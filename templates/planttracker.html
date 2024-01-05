@@ -69,12 +69,6 @@
             </div>
     </div>
     <div id="right">
-        {% for info in chckoutinfo_list %}
-        
-        <h1 style="text-align:right;">Your plant {{info.get_info_id() }} is {{pic_list[loop.index0][1]}}</h1>
-       <img src="{{pic_list[loop.index0][0]}}">
-     
-        {% endfor %}
     </div>
 </div>
 {% endblock %}
