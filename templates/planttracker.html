@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %} Farmville - Plant Tracker {% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: url('static/images/soil.jpg');
+        background-size: cover;
+    }
+
+    .plantlist {
+        background-color: rgb(155, 75, 155);
+        border-radius: 8%;
+        height: 550px;
+        padding: 20px 20px 20px 20px;
+        width: 30%;
+        margin-left: 5%;
+    }
+
+    .pgheader {
+        overflow: hidden;
+    }
+
+    .pgheader #left,
+    .pgheader #right {
+        width: 49%;
+    }
+
+    .pgheader #left {
+        float: left;
+    }
+
+    .pgheader #right {
+        float: right;
+    }
+</style>
+<div class="pgheader">
+    <div id="left">
+        <h1 class="display-4" style="padding-left: 5%; font-weight: bolder; color: palevioletred;">Hey there!</h1>
+        <h3 style="padding-left: 5%; font-weight: bolder; color: white; border-color: black;">Here are your plant
+            updates</h3>
+    </div>
+    <div id="right">
+        <h1 style="text-align:right;">Your plant is</h1>
+        <p>The date and time is: {{ date_time }}</p>
+        <p>{{difference.days}}</p>
+        <p>{{diff_wks}}</p>
+        <p>{{date_1}}</p>
+        <p>{{now}}</p>
+        <p>{{diff_dys}}</p>
+    </div>
+</div>
+<div class="plantlist">
+    <h3>Plant's list:</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for info in chckoutinfo_list %}
+            <tr>
+                <td>{{ info.get_info_id() }}</td>
+                <td>{{ info.get_date() }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
