@@ -1,4 +1,7 @@
 from flask import *
+from Forms import CreateCheckoutForm
+import shelve, checkoutinfo
+from datetime import datetime, timedelta
 import sqlite3, hashlib, os
 from werkzeug.utils import secure_filename
 
@@ -21,15 +24,15 @@ def getLoginDetails():
     conn.close()
     return (loggedIn, firstName, noOfItems)
 
-@app.route("/")
-def root():
-    loggedIn, firstName, noOfItems = getLoginDetails()
-    with sqlite3.connect('database.db') as conn:
-        cur = conn.cursor()
-        cur.execute('SELECT productId, name, price, description, image, stock FROM products')
-        itemData = cur.fetchall()
-    itemData = parse(itemData)   
-    return render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
+# @app.route("/")
+# def root():
+#     loggedIn, firstName, noOfItems = getLoginDetails()
+#     with sqlite3.connect('database.db') as conn:
+#         cur = conn.cursor()
+#         cur.execute('SELECT productId, name, price, description, image, stock FROM products')
+#         itemData = cur.fetchall()
+#     itemData = parse(itemData)   
+#     return render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
 
 
 
