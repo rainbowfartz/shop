@@ -1,0 +1,67 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar {
+    background-color: black;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    color: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    width: 300px;
+    margin-top: 80px; /* To prevent the form from being hidden behind the navbar */
+    border: 2px solid lightblue; /* Add a border */
+    backdrop-filter: blur(10px); /* Apply a blur effect */
+}
+
+.form h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form input {
+    width: 280px;
+    padding: 10px;
+    margin-bottom: 20px; 
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: #0056b3;
+}
+
