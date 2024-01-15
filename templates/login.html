@@ -1,0 +1,44 @@
+{% extends "base2.html" %}
+
+{% block title %}
+Login System
+{% endblock %}
+
+{% block content %}
+
+
+{% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+{% endblock %}
+    <h1 class="display-4">Login</h1>
+
+<div class = "form">
+    <form id="loginForm" method="post" action="/login2">
+        <label for="email"><b>Email</b></label>
+        <input type="email" placeholder="Email" name="email" id="email" required onblur2="validateEmail(this);">
+
+        <label for="password"><b>Password</b></label>
+        <input type="password" placeholder="Password" name="password" id="password" required>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+    <script>
+        function validateEmail(input) {
+            var email = input.value;
+
+            // Validation logic after user clicks off the email field
+            if (!email.includes('@')) {
+                alert('Email must contain @');
+            }
+        }
+
+        document.querySelector('#loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var email = document.querySelector('input[name="Iatetoast@gmail.com"]').value;
+            var password = document.querySelector('input[name="Iatetoast"]').value;
+
+             <!-- Add your own login logic here -->
+        });
+    </script>   
+{%endblock%}
