@@ -226,8 +226,4 @@ def parse(data):
     return ans
 
 if __name__ == '__main__':
-<<<<<<< HEAD
     app.run(debug=True)
-=======
-    app.run(debug=True)
->>>>>>> 12cb686de67bdb37e041ab882d8de3b295625c8d
