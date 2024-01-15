@@ -1,4 +1,4 @@
-import grocery.User as User
+import User
 
 class Customer(User.User):
     count_id = 0
