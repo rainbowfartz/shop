@@ -1,6 +1,7 @@
 from flask import *
 import sqlite3, hashlib, os
 from werkzeug.utils import secure_filename
+import shelve
 
 app = Flask(__name__)
 ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png'])
