@@ -11,6 +11,7 @@ ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png'])
 @app.route('/')
 def home():
     return render_template("add.html")
+
 def getLoginDetails():
     with sqlite3.connect('database.db') as conn:
         cur = conn.cursor()
@@ -37,7 +38,11 @@ def root():
     itemData = parse(itemData)   
     return render_template('home.html', itemData=itemData, loggedIn=loggedIn, firstName=firstName, noOfItems=noOfItems)
 
-
+def allowed_file(filename):
+    return '.' in filename and \
+            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+            
+            
 @app.route("/addItem", methods=["GET", "POST"])
 def addItem():
     if request.method == "POST":
@@ -251,9 +256,7 @@ def parse(data):
     
     # return render_template('login.html')
 
-def allowed_file(filename):
-    return '.' in filename and \
-            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
 
 
 def parse(data):
