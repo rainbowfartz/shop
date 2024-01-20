@@ -8,8 +8,41 @@ import shelve
 import random
 
 app = Flask(__name__)
-ALLOWED_EXTENSIONS = set(['jpeg', 'jpg', 'png'])
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
+
+app.config['UPLOAD_FOLDER'] = 'static/upload'  
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}  
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+app = Flask(__name__)
+
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+    if request.method == 'POST':
+        name = request.form['name']
+        price = request.form['price']
+        stock = request.form['stock']
+        image = request.form['image']
+        seedplant = request.form['seedplant']
+
+        with shelve.open('products.db') as db:
+            product_id = str(len(db))
+            db[product_id] = {'name': name, 'price': price, 'stock': stock, 'image': image, 'seedplant': seedplant}
+
+        return redirect('/shopping')  
+
+    return render_template('admin.html')
+
+
+@app.route('/shopping')
+def shopping():
+    with shelve.open('products.db') as db:
+        products = list(db.values())
+
+    return render_template('shopping.html', products=products)
 
 # Shelve file for data storage
 SHELVE_FILE = 'claw_machine_data.shelve'
@@ -82,42 +115,7 @@ def getLoginDetails():
 
 
 
-def allowed_file(filename):
-    return '.' in filename and \
-            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route("/addItem", methods=["GET", "POST"])
-def addItem():
-    if request.method == "POST":
-        name = request.form['name']
-        price = float(request.form['price'])
-        stock = int([request.form['stock']])
-        image = request.files['image']
-        if image and allowed_file(image.filename):
-            filename = secure_filename(image.filename)
-            image.save(os.path.join(filename))
-        imagename = filename
-        with sqlite3.connect('database.db') as conn:
-            try:
-                cur = conn.cursor
-                cur.execute('''INSERT INTO products (name, price, image, stock) VALUES (?, ?, ?, ?, ?, ?)''', (name, price, imagename, stock))
-                conn.commit()
-                msg="added successfully"
-            except:
-                msg="error occured"
-                conn.rollback()
-        conn.close()
-        print(msg)
-
-@app.route("/productDescription")
-def productDescription():
-    productId = request.args.get('productId')
-    with sqlite3.connect('database.db') as conn:
-        cur = conn.cursor()
-        cur.execute('SELECT productId, name, price, image, stock FROM products WHERE productId = ?', (productId))
-        productData = cur.fetchone()
-    conn.close()
-    return render_template("products.html", data=productData)
 
 @app.route("/account/profile")
 def profileHome():
@@ -274,7 +272,7 @@ def parse(data):
         ans.append(curr)
     return ans
 
-@app.route('/', methods = ['GET', 'POST'])
+@app.route('/cart', methods = ['GET', 'POST'])
 def checkout():
     form = CreateCheckoutForm(request.form)
     if request.method == "POST" and form.validate():

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Grocery Store - Shopping {% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="/static/css/shopping.css">
+{% endblock %}
+{% block content %}
+<h1>Products</h1>
+<ul>
+    <div class="seed">
+        <h1>Seed</h1>
+        {% for product in products %}
+        {% if product['seedplant'] == 'seed' %}
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
+                <a href="#">Checkout now</a><br>
+                <a href="#">Plant now</a>
+            </li>
+        {% endif %}
+        {% endfor %}
+    </div>
+</ul>
+<br>
+<ul>
+    <div class="plant">
+        <h1>Plant</h1>
+        {% for product in products %}
+        {% if product['seedplant'] == 'plant' %}
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
+                <a href="#">Checkout now</a>
+            </li>
+        {% endif %}
+        {% endfor %}
+    </div>
+</ul>
+{% endblock %}
