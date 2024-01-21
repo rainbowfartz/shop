@@ -23,7 +23,7 @@ def home():
 
 @app.route('/game')
 def game():
-    return render_template('index.html')
+    return render_template('claw machine.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
