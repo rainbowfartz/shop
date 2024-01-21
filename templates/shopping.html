@@ -7,8 +7,13 @@
 <style>
 h1 {
     color: #646464;
+    text-align: center;
 }
 
+h3 {
+    color: #646464;
+    text-align: center;
+}
 .seed {
     display: flex;
     flex-wrap: wrap;
@@ -29,14 +34,58 @@ h1 {
 }
 
 .pics li a {
-    background-color: pink;
+    background-color: rgb(230, 175, 206);
     border-radius: 30px;
+    border-color: pink;
+    margin-top: 10px;
 }
 
 .pics img {
     width: 220px;
     height: 200px;
     border-radius: 30px;
+}
+
+.pics p {
+    font-weight: bold;
+    color: #646464;
+}
+
+.plant {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.pic1 {
+    margin-top: 30px;
+}
+
+.pic1 li{
+    list-style: none;
+    border: solid 3px pink;
+    border-radius: 30px;
+    padding: 10px 50px ;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(251, 205, 222);
+}
+
+.pic1 li a {
+    background-color: rgb(230, 175, 206);
+    border-radius: 30px;
+    border-color: pink;
+    margin-top: 10px;
+}
+
+.pic1 img {
+    width: 220px;
+    height: 200px;
+    border-radius: 30px;
+}
+
+.pic1 p {
+    font-weight: bold;
+    color: #646464;
 }
 </style>
 <h1>Products</h1>
@@ -52,8 +101,8 @@ h1 {
                     <p>Stock: {{ product['stock'] }}</p>
                     <p>Plant or Seed: {{ product['seedplant'] }}</p>
                     <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="#" class="pn">Plant now</a><br>
-                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
+                    <a href="#" class="btn btn-primary">Plant now</a><br>
+                    <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
                     
                 </li>
             </div>
@@ -75,7 +124,7 @@ h1 {
                     <p>Stock: {{ product['stock'] }}</p>
                     <p>Plant or Seed: {{ product['seedplant'] }}</p>
                     <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
+                    <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
                 </li>
             </div>
         {% endif %}
