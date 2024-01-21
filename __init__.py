@@ -49,7 +49,7 @@ def shopping():
     with shelve.open('products.db') as db:
         for id in db.keys():
             products[id] = db[id]
-
+    
     return render_template('shopping.html', products=products)
 
 @app.route('/addtocart/<item>')
@@ -143,11 +143,9 @@ def checkout():
     with shelve.open('checkout.db') as db:
         if userid in db:
             cart = db[userid]
-            print(cart)
     with shelve.open('products.db') as db:
         for item in cart:
             products.append(db[item])
-            print(products)
 
     form = CreateCheckoutForm(request.form)
     if request.method == "POST" and form.validate():
