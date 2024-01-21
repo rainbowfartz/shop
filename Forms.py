@@ -7,7 +7,3 @@ class CreateCheckoutForm(Form):
     exp_month = StringField('Month', [validators.Length(min=1, max=12),validators.Regexp(regex="^(0?[1-9]|1[012])$", message='Please enter valid month.'),validators.DataRequired()], render_kw={"placeholder":"mm"})
     exp_year = StringField('Year', [validators.Regexp(regex="^(19|20)\d{2}$", message='Please enter valid year.'),validators.DataRequired()], render_kw={"placeholder":"yyyy"})
     cvv = StringField('Cvv', [validators.Regexp(regex="^[0-9]{3,4}$", message='Please enter valid cvv.'),validators.DataRequired()], render_kw={"placeholder":"123"})
-
-    #  validators.Regexp(regex="^[0-9]{3,4}$", message='Please enter valid cvv.')
-    # validators.Regexp(regex="^(19|20)\d{2}$", message='Please enter valid year.'), render_kw={"placeholder":"yyyy"}
-    # ,validators.Regexp(regex="^(0?[1-9]|1[012])$", message='Please enter valid month.'), validators.DataRequired()], render_kw={"placeholder":"mm"}
