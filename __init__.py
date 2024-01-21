@@ -430,5 +430,8 @@ def plant_tracker():
 
     return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, date_time=date_time, difference=difference, diff_wks=diff_wks, date_1=date_1, now=now, diff_dys=diff_dys)
 
+# @app.route('/clawmachine')
+# def claw_machine():
+#     return render_template('c')
 if __name__ == '__main__':
     app.run(debug=True)
