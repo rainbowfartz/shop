@@ -5,50 +5,39 @@
 {% endblock %}
 {% block content %}
 <style>
-    .seed {
-        display: flex;
-        list-style: none;
-        
-    }
+h1 {
+    color: #646464;
+}
 
-    .pics {
-        padding: 10px 50px;
-        border: solid 1px rgb(36, 41, 43);
-        margin: 20px;
-    }
+.seed {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-    .checkout {
-        padding-left: 50px;
-    }
+.pics {
+    margin-top: 30px;
+}
 
-    .pn {
-        padding-left: 50px;
-    }
+.pics li{
+    list-style: none;
+    border: solid 3px pink;
+    border-radius: 30px;
+    padding: 10px 50px ;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(251, 205, 222);
+}
 
-    .pics img {
-        width: 200px;
-        height: 30vh;
-    }
+.pics li a {
+    background-color: pink;
+    border-radius: 30px;
+}
 
-    .plant {
-        display: flex;
-        list-style: none;
-    }
-
-    .pic1 {
-        padding: 10px 50px;
-        border: solid 1px rgb(40, 45, 47);
-        margin: 20px;
-    }
-
-    .pic1 img {
-        width: 200px;
-        height: 30vh;
-    }
-
-    h1 {
-        color: rgb(128, 123, 123);
-    }
+.pics img {
+    width: 220px;
+    height: 200px;
+    border-radius: 30px;
+}
 </style>
 <h1>Products</h1>
 <ul>
