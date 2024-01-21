@@ -4,6 +4,7 @@ import shelve, checkoutinfo
 from datetime import datetime, timedelta
 import sqlite3, hashlib, os
 from werkzeug.utils import secure_filename
+from itertools import product
 import shelve
 import random
 
