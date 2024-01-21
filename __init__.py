@@ -195,7 +195,11 @@ def play_game():
 #         conn.close()
 #         return render_template("changePassword.html", msg=msg)
 #     else:
+<<<<<<< HEAD
     return render_template("changePassword.html")  
+=======
+        # return render_template("changePassword.html")  
+>>>>>>> 794c58bd3b0ccc0916655d9b74e654f9f92c2fdf
 
 # @app.route("/updateProfile", methods=["GET", "POST"])
 # def updateProfile():
