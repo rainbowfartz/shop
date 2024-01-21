@@ -116,9 +116,7 @@ def play_game():
 
     return redirect(url_for('home'))
 
-@app.route('/claw_machine')
-def claw_machine():
-    return render_template('claw_machine.html')
+
 
 def getLoginDetails():
     with sqlite3.connect('database.db') as conn:
