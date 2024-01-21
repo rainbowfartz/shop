@@ -63,22 +63,22 @@ def addtocart(item):
 
         cart.append(item)
         db[userid] = cart
-    return redirect('/checkout')
+    return redirect('/cart')
 
-@app.route('/checkout')
-def check():
-    userid = str(1)
-    products = []
-    cart = []
-    with shelve.open('checkout.db') as db:
-        if userid in db:
-            cart = db[userid]
+# @app.route('/checkout')
+# def check():
+#     userid = str(1)
+#     products = []
+#     cart = []
+#     with shelve.open('checkout.db') as db:
+#         if userid in db:
+#             cart = db[userid]
 
-    with shelve.open('products.db') as db:
-        for item in cart:
-            products.append(db[item])
+#     with shelve.open('products.db') as db:
+#         for item in cart:
+#             products.append(db[item])
 
-    return render_template('checkout.html', products=products)
+#     return render_template('checkout.html', products=products)
 
 # Shelve file for data storage
 SHELVE_FILE = 'claw_machine_data.shelve'
@@ -304,8 +304,35 @@ def parse(data):
         ans.append(curr)
     return ans
 
+# @app.route('/checkout')
+# def check():
+#     userid = str(1)
+#     products = []
+#     cart = []
+#     with shelve.open('checkout.db') as db:
+#         if userid in db:
+#             cart = db[userid]
+
+#     with shelve.open('products.db') as db:
+#         for item in cart:
+#             products.append(db[item])
+
+#     return render_template('checkout.html', products=products)
+
 @app.route('/cart', methods = ['GET', 'POST'])
 def checkout():
+    userid = str(1)
+    products = []
+    cart = []
+    with shelve.open('checkout.db') as db:
+        if userid in db:
+            cart = db[userid]
+            print(cart)
+    with shelve.open('products.db') as db:
+        for item in cart:
+            products.append(db[item])
+            print(products)
+
     form = CreateCheckoutForm(request.form)
     if request.method == "POST" and form.validate():
         chckoutinfo_dict = {}
@@ -337,7 +364,7 @@ def checkout():
 
         db.close()
         return redirect(url_for('checkout'))
-    return render_template('checkout.html', form=form)
+    return render_template('checkout.html', form=form, products=products)
 
 @app.route('/retrieveInfo')
 def retrieve_Info():
