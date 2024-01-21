@@ -11,13 +11,12 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
 
 app.config['UPLOAD_FOLDER'] = 'static/upload'  
-app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'}  
+app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'} 
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
-app = Flask(__name__)
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -39,10 +38,39 @@ def admin():
 
 @app.route('/shopping')
 def shopping():
+    products = {}
     with shelve.open('products.db') as db:
-        products = list(db.values())
+        for id in db.keys():
+            products[id] = db[id]
 
     return render_template('shopping.html', products=products)
+
+@app.route('/addtocart/<item>')
+def addtocart(item):
+    userid = str(1)
+    with shelve.open('checkout.db') as db:
+        cart = []
+        if userid in db:
+            cart = db[userid]
+
+        cart.append(item)
+        db[userid] = cart
+    return redirect('/checkout')
+
+@app.route('/checkout')
+def check():
+    userid = str(1)
+    products = []
+    cart = []
+    with shelve.open('checkout.db') as db:
+        if userid in db:
+            cart = db[userid]
+
+    with shelve.open('products.db') as db:
+        for item in cart:
+            products.append(db[item])
+
+    return render_template('checkout.html', products=products)
 
 # Shelve file for data storage
 SHELVE_FILE = 'claw_machine_data.shelve'
