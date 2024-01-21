@@ -4,39 +4,91 @@
     <link rel="stylesheet" href="/static/css/shopping.css">
 {% endblock %}
 {% block content %}
+<style>
+    .seed {
+        display: flex;
+        list-style: none;
+        
+    }
+
+    .pics {
+        padding: 10px 50px;
+        border: solid 1px rgb(36, 41, 43);
+        margin: 20px;
+    }
+
+    .checkout {
+        padding-left: 50px;
+    }
+
+    .pn {
+        padding-left: 50px;
+    }
+
+    .pics img {
+        width: 200px;
+        height: 30vh;
+    }
+
+    .plant {
+        display: flex;
+        list-style: none;
+    }
+
+    .pic1 {
+        padding: 10px 50px;
+        border: solid 1px rgb(40, 45, 47);
+        margin: 20px;
+    }
+
+    .pic1 img {
+        width: 200px;
+        height: 30vh;
+    }
+
+    h1 {
+        color: rgb(128, 123, 123);
+    }
+</style>
 <h1>Products</h1>
 <ul>
+    <h1>Seed</h1>
     <div class="seed">
-        <h1>Seed</h1>
-        {% for product in products %}
+        {% for id,product in products.items() %}
         {% if product['seedplant'] == 'seed' %}
-            <li>
-                <h3>{{ product['name'] }}</h3>
-                <p>Price: {{ product['price'] }}</p>
-                <p>Stock: {{ product['stock'] }}</p>
-                <p>Plant or Seed: {{ product['seedplant'] }}</p>
-                <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                <button class="plantnow">Plant For Me</button><br>
-                <button class="checkout">Checkout</button>
-            </li>
+            <div class="pics">
+                <li>
+                    <h3>{{ product['name'] }}</h3>
+                    <p>Price: {{ product['price'] }}</p>
+                    <p>Stock: {{ product['stock'] }}</p>
+                    <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                    <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
+                    <a href="#" class="pn">Plant now</a><br>
+                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
+                    
+                </li>
+            </div>
         {% endif %}
         {% endfor %}
     </div>
 </ul>
 <br>
 <ul>
+    <h1>Plant</h1>
     <div class="plant">
-        <h1>Plant</h1>
-        {% for product in products %}
+        
+        {% for id,product in products.items() %}
         {% if product['seedplant'] == 'plant' %}
-            <li>
-                <h3>{{ product['name'] }}</h3>
-                <p>Price: {{ product['price'] }}</p>
-                <p>Stock: {{ product['stock'] }}</p>
-                <p>Plant or Seed: {{ product['seedplant'] }}</p>
-                <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                <button class="checkout">Checkout</button>
-            </li>
+            <div class="pic1">
+                <li>
+                    <h3>{{ product['name'] }}</h3>
+                    <p>Price: {{ product['price'] }}</p>
+                    <p>Stock: {{ product['stock'] }}</p>
+                    <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                    <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
+                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
+                </li>
+            </div>
         {% endif %}
         {% endfor %}
     </div>
