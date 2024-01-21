@@ -16,8 +16,8 @@
                 <p>Stock: {{ product['stock'] }}</p>
                 <p>Plant or Seed: {{ product['seedplant'] }}</p>
                 <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                <a href="#">Checkout now</a><br>
-                <a href="#">Plant now</a>
+                <button class="plantnow">Plant For Me</button><br>
+                <button class="checkout">Checkout</button>
             </li>
         {% endif %}
         {% endfor %}
@@ -35,7 +35,7 @@
                 <p>Stock: {{ product['stock'] }}</p>
                 <p>Plant or Seed: {{ product['seedplant'] }}</p>
                 <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                <a href="#">Checkout now</a>
+                <button class="checkout">Checkout</button>
             </li>
         {% endif %}
         {% endfor %}
