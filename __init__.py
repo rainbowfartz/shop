@@ -18,6 +18,9 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
 
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 @app.route('/game')
 def game():
@@ -98,9 +101,7 @@ class ClawMachine:
             session[self.last_play_key] = datetime.now()
             return user_wins
 
-@app.route('/')
-def home():
-    return render_template('index.html')
+
 
 @app.route('/play')
 def play_game():
@@ -116,9 +117,7 @@ def play_game():
 
     return redirect(url_for('home'))
 
-@app.route('/claw_machine')
-def claw_machine():
-    return render_template('claw_machine.html')
+
 
 def getLoginDetails():
     with sqlite3.connect('database.db') as conn:
