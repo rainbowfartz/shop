@@ -1,0 +1,105 @@
+
+{%extends "base.html" %}
+{% block title %}Grocery store - delivery {% endblock %}
+
+    
+{% block content %}   
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: lightyellow;
+        }
+
+        nav {
+            width: 100%;
+            height: 100px;
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            margin-top: -1000px;
+            margin-bottom: 90px; 
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        section {
+            width: 100%;
+            text-align: center;
+        }
+
+        .content-box {
+            width: 650px;
+            height: 500px;
+            margin-top: 1000px;
+            margin-bottom:50px;
+            margin-left: 550px;
+            margin-right:300px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .formbox {
+            margin-left: 650px;
+        }
+    </style>
+
+
+<body style="background-image: url('farm.jpg'); background-size: cover;">
+    <section>
+        <div class="content-box">
+            <a href="#">
+                <img src="{{ url_for('static', filename='images/Singapore.png')}}" style="width: 600px; margin-top: 30px;" id="map">
+            </a>
+            <h3 style="margin-top: 10px;">Map</h3>
+        </div>
+
+        <div class="info-box" id="liveLocationInfo">
+            <h5>Live Location Info</h5>
+            <p>Loading...</p>
+        </div>
+
+    </section>
+
+    <div class="formbox">
+        <form action="{{ url_for('display_input') }}" method="post">
+            <label for="productId">Enter Parcel Code:</label>
+            <input type="text" id="productIdInput" name="parcel_code">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function appendProductId() {
+            // Get the input value
+            var productIdInput = document.getElementById("productIdInput").value;
+
+            // Assume you have an existing product ID, for example "ABC123"
+            var existingProductId = "ABC123";
+
+            // Append the input value to the existing product ID
+            var appendedProductId = existingProductId + '-' + productIdInput;
+
+            // Log the result to the console
+            console.log("User Input:", productIdInput);
+        }
+       </script>
+
+</body>
+
+{% endblock %}
