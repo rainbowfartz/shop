@@ -86,21 +86,45 @@ class ClawMachine:
     def __init__(self):
         self.last_play_key = 'last_play'
         self.play_frequency = timedelta(hours=24)
-
+        self.max_daily_plays = 3  # Maximum allowed plays per day
+    
     def can_play(self):
-        if self.last_play_key in session and datetime.now() - session[self.last_play_key] < self.play_frequency:
-            raise PermissionError('You can only play once every 24 hours!')
+        if self.last_play_key in session:
+            plays_today = session.get('plays_today', 0)
+            if plays_today >= self.max_daily_plays:
+                raise PermissionError('You have reached the maximum number of plays for today!')
+            
+            # Increment the plays_today counter
+            session['plays_today'] = plays_today + 1
+
+            if datetime.now() - session[self.last_play_key] < self.play_frequency:
+                raise PermissionError('You can only play once every 24 hours!')
+        else:
+            # First play of the day, reset the plays_today counter
+            session['plays_today'] = 1
+
         return True
 
     def play(self):
         if self.can_play():
             # Simulate the claw machine game
             user_wins = random.choice([True, False])
+            
+            # Save the user's result to the database
+            user_data = shelve.open(SHELVE_FILE)
+            try:
+                if 'user_wins' not in user_data:
+                    user_data['user_wins'] = {}
+
+                play_number = session['plays_today']
+                user_data['user_wins'][f'Try {play_number}'] = 'Win' if user_wins else 'Lose'
+
+            finally:
+                user_data.close()
+
             # Update the last play time
             session[self.last_play_key] = datetime.now()
             return user_wins
-
-
 
 @app.route('/play')
 def play_game():
@@ -114,8 +138,7 @@ def play_game():
     except PermissionError as e:
         flash(str(e), 'danger')
 
-    return redirect(url_for('home'))
-
+    return redirect(url_for('index'))
 
 
 
@@ -273,6 +296,92 @@ def plant_tracker():
     
 
     return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, date_time=date_time, difference=difference, diff_wks=diff_wks, date_1=date_1, now=now, diff_dys=diff_dys)
+
+class Parcel:
+    def __init__(self, code, location, latitude=None, longitude=None):
+        self.code = code
+        self.location = location
+        self.latitude = latitude
+        self.longitude = longitude
+
+with shelve.open('parcels.db', writeback=True) as shelf:
+    if 'parcels' not in shelf:
+        shelf['parcels'] = [
+            Parcel('123', 'Jurong Ave 6', 1.3561, 103.8010),
+            Parcel('456', 'Woodlands Dr 70', 1.3721, 103.8292)
+        ]
+
+@app.route('/form')
+def form():
+    return render_template('form.html')
+
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        code = request.form['parcel_code']
+        currentparcel = None
+
+        with shelve.open('parcels.db') as shelf:
+            parcels = shelf.get('parcels', [])
+            
+            for parcel in parcels:
+                if parcel.code == code:
+                    currentparcel = parcel
+
+        if currentparcel:
+            return render_template('map.html', parcel=currentparcel)
+        else:
+            return "Parcel not found", 404
+
+    with shelve.open('parcels.db') as shelf:
+        parcels = shelf.get('parcels', [])
+    return render_template('index.html', parcels=parcels, user_input_code=None)
+
+@app.route('/delete/<code>')  # Changed the endpoint for the delete route
+def delete(code):
+    with shelve.open('parcels.db', writeback=True) as shelf:
+        parcels = shelf.get('parcels', [])
+        shelf['parcels'] = [p for p in parcels if p.code != code]
+
+    return redirect(url_for('index'))
+
+@app.route('/add', methods=['GET', 'POST'])
+def add():
+    if request.method == 'POST':
+        parcel = Parcel(request.form.get('parcelid'), request.form.get('location'), request.form.get('latitude'), request.form.get('longitude'))
+
+        with shelve.open('parcels.db', writeback=True) as shelf:
+            parcels = shelf.get('parcels', [])
+
+            parcels.append(parcel)
+
+            shelf['parcels'] = parcels
+
+            redirect(url_for('index'))
+
+    return render_template('addparcel.html')
+
+@app.route('/map', methods=['POST'])
+def display_input():
+    code = request.form['parcel_code']
+    currentparcel = None
+
+    with shelve.open('parcels.db') as shelf:
+        parcels = shelf.get('parcels', [])
+        
+        for parcel in parcels:
+            if parcel.code == code:
+                currentparcel = parcel
+
+    if currentparcel:
+        return render_template('map.html', parcel=currentparcel)
+    else:
+        return "Parcel not found", 404
+
+
+with shelve.open('parcels.db') as shelf:
+    parcels = shelf.get('parcels', [])
+    print(parcels)
 
 # @app.route('/clawmachine')
 # def claw_machine():
