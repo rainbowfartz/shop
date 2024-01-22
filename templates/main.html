@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FARMVILLE</title>
+    <link rel="stylesheet" href="/static/style.css"/>
+    <style>
+        body{
+                  background-image: url(/static/images/meadow.png);
+                  background-size: cover;
+                  background-repeat: no-repeat;
+                  background-color: transparent;
+                  background-position: center bottom;
+            }
+
+
+
+            .a {
+                  color: white;
+                  text-decoration: none;
+                  font-family: "Times New Roman", Times, serif;
+            }
+
+            .login{
+                    list-style: none;
+                    border-style: solid;
+                    text-align: center;
+                    border-color: purple;
+                    background-color: purple;
+                    font-size: 30px;
+                    padding-right: 60px;
+                    padding-left: 60px;
+                    width: 400px;
+                    border-radius: 20px;
+                    margin-left: 900px;
+                    padding: 20px;
+                    color: white;
+                    text-decoration: none;
+                    font-family: "Times New Roman", Times, serif;
+
+            }
+
+            p {
+                margin-top:100px;
+            }
+
+            .button {
+
+                    border: none;
+                    background: transparent;
+                  }
+
+
+            .image1 {
+                      margin-top: 133px;
+                      background: transparent;
+                      width: 450px;
+                      height: 650px;
+
+                    }
+            .image2 {
+                      margin-top: 160px;
+                      background: transparent;
+                      height: 300px;
+                      width: 350px;
+                     }
+            .image3 {
+                      margin-top: 190px;
+                      background: transparent;
+                      height: 550px;
+                      width: 350px;
+                     }
+            .image4 {
+                      margin-top: 10px;
+                      background: transparent;
+                      height: 600px;
+                      width: 630px;
+                     }
+    </style>
+</head>
+  <body>
+    {% block navbar %}
+
+    {% endblock %}
+
+
+            <p><a class="login" href="{{ url_for('admin') }}">Login</a></p>
+
+            <div class="button">
+            <a href="/shopping"><img class="image1" src="/static/images/tree but real.png"></a>
+
+            <a href="#"><img class="image2" src="/static/images/bicycle.png"></a>
+
+            <a href="/game"><img class="image3" src="/static/images/arcade but real.png"></a>
+
+            <a href="/planttracker"><img class="image4" src="/static/images/transparent.png"></a>
+            </div>
+
+    <div>
+        {% block content %}{% endblock %}
+    </div>
+  </body>
+
+
+</html>
