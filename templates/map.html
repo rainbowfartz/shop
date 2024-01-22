@@ -1,5 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends "base.html" %}
+{% block title %} Farmville - Map  {% endblock %}
+
+{% block content %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +40,7 @@
     }
     </script>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
     <div style="padding-left: 5%;">
         <a href="#">
             <img src="{{ url_for('static', filename='images/homelogo.png')}}" style="width:70px;"
@@ -63,7 +65,7 @@
             <img src="{{ url_for('static', filename='images/game.png')}}" style="width:70px;" class="rounded-pill">
         </a>
     </div>
-</nav>
+</nav> -->
 
 <style>
     body {
@@ -105,15 +107,24 @@
     .content-box {
         width: 650px;
         height: 500px;
-        margin-top: 1000px;
+        margin-top: 1050px;
         margin-bottom: 50px;
-        margin-left: 600px;
-        margin-right: 350px;
+        margin-left: 450px;
+        margin-right: 550px;
         background-color: #ffffff;
         border-radius: 15px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 20px;
         text-align: center;
+    }
+
+    #display1 {
+        margin-left: 550px;
+
+    }
+
+    footer {
+        margin-left: 550px;
     }
 </style>
     <title>MAP</title>
@@ -154,4 +165,4 @@
     window.onload = updateLastUpdated;
 </script>
 </body>
-</html>
+{% endblock%}
