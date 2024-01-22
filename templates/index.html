@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include necessary meta tags, stylesheets, and scripts -->
+</head>
+<body>
+    <h1>Parcel List</h1>
+
+    <!-- Display user input code -->
+    {% if user_input_code %}
+        <p>User Input Code: {{ user_input_code }}</p>
+    {% endif %}
+
+    <a href="{{ url_for('add') }}">Add Parcel</a>
+
+    <ul>
+        {% for parcel in parcels %}
+            <li>
+                <a>
+                    {{ parcel.code }} - {{ parcel.location }}
+                </a>
+                <a href="{{ url_for('delete', code=parcel.code) }}">Delete</a>
+                <br>
+                <!-- Display additional parcel information -->
+                Latitude: {{ parcel.latitude }} | Longitude: {{ parcel.longitude }}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
