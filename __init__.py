@@ -370,7 +370,7 @@ def display_input():
         parcels = shelf.get('parcels', [])
         
         for parcel in parcels:
-            if parcel.code == code:
+            if int(parcel.code) == int(code):
                 currentparcel = parcel
 
     if currentparcel:
