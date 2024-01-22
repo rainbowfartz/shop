@@ -27,6 +27,12 @@ nav a {
   margin-right: 15px;
 }
 
+.machine {
+  margin-top: 1000px;
+  margin-left: 1000px;
+}
+
+
 section {
   width: 100%;
   text-align: center;
