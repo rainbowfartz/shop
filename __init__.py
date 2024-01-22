@@ -6,21 +6,21 @@ import shelve, User, Customer
 
 app = Flask(__name__)
 
-@app.route('/')
-def home():
-    return render_template("add.html")
 
+@app.route('/')
+def add():
+    return render_template("add.html")
 
 @app.route('/signup', methods= ["POST","GET"] )
 def index():
     return render_template('signup.html')
 
 @app.route('/login')
-def login2():
+def login():
     return render_template('login.html')
 
 @app.route('/login', methods=['GET','POST'])
-def login():
+def login2():
     email = request.form['email']
     password = request.form['password']
     print(f"{email}, {password}")
