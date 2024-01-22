@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Website</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">    <script src="https://kit.fontawesome.com/d74c50e88f.js" crossorigin="anonymous"></script>
+            <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+                <div style="padding-left: 5%;">
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='images/homelogo.png')}}" style="width:70px;"
+                            class="rounded-pill">
+                    </a>
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='images/profile.png')}}" style="width:70px;"
+                            class="rounded-pill">
+                    </a>
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='images/grocery.png')}}" style="width:70px;"
+                            class="rounded-pill">
+                    </a>
+                    <a href="/">
+                        <img src="{{ url_for('static', filename='images/cart.png')}}" style="width:70px;" class="rounded-pill">
+                    </a>
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='images/delivery.png')}}" style="width:70px;"
+                            class="rounded-pill">
+                    </a>
+                    <a href="#">
+                        <img src="{{ url_for('static', filename='images/game.png')}}" style="width:70px;" class="rounded-pill">
+                    </a>
+                </div>
+            </nav>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: lightyellow;
+        }
+
+        nav {
+            width: 100%;
+            height: 100px;
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            margin-top: -1000px;
+            margin-bottom: 90px; 
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        section {
+            width: 100%;
+            text-align: center;
+        }
+
+        .content-box {
+            width: 650px;
+            height: 500px;
+            margin-top: 1000px;
+            margin-bottom:50px;
+            margin-left: 550px;
+            margin-right:300px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body style="background-image: url('farm.jpg'); background-size: cover;">
+    <section>
+        <div class="content-box">
+            <a href="#">
+                <img src="{{ url_for('static', filename='images/Singapore.png')}}" style="width: 600px; margin-top: 30px;" id="map">
+            </a>
+            <h3 style="margin-top: 10px;">Map</h3>
+        </div>
+
+        <div class="info-box" id="liveLocationInfo">
+            <h5>Live Location Info</h5>
+            <p>Loading...</p>
+        </div>
+
+    </section>
+
+    <form action="{{ url_for('display_input') }}" method="post">
+        <label for="productId">Enter Parcel Code:</label>
+        <input type="text" id="productIdInput" name="parcel_code">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function appendProductId() {
+            // Get the input value
+            var productIdInput = document.getElementById("productIdInput").value;
+
+            // Assume you have an existing product ID, for example "ABC123"
+            var existingProductId = "ABC123";
+
+            // Append the input value to the existing product ID
+            var appendedProductId = existingProductId + '-' + productIdInput;
+
+            // Log the result to the console
+            console.log("User Input:", productIdInput);
+        }
+       </script>
+
+</body>
+</html>
