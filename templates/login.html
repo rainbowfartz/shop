@@ -4,8 +4,6 @@
 Login System
 {% endblock %}
 
-{% block content %}
-
 
 {% block head %}
 <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
@@ -18,7 +16,7 @@ Login System
 
 
 
-<!-- {% block content %} -->
+{% block content %}
 <form id="loginForm" method="POST" action="/login">
     <div class="container login_page">
       <div class="row">

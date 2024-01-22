@@ -29,7 +29,7 @@ def signup():
 def login():
     return render_template('login.html')
 
-@app.route('/login2', methods=['GET','POST'])
+@app.route('/login', methods=['GET','POST'])
 def login2():
     email = request.form['email']
     password = request.form['password']
