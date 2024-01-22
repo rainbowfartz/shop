@@ -36,7 +36,7 @@ def admin():
 
         with shelve.open('products.db') as db:
             product_id = str(len(db))
-            db[product_id] = {'name': name, 'price': price, 'stock': stock, 'image': image, 'seedplant': seedplant}
+            db[product_id] = {"id": int(product_id)+1, 'name': name, 'price': price, 'stock': stock, 'image': image, 'seedplant': seedplant}
 
         return redirect('/shopping')  
 
@@ -49,6 +49,7 @@ def shopping():
     with shelve.open('products.db') as db:
         for id in db.keys():
             products[id] = db[id]
+
     
     return render_template('shopping.html', products=products)
 
@@ -254,11 +255,12 @@ def update_info(id):
 
         return render_template('updateInfo.html', form=update_info_form)
     
-@app.route('/deleteInfo/<int:id>', methods=['POST'])
+@app.route('/deleteInfo/<int:id>', methods=["POST"])
 def delete_info(id):
     chckoutinfo_dict = {}
     db = shelve.open('chckoutinfo.db', 'w')
     chckoutinfo_dict = db['Chckoutinfo']
+
 
     chckoutinfo_dict.pop(id)
 
@@ -266,6 +268,30 @@ def delete_info(id):
     db.close()
 
     return redirect(url_for('retrieve_Info'))
+
+    userid = str(1)
+    products = []
+    cart = []
+    with shelve.open('checkout.db') as db:
+        if userid in db:
+            cart = db[userid]
+    with shelve.open('products.db') as db:
+        for item in cart:
+            products.append(db[item])
+
+@app.route('/deleteCart/<int:id>', methods=['POST', 'GET'])
+def delete_cart(id):
+    userid = str(1)
+    with shelve.open('checkout.db', 'w') as db:
+        cart = []
+        if userid in db:
+            cart = db[userid]
+        cart.pop(id)
+        db[userid] = cart
+    db.close()
+
+    return redirect(url_for('checkout'))
+
 
 @app.route('/planttracker')
 def plant_tracker():

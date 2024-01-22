@@ -1,6 +1,5 @@
 body {
   margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -28,6 +27,9 @@ nav a {
   margin-right: 15px;
 }
 
+
+
+
 section {
   width: 100%;
   text-align: center;
@@ -35,7 +37,8 @@ section {
 }
 
 #main {
-  position: center;
+  margin-top: 1000px;
+  margin-left: 1000px;
   width:360px;
   height:460px;
 }
