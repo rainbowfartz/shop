@@ -15,60 +15,27 @@ Sign up System
               <h1>Sign Up</h1>
               <div class="user">
                 <i class="fas fa-user"></i>
-                <input type="text" name="username" id="username" placeholder="Full Name">
+                <input type="text" name="username" id="username" placeholder="Full Name" required>
                 <i class="fas fa-envelope"></i>
-                <input type="text" name="email" id="email" placeholder="Email Address">
+                <input type="text" name="email" id="email" placeholder="Email Address" required>
                 <i class="fas fa-unlock-alt"></i>
-                <input type="password" name="password" id="password" placeholder="Password">
+                <input type="password" name="password" id="password" placeholder="Password" required minlength="8">
                 <i class="fas fa-unlock-alt"></i>
-                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password">
+                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required minlength="8">
                 <div class="checkbox-container">
                     <input type="checkbox" id="remember-me" name="remember-me">
                     <label for="remember-me">Remember me</label>
                  </div>                 
               </div>
               <div class="login-btn">
-                <button class="btn"> <a href="succes.html"> Submit</a></button>
-                <p class="signup">Already have an account ? <a href="#"><span>Log In</span> </a></p>
+                <button class="btn"> <a href="signup.html"> Submit</a></button>
+                <p class="signup">Already have an account ? <a href="login.html"><span>Log In</span> </a></p>
               </div>
             </div>
           </div>
     </form>
 
-    <script>
-        function showHidePassword() {
-            var password = document.getElementById("password");
-            var confirmPassword = document.getElementById("confirmPassword");
-
-            if (password.type === "password") {
-                password.type = "text";
-                confirmPassword.type = "text";
-            } else {
-                password.type = "password";
-                confirmPassword.type = "password";
-            }
-        }
-        document.querySelector('#signupForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            var username = document.querySelector('input[name="username"]').value;
-            var email = document.querySelector('input[name="email"]').value;
-            var password = document.querySelector('input[name="password"]').value;
-            var confirmPassword = document.querySelector('input[name="confirmPassword"]').value;
-            var rememberMe = document.querySelector('input[name="rememberMe"]').checked;
-
-            // Add your own sign up logic here
-            // For example, you might want to check if password and confirmPassword are the same
-            if (password !== confirmPassword) {
-                alert('Passwords do not match');
-            } else {
-                // If rememberMe is checked, save the username in localStorage
-                if (rememberMe) {
-                    localStorage.setItem('username', username);
-                }
-
-                // Redirect to another page after successful sign up
-                window.location.href = 'login';
-            }
-        });
-    </script>
+    
 {% endblock %}
+
+

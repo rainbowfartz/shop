@@ -1,7 +1,7 @@
 from flask import *
 import sqlite3, hashlib, os
 from werkzeug.utils import secure_filename
-from Forms import CreateUserForm, CreateCustomerForm
+from Forms import *
 import shelve, User, Customer
 
 app = Flask(__name__)
@@ -11,15 +11,25 @@ app = Flask(__name__)
 def add():
     return render_template("add.html")
 
-@app.route('/signup', methods= ["POST","GET"] )
+@app.route('/signup')
 def index():
     return render_template('signup.html')
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        # save the user data to the database here
+        return render_template('success.html')
+    return render_template('signup.html', form=form)
 
 @app.route('/login')
 def login():
     return render_template('login.html')
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login2', methods=['GET','POST'])
 def login2():
     email = request.form['email']
     password = request.form['password']
@@ -36,11 +46,6 @@ def login2():
     return render_template('login.html')
 
 
-
-
-@app.route('/contactUs')
-def contact_us():
-    return render_template('contactUs.html')
 
 @app.route('/createUser', methods=['GET', 'POST'])
 def create_user():

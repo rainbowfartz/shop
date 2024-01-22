@@ -1,4 +1,4 @@
-# User class
+
 class User:
     count_id = 0
 
