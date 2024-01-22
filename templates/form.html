@@ -54,6 +54,9 @@
             padding: 20px;
             text-align: center;
         }
+        #formbox{
+            margin-right:50px;
+        }
     </style>
 
 
@@ -73,11 +76,13 @@
 
     </section>
 
+    <div id="formbox">
     <form action="{{ url_for('display_input') }}" method="post">
         <label for="productId">Enter Parcel Code:</label>
         <input type="text" id="productIdInput" name="parcel_code">
         <button type="submit">Submit</button>
     </form>
+    </div>
 
     <script>
         function appendProductId() {
