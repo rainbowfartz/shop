@@ -105,7 +105,7 @@ a {
                     <p>Stock: {{ product['stock'] }}</p>
                     <p>Plant or Seed: {{ product['seedplant'] }}</p>
                     <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="#" class="btn btn-primary">Plant now</a><br>
+                    <!-- <a href="#" class="btn btn-primary">Plant now</a><br> -->
                     <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
                     
                 </li>
