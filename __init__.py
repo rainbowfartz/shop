@@ -11,9 +11,6 @@ app = Flask(__name__)
 def add():
     return render_template("add.html")
 
-@app.route('/signup')
-def index():
-    return render_template('signup.html')
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     form = RegistrationForm(request.form)
