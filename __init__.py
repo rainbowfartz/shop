@@ -11,29 +11,31 @@ def home():
     return render_template("add.html")
 
 
-# @app.route('/signup', methods= ["POST","GET"] )
-# def index():
-#     return render_template('signup.html')
+@app.route('/signup', methods= ["POST","GET"] )
+def index():
+    return render_template('signup.html')
 
-# @app.route('/login')
-# def login2():
-#     return render_template('login.html')
+@app.route('/login')
+def login2():
+    return render_template('login.html')
 
-# @app.route('/login', methods=['GET','POST'])
-# def login():
-    # email = request.form['email']
-    # password = request.form['password']
-    # print(f"{email}, {password}")
-    # db = shelve.open('user.db', 'r')
-    # users = db["Users"]
-    # if email in users:
-    #     print("found")
-    # else:
-    #     print("not found")
+@app.route('/login', methods=['GET','POST'])
+def login():
+    email = request.form['email']
+    password = request.form['password']
+    print(f"{email}, {password}")
+    db = shelve.open('user.db', 'r')
+    users = db["Users"]
+    if email in users:
+        print("found")
+    else:
+        print("not found")
    
-    # db.close()
+    db.close()
     
-    # return render_template('login.html')
+    return render_template('login.html')
+
+
 
 
 @app.route('/contactUs')
