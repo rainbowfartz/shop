@@ -65,6 +65,13 @@
                         <th>Price</th>
                     </tr>
                 </thead>
+                {% for product in products %}
+                <tr>
+                    <td>{{product.name}}</td>
+                    <td>{{product.Quantity}}</td>
+                    <td>{{product.price}}</td>
+                </tr>
+                {% endfor %}
                 <tr>
                     <td colspan="3" style="text-align: right;">Subtotal: $0.00</td>
                 </tr>

@@ -5,50 +5,88 @@
 {% endblock %}
 {% block content %}
 <style>
-    .seed {
-        display: flex;
-        list-style: none;
-        
-    }
+h1 {
+    color: #646464;
+    text-align: center;
+}
 
-    .pics {
-        padding: 10px 50px;
-        border: solid 1px rgb(36, 41, 43);
-        margin: 20px;
-    }
+h3 {
+    color: #646464;
+    text-align: center;
+}
+.seed {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-    .checkout {
-        padding-left: 50px;
-    }
+.pics {
+    margin-top: 30px;
+}
 
-    .pn {
-        padding-left: 50px;
-    }
+.pics li{
+    list-style: none;
+    border: solid 3px pink;
+    border-radius: 30px;
+    padding: 10px 50px ;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(251, 205, 222);
+}
 
-    .pics img {
-        width: 200px;
-        height: 30vh;
-    }
+.pics li a {
+    background-color: rgb(230, 175, 206);
+    border-radius: 30px;
+    border-color: pink;
+    margin-top: 10px;
+}
 
-    .plant {
-        display: flex;
-        list-style: none;
-    }
+.pics img {
+    width: 220px;
+    height: 200px;
+    border-radius: 30px;
+}
 
-    .pic1 {
-        padding: 10px 50px;
-        border: solid 1px rgb(40, 45, 47);
-        margin: 20px;
-    }
+.pics p {
+    font-weight: bold;
+    color: #646464;
+}
 
-    .pic1 img {
-        width: 200px;
-        height: 30vh;
-    }
+.plant {
+    display: flex;
+    flex-wrap: wrap;
+}
 
-    h1 {
-        color: rgb(128, 123, 123);
-    }
+.pic1 {
+    margin-top: 30px;
+}
+
+.pic1 li{
+    list-style: none;
+    border: solid 3px pink;
+    border-radius: 30px;
+    padding: 10px 50px ;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(251, 205, 222);
+}
+
+.pic1 li a {
+    background-color: rgb(230, 175, 206);
+    border-radius: 30px;
+    border-color: pink;
+    margin-top: 10px;
+}
+
+.pic1 img {
+    width: 220px;
+    height: 200px;
+    border-radius: 30px;
+}
+
+.pic1 p {
+    font-weight: bold;
+    color: #646464;
+}
 </style>
 <h1>Products</h1>
 <ul>
@@ -63,8 +101,8 @@
                     <p>Stock: {{ product['stock'] }}</p>
                     <p>Plant or Seed: {{ product['seedplant'] }}</p>
                     <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="#" class="pn">Plant now</a><br>
-                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
+                    <a href="#" class="btn btn-primary">Plant now</a><br>
+                    <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
                     
                 </li>
             </div>
@@ -86,7 +124,7 @@
                     <p>Stock: {{ product['stock'] }}</p>
                     <p>Plant or Seed: {{ product['seedplant'] }}</p>
                     <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
+                    <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
                 </li>
             </div>
         {% endif %}
