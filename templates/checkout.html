@@ -56,7 +56,7 @@
 <h1 class="display-4" style="padding-left: 5%; font-weight: bolder; color: lightpink;">Shopping Cart</h1>
 <div class="container">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6" class="form-group">
             <table class="table table-striped" style="padding-right: 10%;">
                 <thead>
                     <tr>
@@ -68,7 +68,7 @@
                 {% for product in products %}
                 <tr>
                     <td>{{product.name}}</td>
-                    <td>{{product.Quantity}}</td>
+                    <td><input class="form-control form-control-sm" type="text" placeholder=".form-control-lg"></td>
                     <td>{{product.price}}</td>
                     <td><a href="{{url_for('delete_cart', id = products.index(product) )}}">Delete</a></td>  
                 </tr>
