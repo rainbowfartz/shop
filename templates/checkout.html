@@ -68,10 +68,11 @@
                 {% for product in products %}
                 <tr>
                     <td>{{product.name}}</td>
-                    <td><input class="form-control form-control-sm" type="text" placeholder=".form-control-lg"></td>
+                    <td></td>
                     <td>{{product.price}}</td>
                     <td><a href="{{url_for('delete_cart', id = products.index(product) )}}">Delete</a></td>  
                 </tr>
+        
                 {% endfor %}
                 <tr>
                     <td colspan="3" style="text-align: right;">Subtotal: $0.00</td>

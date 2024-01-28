@@ -170,8 +170,7 @@ def checkout():
     with shelve.open('products.db') as db:
         for item in cart:
             products.append(db[item])
-    print(products)
-
+            
     form = CreateCheckoutForm(request.form)
     if request.method == "POST" and form.validate():
         chckoutinfo_dict = {}
