@@ -53,10 +53,23 @@ def shopping():
     
     return render_template('shopping.html', products=products)
 
+# @app.route('/deleteCart/<int:id>', methods=['POST', 'GET'])
+# def delete_cart(id):
+#     userid = str(1)
+#     with shelve.open('checkout.db', 'w') as db:
+#         cart = []
+#         if userid in db:
+#             cart = db[userid]
+#         cart.pop(id)
+#         db[userid] = cart
+#     db.close()
+
+#     return redirect(url_for('checkout'))
+
 @app.route('/addtocart/<item>')
 def addtocart(item):
     userid = str(1)
-    with shelve.open('checkout.db') as db:
+    with shelve.open('checkout.db', writeback=True) as db:
         cart = []
         if userid in db:
             cart = db[userid]
@@ -64,6 +77,19 @@ def addtocart(item):
         cart.append(item)
         db[userid] = cart
     return redirect('/cart')
+
+# @app.route('/addtocart/<item>', methods=['POST'])
+# def addtocart(item):
+#     userid = str(1)
+    
+#     with shelve.open('checkout.db') as db:
+#         cart = []
+#         if userid in db:
+#             cart = db[userid]
+
+#         cart.append(item)
+#         db[userid] = cart
+#     return redirect('/cart')
 
 # @app.route('/checkout')
 # def check():

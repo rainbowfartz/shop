@@ -3,89 +3,91 @@
 
 {% block content %}
 <style>
-h1 {
-    color: #646464;
-    text-align: center;
-}
+    h1 {
+        color: #646464;
+        text-align: center;
+    }
 
-h3 {
-    color: #646464;
-    text-align: center;
-}
-.seed {
-    display: flex;
-    flex-wrap: wrap;
-}
+    h3 {
+        color: #646464;
+        text-align: center;
+    }
 
-.pics {
-    margin-top: 30px;
-}
+    .seed {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-.pics li{
-    list-style: none;
-    border: solid 3px pink;
-    border-radius: 30px;
-    padding: 10px 50px ;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: rgb(251, 205, 222);
-}
+    .pics {
+        margin-top: 30px;
+    }
 
-.pics li a {
-    background-color: rgb(230, 175, 206);
-    border-radius: 30px;
-    border-color: pink;
-    margin-top: 10px;
-}
+    .pics li {
+        list-style: none;
+        border: solid 3px pink;
+        border-radius: 30px;
+        padding: 10px 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: rgb(251, 205, 222);
+    }
 
-.pics img {
-    width: 220px;
-    height: 200px;
-    border-radius: 30px;
-}
+    .pics li a {
+        background-color: rgb(230, 175, 206);
+        border-radius: 30px;
+        border-color: pink;
+        margin-top: 10px;
+    }
 
-.pics p {
-    font-weight: bold;
-    color: #646464;
-}
+    .pics img {
+        width: 220px;
+        height: 200px;
+        border-radius: 30px;
+    }
 
-.plant {
-    display: flex;
-    flex-wrap: wrap;
-}
+    .pics p {
+        font-weight: bold;
+        color: #646464;
+    }
 
-.pic1 {
-    margin-top: 30px;
-}
+    .plant {
+        display: flex;
+        flex-wrap: wrap;
+    }
 
-.pic1 li{
-    list-style: none;
-    border: solid 3px pink;
-    border-radius: 30px;
-    padding: 10px 50px ;
-    margin-left: 10px;
-    margin-right: 10px;
-    background-color: rgb(251, 205, 222);
-}
+    .pic1 {
+        margin-top: 30px;
+    }
 
-.pic1 li a {
-    background-color: rgb(230, 175, 206);
-    border-radius: 30px;
-    border-color: pink;
-    margin-top: 10px;
-}
+    .pic1 li {
+        list-style: none;
+        border: solid 3px pink;
+        border-radius: 30px;
+        padding: 10px 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: rgb(251, 205, 222);
+    }
 
-.pic1 img {
-    width: 220px;
-    height: 200px;
-    border-radius: 30px;
-}
+    .pic1 li a {
+        background-color: rgb(230, 175, 206);
+        border-radius: 30px;
+        border-color: pink;
+        margin-top: 10px;
+    }
 
-.pic1 p {
-    font-weight: bold;
-    color: #646464;
-}
-a {
+    .pic1 img {
+        width: 220px;
+        height: 200px;
+        border-radius: 30px;
+    }
+
+    .pic1 p {
+        font-weight: bold;
+        color: #646464;
+    }
+
+    a {
         text-decoration: none;
         color: white;
         font-weight: bold;
@@ -98,18 +100,22 @@ a {
     <div class="seed">
         {% for id,product in products.items() %}
         {% if product['seedplant'] == 'seed' %}
-            <div class="pics">
-                <li>
-                    <h3>{{ product['name'] }}</h3>
-                    <p>Price: {{ product['price'] }}</p>
-                    <p>Stock: {{ product['stock'] }}</p>
-                    <p>Plant or Seed: {{ product['seedplant'] }}</p>
-                    <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <!-- <a href="#" class="btn btn-primary">Plant now</a><br> -->
-                    <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
-                    
-                </li>
-            </div>
+        <div class="pics">
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
+                <!-- <a href="#" class="btn btn-primary">Plant now</a><br> -->
+                <label for="">Quantity: </label>
+                <input type="number" name="quantity" id="" value="1" min="1" max="{{product.stock}}" />
+
+
+                <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
+
+            </li>
+        </div>
         {% endif %}
         {% endfor %}
     </div>
@@ -118,19 +124,21 @@ a {
 <ul>
     <h1>Plant</h1>
     <div class="plant">
-        
+
         {% for id,product in products.items() %}
         {% if product['seedplant'] == 'plant' %}
-            <div class="pic1">
-                <li>
-                    <h3>{{ product['name'] }}</h3>
-                    <p>Price: {{ product['price'] }}</p>
-                    <p>Stock: {{ product['stock'] }}</p>
-                    <p>Plant or Seed: {{ product['seedplant'] }}</p>
-                    <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
-                </li>
-            </div>
+        <div class="pic1">
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
+                <label for="">Quantity: </label>
+                <input type="number" name="quantity" id="" value="1" min="1" max="{{product.stock}}" />
+                <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
+            </li>
+        </div>
         {% endif %}
         {% endfor %}
     </div>
