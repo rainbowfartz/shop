@@ -44,9 +44,8 @@
             margin-top: 200px;
         }
        </style>
-       <head>
-    <!-- Include necessary meta tags, stylesheets, and scripts -->
-</head>
+
+
 <body>
     <div class="output">
     <h1>Parcel List</h1>
@@ -67,6 +66,7 @@
                 <a href="{{ url_for('delete', code=parcel.code) }}">Delete</a>
                 <br>
                 <!-- Display additional parcel information -->
+                <a>Current location of parcel:</a>
                 Latitude: {{ parcel.latitude }} | Longitude: {{ parcel.longitude }}
             </li>
         {% endfor %}

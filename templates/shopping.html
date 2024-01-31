@@ -107,13 +107,12 @@
                 <p>Stock: {{ product['stock'] }}</p>
                 <p>Plant or Seed: {{ product['seedplant'] }}</p>
                 <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                <!-- <a href="#" class="btn btn-primary">Plant now</a><br> -->
-                <label for="">Quantity: </label>
-                <input type="number" name="quantity" id="" value="1" min="1" max="{{product.stock}}" />
+                <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
+                    <label for="stock">Amount:</label>
+                    <input autocomplete="false" type="text" name="amount" required><br>
 
-
-                <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
-
+                    <input type="submit" value="Add To Cart" class="btn btn-primary">
+                </form>
             </li>
         </div>
         {% endif %}
@@ -134,9 +133,12 @@
                 <p>Stock: {{ product['stock'] }}</p>
                 <p>Plant or Seed: {{ product['seedplant'] }}</p>
                 <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                <label for="">Quantity: </label>
-                <input type="number" name="quantity" id="" value="1" min="1" max="{{product.stock}}" />
-                <a href="{{ url_for('addtocart',item=id)}}" class="btn btn-primary">Checkout now</a>
+                <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
+                    <label for="stock">Amount:</label>
+                    <input autocomplete="false" type="text" name="amount" required><br>
+
+                    <input type="submit" value="Add To Cart" class="btn btn-primary">
+                </form>
             </li>
         </div>
         {% endif %}
