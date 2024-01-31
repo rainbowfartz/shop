@@ -66,16 +66,20 @@ def shopping():
 
 #     return redirect(url_for('checkout'))
 
-@app.route('/addtocart/<item>')
+@app.route('/addtocart/<item>', methods=['POST'])
 def addtocart(item):
     userid = str(1)
-    with shelve.open('checkout.db', writeback=True) as db:
-        cart = []
-        if userid in db:
-            cart = db[userid]
 
-        cart.append(item)
+    with shelve.open('checkout.db', writeback=True) as db:
+        cart = db.get(userid, [])
+
+        print(request)
+        print(request.form)
+        amount = request.form["amount"]
+
+        cart.append({'id':item, 'amount': amount})
         db[userid] = cart
+
     return redirect('/cart')
 
 # @app.route('/addtocart/<item>', methods=['POST'])
@@ -195,7 +199,9 @@ def checkout():
             cart = db[userid]
     with shelve.open('products.db') as db:
         for item in cart:
-            products.append(db[item])
+            product = db[item['id']]
+            product['amount'] = item['amount']
+            products.append(product)
             
     form = CreateCheckoutForm(request.form)
     if request.method == "POST" and form.validate():
