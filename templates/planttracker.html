@@ -37,17 +37,11 @@
 <div class="pgheader">
     <div id="left">
         <h1 class="display-4" style="padding-left: 5%; font-weight: bolder; color: palevioletred;">Hey there!</h1>
-        <h3 style="padding-left: 5%; font-weight: bolder; color: white; border-color: black;">Here are your plant
+        <h3 style="padding-left: 5%; font-weight: bolder; color: lightpink; border-color: black;">Here are your plant
             updates</h3>
     </div>
     <div id="right">
         <h1 style="text-align:right;">Your plant is</h1>
-        <p>The date and time is: {{ date_time }}</p>
-        <p>{{difference.days}}</p>
-        <p>{{diff_wks}}</p>
-        <p>{{date_1}}</p>
-        <p>{{now}}</p>
-        <p>{{diff_dys}}</p>
     </div>
 </div>
 <div class="plantlist">
@@ -56,8 +50,8 @@
         <thead>
             <tr>
                 <th>Product ID</th>
-                <th></th>
-                <th></th>
+                <th>date</th>
+                <th>duration</th>
                 <th></th>
                 <th></th>
 
@@ -68,6 +62,7 @@
             <tr>
                 <td>{{ info.get_info_id() }}</td>
                 <td>{{ info.get_date() }}</td>
+                <td>{{ info.get_difference() }} weeks</td>
             </tr>
             {% endfor %}
         </tbody>

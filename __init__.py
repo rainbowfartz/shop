@@ -242,7 +242,7 @@ def retrieve_Info():
         chckoutinfo = chckoutinfo_dict.get(key)
         chckoutinfo_list.append(chckoutinfo)
     
-        print(chckoutinfo.get_date())
+        # print(chckoutinfo.get_date())
     return render_template("retrieveInfo.html", count=len(chckoutinfo_list), chckoutinfo_list=chckoutinfo_list)
 
 @app.route('/updateInfo/<int:id>/', methods=['GET', 'POST'])
@@ -331,23 +331,15 @@ def plant_tracker():
         chckoutinfo = chckoutinfo_dict.get(key)
         chckoutinfo_list.append(chckoutinfo)
 
-    now = datetime.now()
-    date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
+    for info in chckoutinfo_list:
+        date_format = '%d/%m/%Y, %H:%M:%S'
+        date_obj = datetime.strptime(info.get_date(), date_format)
+        difference2 = datetime.now() - date_obj
+        weeks = difference2.days/7
+        info.set_difference(round(weeks))
 
-    date1 = datetime(2022, 1, 1)
-    date2 = datetime(2022, 12, 31)
-    difference = date2 - date1
-    diff_wks = difference.days/7
 
-    date_1 = chckoutinfo.get_date()
-    print(date_1)
-    conv_date1 = datetime.strptime(date_1, '%m/%d/%Y, %H:%M:%S')
-    date_2 = datetime.now()
-    diff_dys = date_2 - conv_date1
-
-    
-
-    return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, date_time=date_time, difference=difference, diff_wks=diff_wks, date_1=date_1, now=now, diff_dys=diff_dys)
+    return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list)
 
 class Parcel:
     def __init__(self, code, location, latitude=None, longitude=None):
