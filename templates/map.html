@@ -143,13 +143,13 @@
     </style>
 
     <script>
-        var map = L.map('map').setView([1.3814810082855427, 103.80403050466634], 12); 
+        var map = L.map('map').setView([1.3714810082855427, 103.81803050466634], 11); 
 
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         }).addTo(map);
-        var marker = L.marker([1.33473, 103.78332]).addTo(map)
+        var marker = L.marker([{{parcel.latitude}}, {{parcel.longitude}}]).addTo(map)
     </script>
     </section>
 <div id="display1">

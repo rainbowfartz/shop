@@ -423,7 +423,14 @@ def display_input():
         
         for parcel in parcels:
             if int(parcel.code) == int(code):
+                parcel.latitude = random.randint(127, 142)/100
+                parcel.longitude = random.randint(10370, 10390)/100
+
+                parcels[parcels.index(parcel)] = parcel
+
                 currentparcel = parcel
+        
+        shelf['parcels'] = parcels
 
     if currentparcel:
         return render_template('map.html', parcel=currentparcel)
