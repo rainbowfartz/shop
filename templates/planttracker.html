@@ -65,7 +65,13 @@
                 <td>{{ info.get_difference() }} weeks</td>
             </tr>
             {% endfor %}
+            
         </tbody>
     </table>
+</div>
+<div>
+    {% if key in plant.items() == get_difference() %}
+    <img src="{{plant.values()}}">
+    {% endif %}
 </div>
 {% endblock %}
