@@ -70,8 +70,8 @@
     </table>
 </div>
 <div>
-    {% if key in plant.items() == get_difference() %}
-    <img src="{{plant.values()}}">
-    {% endif %}
+    {% for value in plant.values() %}
+    <img src="{{value}}">
+    {% endfor %}
 </div>
 {% endblock %}

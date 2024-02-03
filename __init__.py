@@ -347,8 +347,7 @@ def plant_tracker():
         weeks = difference2.days/7
         info.set_difference(round(weeks))
 
-    plant = {2:'static/images/sprout.png', 4:'static/images/seeding.png', 6:'static/images/vegetative', 8:'static/images/budding.png', 11:'static/images/flowering.png', 13:'static/images/ripening.png'}
-
+    plant = {2:'static/images/sprout.png', 4:'static/images/seeding.png', 6:'static/images/vegetative.png', 8:'static/images/budding.png', 11:'static/images/flowering.png', 13:'static/images/ripening.png'}
     return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, plant=plant)
 
 class Parcel:
