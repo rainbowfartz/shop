@@ -194,19 +194,28 @@ def checkout():
     userid = str(1)
     products = []
     cart = []
+    # with shelve.open('checkout.db') as db:
+    #     if userid in db:
+    #         cart = db[userid]
+    # with shelve.open('products.db') as db:
+    #     # with shelve.open('checkout.db') as db:
+    #         for item in cart:
+    #             product = db[int(item['id'])]
+    #             product['amount'] = item['amount']
+    #             total_price = int(item['amount']) * int(product['price'])
+    #             products.append(product)
+    #             products.append(total_price)
     with shelve.open('checkout.db') as db:
         if userid in db:
             cart = db[userid]
     with shelve.open('products.db') as db:
-        with shelve.open('checkout.db') as db:
-            for item in cart:
-                product = db[int(item['id'])]
-                product['amount'] = item['amount']
-                total_price = int(item['amount']) * int(product.price)
-                products.append(product)
-                products.append(total_price)
-
+        for item in cart:
+            product = db[str(item['id'])]
+            product['amount'] = str(item['amount'])  # Convert to string
+            product['total_price'] = "{:.2f}".format(float(item['amount']) * float(product['price']))
+            products.append(product)
     form = CreateCheckoutForm(request.form)
+
     if request.method == "POST" and form.validate():
         chckoutinfo_dict = {}
         db = shelve.open('chckoutinfo.db', 'c')

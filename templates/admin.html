@@ -37,10 +37,10 @@
     <input autocomplete="false" type="text" name="name" required><br>
 
     <label for="price">Price:</label>
-    <input autocomplete="false" type="text" name="price" required><br>
+    <input autocomplete="false" type="text" name="price" pattern="\d+|\d*\.\d{2}" required><br>
 
     <label for="stock">Stock:</label>
-    <input autocomplete="false" type="text" name="stock" required><br>
+    <input autocomplete="false" type="text" name="stock" pattern="[1-9][0-9]*" required><br>
 
     <label for="image">Image URL:</label>
     <input autocomplete="false" type="text" name="image" required><br>
