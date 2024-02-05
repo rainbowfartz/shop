@@ -3,7 +3,13 @@
 {% block title %}Grocery store - delivery {% endblock %}
 
     
-{% block content %}   
+{% block content %} 
+
+<head>
+    <section>
+        <h2>Parcel List</h2>
+    </section>
+</head>
     <style>
 
         body {
@@ -41,21 +47,22 @@
             text-align: center;
         }
         ul {
-            margin-top: 200px;
+            margin-top: 100px;
+        }
+        section{
+            margin-top: 500px;
+        }
+        output{
+            margin-top: 100px;
         }
        </style>
-
-
 <body>
     <div class="output">
-    <h1>Parcel List</h1>
 
     <!-- Display user input code -->
     {% if user_input_code %}
         <p>User Input Code: {{ user_input_code }}</p>
     {% endif %}
-
-    <a href="{{ url_for('add') }}">Add Parcel</a>
 
     <ul>
         {% for parcel in parcels %}
