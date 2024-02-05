@@ -241,10 +241,11 @@ def checkout():
             exp_month=form.exp_month.data, 
             exp_year=form.exp_year.data, 
             cvv=form.cvv.data, 
-            date=date_time)
+            date=date_time,
+            difference=0)
         chckoutinfo_dict[chckoutinfo.get_info_id()] = chckoutinfo
         db['Chckoutinfo'] = chckoutinfo_dict
-        
+    
         
         #Test codes
         # chckoutinfo_dict = db['Chckoutinfo']
@@ -253,6 +254,16 @@ def checkout():
 
         db.close()
         return redirect(url_for('checkout'))
+    
+    #     chckoutinfo_dict = {}
+#     db = shelve.open('chckoutinfo.db', 'r')
+#     chckoutinfo_dict = db['Chckoutinfo']
+#     db.close()
+
+#     chckoutinfo_list = []
+#     for key in chckoutinfo_dict:
+#         chckoutinfo = chckoutinfo_dict.get(key)
+#         chckoutinfo_list.append(chckoutinfo)
     return render_template('checkout.html', form=form, products=products)
 
 @app.route('/retrieveInfo')
@@ -267,8 +278,22 @@ def retrieve_Info():
         chckoutinfo = chckoutinfo_dict.get(key)
         chckoutinfo_list.append(chckoutinfo)
     
+    pic_list = []
+    for info in chckoutinfo_list:
+
+        date_format = '%d/%m/%Y, %H:%M:%S'
+        date_obj = datetime.strptime(info.get_date(), date_format)
+        difference2 = datetime.now() - date_obj
+        weeks = difference2.days/7
+        info.set_difference(round(weeks))
+        print(chckoutinfo.get_difference())
+        pic_image = plant[round(weeks)]
+        parts = pic_image.split('/')
+        names = parts[2].split('.')
+        stage = names[0]
+        pic_list.append((pic_image, stage))
         # print(chckoutinfo.get_date())
-    return render_template("retrieveInfo.html", count=len(chckoutinfo_list), chckoutinfo_list=chckoutinfo_list)
+    return render_template("retrieveInfo.html", count=len(chckoutinfo_list), chckoutinfo_list=chckoutinfo_list, pic_list=pic_list)
 
 @app.route('/updateInfo/<int:id>/', methods=['GET', 'POST'])
 def update_info(id):
@@ -344,37 +369,6 @@ def delete_cart(id):
     return redirect(url_for('checkout'))
 
 
-# @app.route('/planttracker')
-# def plant_tracker():
-#     chckoutinfo_dict = {}
-#     db = shelve.open('chckoutinfo.db', 'r')
-#     chckoutinfo_dict = db['Chckoutinfo']
-#     db.close()
-
-#     chckoutinfo_list = []
-#     for key in chckoutinfo_dict:
-#         chckoutinfo = chckoutinfo_dict.get(key)
-#         chckoutinfo_list.append(chckoutinfo)
-        
-#     pic_list = []
-#     for info in chckoutinfo_list:
-
-#         date_format = '%d/%m/%Y, %H:%M:%S'
-#         date_obj = datetime.strptime(info.get_date(), date_format)
-#         difference2 = datetime.now() - date_obj
-#         weeks = difference2.days/7
-#         info.set_difference(round(weeks))
-#         print(chckoutinfo.get_difference())
-#         pic_image = plant[round(weeks)]
-#         parts = pic_image.split('/')
-#         names = parts[2].split('.')
-#         stage = names[0]
-#         pic_list.append((pic_image, stage))
-
-
-
-#     return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, pic_list=pic_list)
-
 @app.route('/planttracker')
 def plant_tracker():
     chckoutinfo_dict = {}
@@ -386,10 +380,41 @@ def plant_tracker():
     for key in chckoutinfo_dict:
         chckoutinfo = chckoutinfo_dict.get(key)
         chckoutinfo_list.append(chckoutinfo)
+        
+    pic_list = []
+    for info in chckoutinfo_list:
+
+        date_format = '%d/%m/%Y, %H:%M:%S'
+        date_obj = datetime.strptime(info.get_date(), date_format)
+        difference2 = datetime.now() - date_obj
+        weeks = difference2.days/7
+        info.set_difference(round(weeks))
+        print(chckoutinfo.get_difference())
+        pic_image = plant[round(weeks)]
+        parts = pic_image.split('/')
+        names = parts[2].split('.')
+        stage = names[0]
+        pic_list.append((pic_image, stage))
 
 
 
-    return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list)
+    return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, pic_list=pic_list)
+
+# @app.route('/planttracker')
+# def plant_tracker():
+#     chckoutinfo_dict = {}
+#     db = shelve.open('chckoutinfo.db', 'r')
+#     chckoutinfo_dict = db['Chckoutinfo']
+#     db.close()
+
+#     chckoutinfo_list = []
+#     for key in chckoutinfo_dict:
+#         chckoutinfo = chckoutinfo_dict.get(key)
+#         chckoutinfo_list.append(chckoutinfo)
+
+
+
+#     return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list)
 
 class Parcel:
     def __init__(self, code, location, latitude=None, longitude=None):
