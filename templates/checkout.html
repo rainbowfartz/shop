@@ -63,19 +63,26 @@
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Price</th>
+                        <th>Total Price</th>
                     </tr>
                 </thead>
+                {% set ns = namespace(total = 0) %}  
                 {% for product in products %}
+                    {% set total_price = product.total_price|int %}
+                    {% set ns.total = ns.total + total_price %}
                 <tr>
                     <td>{{product.name}}</td>
                     <td>{{product.amount}}</td>
-                    <td>{{product.price}}</td>
-                    <td><a href="{{url_for('delete_cart', id = products.index(product) )}}">Delete</a></td>  
+                    <td>${{product.price}}</td>     
+                    <td>{{product.total_price}}</td>
+                    <td><a href="{{url_for('delete_cart', id = products.index(product) )}}">Delete</a></td> 
+                    
                 </tr>
         
                 {% endfor %}
+            
                 <tr>
-                    <td colspan="3" style="text-align: right;">Subtotal: $0.00</td>
+                    <td colspan="3" style="text-align: right;">Subtotal: ${{"%.2f"| format(ns.total)}}</td>
                 </tr>
                 <tr>
                     <td colspan="3" style="text-align: right;">Shipping: $0.00</td>

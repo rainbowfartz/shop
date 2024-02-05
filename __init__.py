@@ -12,6 +12,7 @@ app.secret_key = 'supersecretkey'  # Change this to a more secure key
 
 app.config['UPLOAD_FOLDER'] = 'static/upload'  
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'} 
+plant = {2:'static/images/sprout.png', 4:'static/images/seeding.png', 6:'static/images/vegetative.png', 8:'static/images/budding.png', 11:'static/images/flowering.png', 13:'static/images/ripening.png'}
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -194,16 +195,28 @@ def checkout():
     userid = str(1)
     products = []
     cart = []
+    # with shelve.open('checkout.db') as db:
+    #     if userid in db:
+    #         cart = db[userid]
+    # with shelve.open('products.db') as db:
+    #     # with shelve.open('checkout.db') as db:
+    #         for item in cart:
+    #             product = db[int(item['id'])]
+    #             product['amount'] = item['amount']
+    #             total_price = int(item['amount']) * int(product['price'])
+    #             products.append(product)
+    #             products.append(total_price)
     with shelve.open('checkout.db') as db:
         if userid in db:
             cart = db[userid]
     with shelve.open('products.db') as db:
         for item in cart:
-            product = db[item['id']]
-            product['amount'] = item['amount']
+            product = db[str(item['id'])]
+            product['amount'] = str(item['amount'])  # Convert to string
+            product['total_price'] = "{:.2f}".format(float(item['amount']) * float(product['price']))
             products.append(product)
-            
     form = CreateCheckoutForm(request.form)
+
     if request.method == "POST" and form.validate():
         chckoutinfo_dict = {}
         db = shelve.open('chckoutinfo.db', 'c')
@@ -336,16 +349,26 @@ def plant_tracker():
     for key in chckoutinfo_dict:
         chckoutinfo = chckoutinfo_dict.get(key)
         chckoutinfo_list.append(chckoutinfo)
-
+        
+    pic_list = []
     for info in chckoutinfo_list:
+
         date_format = '%d/%m/%Y, %H:%M:%S'
         date_obj = datetime.strptime(info.get_date(), date_format)
         difference2 = datetime.now() - date_obj
         weeks = difference2.days/7
         info.set_difference(round(weeks))
+        pic_image = plant[round(weeks)]
+        parts = pic_image.split('/')
+        names = parts[2].split('.')
+        stage = names[0]
+        pic_list.append((pic_image, stage))
 
 
-    return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list)
+
+    return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, pic_list=pic_list)
+
+
 
 class Parcel:
     def __init__(self, code, location, latitude=None, longitude=None):

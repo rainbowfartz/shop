@@ -13,7 +13,7 @@
         border-radius: 8%;
         height: 550px;
         padding: 20px 20px 20px 20px;
-        width: 30%;
+        width: 50%;
         margin-left: 5%;
     }
 
@@ -23,15 +23,17 @@
 
     .pgheader #left,
     .pgheader #right {
-        width: 49%;
+        width: 100%;
     }
 
     .pgheader #left {
         float: left;
+        width: 50%
     }
 
     .pgheader #right {
         float: right;
+        width:50%
     }
 </style>
 <div class="pgheader">
@@ -39,33 +41,40 @@
         <h1 class="display-4" style="padding-left: 5%; font-weight: bolder; color: palevioletred;">Hey there!</h1>
         <h3 style="padding-left: 5%; font-weight: bolder; color: lightpink; border-color: black;">Here are your plant
             updates</h3>
+            <div class="plantlist">
+                <h3>Plant's list:</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product ID</th>
+                            <th>date</th>
+                            <th>duration</th>
+                            <th></th>
+                            <th></th>
+            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for info in chckoutinfo_list %}
+                        <tr>
+                            <td>{{ info.get_info_id() }}</td>
+                            <td>{{ info.get_date() }}</td>
+                            <td>{{ info.get_difference() }} weeks</td>
+                        </tr>
+            
+                        {% endfor %}
+                        
+                    </tbody>
+                </table>
+            </div>
     </div>
     <div id="right">
-        <h1 style="text-align:right;">Your plant is</h1>
+        {% for info in chckoutinfo_list %}
+        
+        <h1 style="text-align:right;">Your plant {{info.get_info_id() }} is {{pic_list[loop.index0][1]}}</h1>
+       <img src="{{pic_list[loop.index0][0]}}">
+     
+        {% endfor %}
     </div>
-</div>
-<div class="plantlist">
-    <h3>Plant's list:</h3>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Product ID</th>
-                <th>date</th>
-                <th>duration</th>
-                <th></th>
-                <th></th>
-
-            </tr>
-        </thead>
-        <tbody>
-            {% for info in chckoutinfo_list %}
-            <tr>
-                <td>{{ info.get_info_id() }}</td>
-                <td>{{ info.get_date() }}</td>
-                <td>{{ info.get_difference() }} weeks</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 </div>
 {% endblock %}
