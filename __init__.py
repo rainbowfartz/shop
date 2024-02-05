@@ -6,6 +6,7 @@ from werkzeug.utils import secure_filename
 from itertools import product
 import shelve
 import random
+import os
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
@@ -32,12 +33,15 @@ def admin():
         name = request.form['name']
         price = request.form['price']
         stock = request.form['stock']
-        image = request.form['image']
         seedplant = request.form['seedplant']
+
+        image = request.files['image']
 
         with shelve.open('products.db') as db:
             product_id = str(len(db))
-            db[product_id] = {"id": int(product_id)+1, 'name': name, 'price': price, 'stock': stock, 'image': image, 'seedplant': seedplant}
+            db[product_id] = {"id": int(product_id)+1, 'name': name, 'price': price, 'stock': stock, 'seedplant': seedplant}
+
+            image.save(os.path.join('static/productimage', product_id))
 
         return redirect('/shopping')  
 
@@ -49,6 +53,7 @@ def shopping():
     products = {}
     with shelve.open('products.db') as db:
         for id in db.keys():
+            print(id)
             products[id] = db[id]
 
     
