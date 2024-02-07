@@ -427,7 +427,8 @@ with shelve.open('parcels.db', writeback=True) as shelf:
     if 'parcels' not in shelf:
         shelf['parcels'] = [
             Parcel('123', 'Jurong Ave 6', 1.3561, 103.8010),
-            Parcel('456', 'Woodlands Dr 70', 1.3721, 103.8292)
+            Parcel('456', 'Woodlands Dr 70', 1.3721, 103.8292),
+            Parcel('789', 'Ang Mo Kio Ave 80',  1.369115, 103.845436)
         ]
 
 @app.route('/form')
