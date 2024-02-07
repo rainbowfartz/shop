@@ -1,0 +1,87 @@
+
+{%extends "base.html" %}
+{% block title %}Grocery store - delivery {% endblock %}
+
+    
+{% block content %} 
+
+<head>
+    <section>
+        <h2>Parcel List</h2>
+    </section>
+</head>
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: lightyellow;
+        }
+
+        nav {
+            width: 100%;
+            height: 100px;
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            margin-top: -1000px;
+            margin-bottom: 90px; 
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        section {
+            width: 100%;
+            text-align: center;
+        }
+        ul {
+            margin-top: 100px;
+        }
+        section{
+            margin-top: 500px;
+        }
+        .output{
+            margin-top: 100px;
+        }
+        h2{
+            margin-top: 40px;
+        }
+       </style>
+<body>
+    <div class="output">
+
+    <!-- Display user input code -->
+    {% if user_input_code %}
+        <p>User Input Code: {{ user_input_code }}</p>
+    {% endif %}
+
+    <ul>
+        {% for parcel in parcels %}
+            <li>
+                <a>
+                    {{ parcel.code }} - {{ parcel.location }}
+                </a>
+                <a href="{{ url_for('delete', code=parcel.code) }}">Delete</a>
+                <br>
+                <!-- Display additional parcel information -->
+                <a>Current location of parcel:</a>
+                Latitude: {{ parcel.latitude }} | Longitude: {{ parcel.longitude }}
+            </li>
+        {% endfor %}
+    </ul>
+    </div>
+</body>
+
+{% endblock %}

@@ -1,0 +1,58 @@
+<style>
+    .right li {
+        overflow: hidden;
+        background-color: black;
+    }
+
+    .right img {
+        transform: scale(1.20);
+        opacity: 1;
+        transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .right img:hover {
+        transform: scale(1.03);
+        opacity: 0.7;
+    }
+    .right a:hover{
+        color:blue;
+    }
+    .right a{
+        padding: 10px;
+    }
+    nav{
+        height: 100px;
+    }
+</style>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" class="right">
+    <div style="padding-left: 5%;" class="right">
+        <a href="/">
+            <img src="static/images/homelogo.png" style="width:70px;" class="rounded-pill">
+        </a>
+        <a href="/">
+            <img src="static/images/profile.png" style="width:70px;" class="rounded-pill">
+        </a>
+        <a href="/shopping">
+            <img src="static/images/grocery.png" style="width:70px;" class="rounded-pill">
+        </a>
+        <a href="/cart">
+            <img src="static/images/cart.png" style="width:70px;" class="rounded-pill">
+        </a>
+        <a href="/form">
+            <img src="static/images/delivery.png" style="width:70px;" class="rounded-pill">
+        </a>
+        <a href="/game">
+            <img src="static/images/game.png" style="width:70px;" class="rounded-pill">
+        </a>
+        <a href="/retrieveInfo">
+            Retrieve Users
+        </a>
+        <a href="/admin">
+            admin
+        </a>
+        <a href="/index">
+            parcel list
+        </a>
+    </div>
+</nav>

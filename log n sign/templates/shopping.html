@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+{% block title %} Grocery Store - Shopping {% endblock %}
+
+{% block content %}
+<style>
+    h1 {
+        color: #646464;
+        text-align: center;
+    }
+
+    h3 {
+        color: #646464;
+        text-align: center;
+    }
+
+    .seed {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .pics {
+        margin-top: 30px;
+    }
+
+    .pics li {
+        list-style: none;
+        border: solid 3px pink;
+        border-radius: 30px;
+        padding: 10px 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: rgb(251, 205, 222);
+    }
+
+    .pics li a {
+        background-color: rgb(230, 175, 206);
+        border-radius: 30px;
+        border-color: pink;
+        margin-top: 10px;
+    }
+
+    .pics img {
+        width: 220px;
+        height: 200px;
+        border-radius: 30px;
+    }
+
+    .pics p {
+        font-weight: bold;
+        color: #646464;
+    }
+
+    .plant {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .pic1 {
+        margin-top: 30px;
+    }
+
+    .pic1 li {
+        list-style: none;
+        border: solid 3px pink;
+        border-radius: 30px;
+        padding: 10px 50px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: rgb(251, 205, 222);
+    }
+
+    .pic1 li a {
+        background-color: rgb(230, 175, 206);
+        border-radius: 30px;
+        border-color: pink;
+        margin-top: 10px;
+    }
+
+    .pic1 img {
+        width: 220px;
+        height: 200px;
+        border-radius: 30px;
+    }
+
+    .pic1 p {
+        font-weight: bold;
+        color: #646464;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .button-73 {
+        appearance: none;
+        background-color: #FFFFFF;
+        border-radius: 40em;
+        border-style: none;
+        box-shadow: #ADCFFF 0 -12px 6px inset;
+        box-sizing: border-box;
+        color: #000000;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -.24px;
+        margin: 0;
+        outline: none;
+        padding: 1rem 1.3rem;
+        quotes: auto;
+        text-align: center;
+        text-decoration: none;
+        transition: all .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin-top: 8px;
+        margin-left: 40px;
+    }
+
+    .button-73:hover {
+        background-color: #f2bbdf;
+        box-shadow: #de96d0 0 -6px 8px inset;
+        transform: scale(1.125);
+    }
+
+    .button-73:active {
+        transform: scale(1.025);
+    }
+
+    @media (min-width: 768px) {
+        .button-73 {
+            font-size: 1.5rem;
+            padding: .75rem 2rem;
+        }
+    }
+</style>
+<h1>Products</h1>
+<ul>
+    <h1>Seed</h1>
+    <div class="seed">
+        {% for id,product in products.items() %}
+        {% if product['seedplant'] == 'seed' %}
+        <div class="pics">
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ url_for('static', filename='productimage' + '/' + id) }}" alt="{{ product['name'] }}" width="200"><br>
+                <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
+                    <label for="stock">Amount:</label>
+                    <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
+                    <input type="submit" value="Plant Me!" class="button-73"><br>
+                    <input type="submit" value="Add To Cart" class="button-73">
+                    
+                </form>
+            </li>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</ul>
+<br>
+<ul>
+    <h1>Plant</h1>
+    <div class="plant">
+
+        {% for id,product in products.items() %}
+        {% if product['seedplant'] == 'plant' %}
+        <div class="pic1">
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ url_for('static', filename='productimage' + '/' + id) }}" alt="{{ product['name'] }}" width="200"><br>
+                <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
+                    <label for="stock">Amount:</label>
+                    <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
+
+                    <input type="submit" value="Add To Cart" class="button-73">
+                </form>
+            </li>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</ul>
+{% endblock %}
