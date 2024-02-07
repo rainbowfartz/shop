@@ -119,12 +119,20 @@
     }
 
     #display1 {
-        margin-left: 550px;
+        margin-left: 635px;
+        margin-bottom: 70px;
 
     }
 
     footer {
         margin-left: 550px;
+    }
+    #lastUpdated{
+        margin-left: 110px;
+        margin-top: 50px;
+    }
+    #parcel{
+        margin-left: 70px;
     }
 </style>
     <title>MAP</title>
@@ -154,7 +162,7 @@
     </section>
 <div id="display1">
     <h1>Your Parcel Code</h1>
-    <p>Entered Parcel Code: {{ parcel.code }}</p>
+    <p id="parcel">Entered Parcel Code: {{ parcel.code }}</p>
 </div>
 
 <footer>

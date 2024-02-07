@@ -277,7 +277,7 @@ def retrieve_Info():
     for key in chckoutinfo_dict:
         chckoutinfo = chckoutinfo_dict.get(key)
         chckoutinfo_list.append(chckoutinfo)
-    
+        print(chckoutinfo_list)
     pic_list = []
     for info in chckoutinfo_list:
 
@@ -293,6 +293,7 @@ def retrieve_Info():
         stage = names[0]
         pic_list.append((pic_image, stage))
         # print(chckoutinfo.get_date())
+
     return render_template("retrieveInfo.html", count=len(chckoutinfo_list), chckoutinfo_list=chckoutinfo_list, pic_list=pic_list)
 
 @app.route('/updateInfo/<int:id>/', methods=['GET', 'POST'])
