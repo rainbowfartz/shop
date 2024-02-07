@@ -13,7 +13,7 @@ app.secret_key = 'supersecretkey'  # Change this to a more secure key
 
 app.config['UPLOAD_FOLDER'] = 'static/upload'  
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'} 
-plant = {2:'static/images/sprout.png', 4:'static/images/seeding.png', 6:'static/images/vegetative.png', 8:'static/images/budding.png', 11:'static/images/flowering.png', 13:'static/images/ripening.png'}
+plant = {0:'static/images/sprout.png', 1:'static/images/sprout.png', 2:'static/images/sprout.png', 3:'static/images/seeding.png', 4:'static/images/seeding.png', 5:'static/images/seeding.png', 6:'static/images/vegetative.png', 7:'static/images/budding.png', 8:'static/images/budding.png', 10:'static/images/flowering.png', 11:'static/images/flowering.png', 12:'static/images/ripening.png', 13:'static/images/ripening.png'}
 
 def allowed_file(filename):
     return '.' in filename and \
