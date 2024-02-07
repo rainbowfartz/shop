@@ -7,6 +7,7 @@
     <style>
         body{
                   background-image: url(/static/images/meadow.png);
+                  height: 98vh;
                   background-size: cover;
                   background-repeat: no-repeat;
                   background-color: transparent;
@@ -21,23 +22,31 @@
                   font-family: "Times New Roman", Times, serif;
             }
 
-            .login{
-                    list-style: none;
-                    border-style: solid;
-                    text-align: center;
-                    border-color: purple;
-                    background-color: purple;
-                    font-size: 30px;
-                    padding-right: 60px;
-                    padding-left: 60px;
-                    width: 400px;
-                    border-radius: 20px;
-                    margin-left: 900px;
-                    padding: 20px;
-                    color: white;
-                    text-decoration: none;
-                    font-family: "Times New Roman", Times, serif;
+            .button-33 {
+              background-color: #e7c2f9;
+              border-radius: 100px;
+              box-shadow: rgba(162, 122, 198, 0.2) 0 -25px 18px -14px inset,rgba(113, 47, 170, 0.15) 0 1px 2px,rgba(134, 44, 187, 0.15) 0 2px 4px,rgba(101, 44, 187, 0.15) 0 4px 8px,rgba(96, 44, 187, 0.15) 0 8px 16px,rgba(130, 44, 187, 0.15) 0 16px 32px;
+              color: rgb(179, 134, 193);
+              cursor: pointer;
+              display: inline-block;
+              font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+              padding: 7px 20px;
+              text-align: center;
+              text-decoration: none;
+              transition: all 250ms;
+              border: 0;
+              font-size: 60px;
+              user-select: none;
+              -webkit-user-select: none;
+              touch-action: manipulation;
+              align-items: center;
+              margin-left: 675px;
+              margin-top: 80px;
+            }
 
+            .button-33:hover {
+              box-shadow: rgba(154, 44, 187, 0.35) 0 -25px 18px -14px inset,rgba(144, 93, 185, 0.25) 0 1px 2px,rgba(182, 44, 187, 0.25) 0 2px 4px,rgba(127, 44, 187, 0.25) 0 4px 8px,rgba(130, 44, 187, 0.25) 0 8px 16px,rgba(120, 44, 187, 0.25) 0 16px 32px;
+              transform: scale(1.05) rotate(-1deg);
             }
 
             p {
@@ -51,30 +60,37 @@
                   }
 
 
-            .image1 {
-                      margin-top: 133px;
+            .image1 { 
+                      
                       background: transparent;
-                      width: 450px;
-                      height: 650px;
+                      width: 400px;
+                      height: 500px;
 
                     }
+
+            
+
             .image2 {
-                      margin-top: 160px;
+                      
                       background: transparent;
                       height: 300px;
-                      width: 350px;
+                      width: 300px;
+                      margin-right: 10px;
                      }
+
             .image3 {
-                      margin-top: 190px;
+                      
                       background: transparent;
-                      height: 550px;
-                      width: 350px;
+                      height: 400px;
+                      width: 340px;
+                      padding-bottom: 20px;
                      }
+
             .image4 {
-                      margin-top: 10px;
+                      margin-top: 50px;
                       background: transparent;
-                      height: 600px;
-                      width: 630px;
+                      height: 500px;
+                      width: 400px;
                      }
     </style>
 </head>
@@ -84,14 +100,15 @@
     {% endblock %}
 
 
-            <p><a class="login" href="/">Login</a></p>
+
+            <a href="/shopping"><button class="button-33" role="button">Login</button></a>
 
             <div class="button">
-            <a href="/shopping"><img class="image1" src="/static/images/tree but real.png"></a>
+            <a href="/shopping"><img class="image1" src="/static/images/cutetree.png"></a>
 
             <a href="/form"><img class="image2" src="/static/images/bicycle.png"></a>
 
-            <a href="/game"><img class="image3" src="/static/images/arcade but real.png"></a>
+            <a href="/game"><img class="image3" src="/static/images/clawmachine.png"></a>
 
             <a href="/planttracker"><img class="image4" src="/static/images/transparent.png"></a>
             </div>
