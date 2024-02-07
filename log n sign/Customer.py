@@ -1,6 +1,7 @@
-import User
+from User import User
 
-class Customer(User.User):
+
+class Customer(User):
     count_id = 0
 
     def __init__(self, first_name, last_name, gender, membership, remarks, email, date_joined, address):
