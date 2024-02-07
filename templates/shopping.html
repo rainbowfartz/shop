@@ -93,6 +93,78 @@
         font-weight: bold;
         font-family: Arial, Helvetica, sans-serif;
     }
+
+    .button-73 {
+        appearance: none;
+        background-color: #FFFFFF;
+        border-radius: 40em;
+        border-style: none;
+        box-shadow: #ADCFFF 0 -12px 6px inset;
+        box-sizing: border-box;
+        color: #000000;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -.24px;
+        margin: 0;
+        outline: none;
+        padding: 1rem 1.3rem;
+        quotes: auto;
+        text-align: center;
+        text-decoration: none;
+        transition: all .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin-top: 8px;
+        margin-left: 40px;
+    }
+
+    .button-73:hover {
+        background-color: #f2bbdf;
+        box-shadow: #de96d0 0 -6px 8px inset;
+        transform: scale(1.125);
+    }
+
+    .button-73:active {
+        transform: scale(1.025);
+    }
+
+    @media (min-width: 768px) {
+        .button-73 {
+            font-size: 1.5rem;
+            padding: .75rem 2rem;
+        }
+    }
+
+    input[type=text] {
+        box-shadow: inset #abacaf 0 0 0 2px;
+        border: 0;
+        background: rgba(0, 0, 0, 0);
+        appearance: none;
+        width: 100%;
+        position: relative;
+        border-radius: 3px;
+        padding: 9px 12px;
+        line-height: 1.4;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        font-weight: 400;
+        height: 40px;
+        transition: all .2s ease;
+    }
+
+    input[type=text]:hover{
+        box-shadow: 0 0 0 0 #fff inset, #d54cff 0 0 0 2px;
+    }
+
+    input[type=text]:focus {
+        background: #fff;
+        outline: 0;
+        box-shadow: 0 0 0 0 #fff inset, #d54cff 0 0 0 3px;
+    }
 </style>
 <h1>Products</h1>
 <ul>
@@ -110,8 +182,9 @@
                 <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
                     <label for="stock">Amount:</label>
                     <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
-
-                    <input type="submit" value="Add To Cart" class="btn btn-primary">
+                    <input type="submit" value="Plant Me!" class="button-73"><br>
+                    <input type="submit" value="Add To Cart" class="button-73">
+                    
                 </form>
             </li>
         </div>
@@ -137,7 +210,7 @@
                     <label for="stock">Amount:</label>
                     <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
 
-                    <input type="submit" value="Add To Cart" class="btn btn-primary">
+                    <input type="submit" value="Add To Cart" class="button-73">
                 </form>
             </li>
         </div>
@@ -146,3 +219,29 @@
     </div>
 </ul>
 {% endblock %}
+
+
+
+
+box-shadow: inset #abacaf 0 0 0 2px;
+border: 0;
+background: rgba(0, 0, 0, 0);
+appearance: none;
+width: 100%;
+position: relative;
+border-radius: 3px;
+padding: 9px 12px;
+line-height: 1.4;
+color: rgb(0, 0, 0);
+font-size: 16px;
+font-weight: 400;
+height: 40px;
+transition: all .2s ease;
+:hover{
+    box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 2px;
+}
+:focus{
+    background: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 3px;
+}
