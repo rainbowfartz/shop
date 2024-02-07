@@ -93,6 +93,51 @@
         font-weight: bold;
         font-family: Arial, Helvetica, sans-serif;
     }
+
+    .button-73 {
+        appearance: none;
+        background-color: #FFFFFF;
+        border-radius: 40em;
+        border-style: none;
+        box-shadow: #ADCFFF 0 -12px 6px inset;
+        box-sizing: border-box;
+        color: #000000;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -.24px;
+        margin: 0;
+        outline: none;
+        padding: 1rem 1.3rem;
+        quotes: auto;
+        text-align: center;
+        text-decoration: none;
+        transition: all .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin-top: 8px;
+        margin-left: 40px;
+    }
+
+    .button-73:hover {
+        background-color: #f2bbdf;
+        box-shadow: #de96d0 0 -6px 8px inset;
+        transform: scale(1.125);
+    }
+
+    .button-73:active {
+        transform: scale(1.025);
+    }
+
+    @media (min-width: 768px) {
+        .button-73 {
+            font-size: 1.5rem;
+            padding: .75rem 2rem;
+        }
+    }
 </style>
 <h1>Products</h1>
 <ul>
@@ -110,8 +155,9 @@
                 <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
                     <label for="stock">Amount:</label>
                     <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
-
-                    <input type="submit" value="Add To Cart" class="btn btn-primary">
+                    <input type="submit" value="Plant Me!" class="button-73"><br>
+                    <input type="submit" value="Add To Cart" class="button-73">
+                    
                 </form>
             </li>
         </div>
@@ -137,7 +183,7 @@
                     <label for="stock">Amount:</label>
                     <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
 
-                    <input type="submit" value="Add To Cart" class="btn btn-primary">
+                    <input type="submit" value="Add To Cart" class="button-73">
                 </form>
             </li>
         </div>
