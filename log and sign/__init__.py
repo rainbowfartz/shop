@@ -1,12 +1,16 @@
 from flask import *
-import sqlite3, hashlib, os
-from werkzeug.utils import secure_filename
+from werkzeug.utils import *
 from Forms import *
 import shelve, User, Customer
 from Forms import RegistrationForm
+from Forms import CreateUserForm
+from Forms import CreateCustomerForm
+from Forms import LoginForm
+import shelve
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
-
+app.secret_key = 'bob'
 
 @app.route('/')
 def add():
@@ -20,7 +24,13 @@ def signup():
         email = form.email.data
         password = form.password.data
         # save the user data to the database here
-        return render_template('success.html')
+        with shelve.open('users.db') as db:
+            # Store the user data in the database
+            user_data = {'email': email, 'password': password}
+            db[username] = user_data
+        # Store the username in the session
+        session['username'] = username
+        return render_template('login.html')
     return render_template('signup.html', form=form)
 
 @app.route('/login')
@@ -29,19 +39,35 @@ def login():
 
 @app.route('/login', methods=['GET','POST'])
 def login2():
-    email = request.form['email']
-    password = request.form['password']
-    print(f"{email}, {password}")
-    db = shelve.open('user.db', 'r')
-    users = db["Users"]
-    if email in users:
-        print("found")
-    else:
-        print("not found")
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
+        Email = form.Email.data
+        password = form.password.data
+
+        with shelve.open('users.db') as db:
+            user_data = db.get(Email)
+
+            if user_data is not None and check_password_hash(user_data['password'], password):
+                session['Email'] = Email
+                return render_template('main.html')
+            else:
+                return 'Invalid username or password', 401
+
+    return render_template('login.html', form=form)
+
+    # email = request.form['email']
+    # password = request.form['password']
+    # print(f"{email}, {password}")
+    # db = shelve.open('user.db', 'r')
+    # users = db["Users"]
+    # if email in users:
+    #     print("found")
+    # else:
+    #     print("not found")
    
-    db.close()
+    # db.close()
     
-    return render_template('login.html')
+    # return render_template('login.html')
 
 
 
