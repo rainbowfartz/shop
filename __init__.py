@@ -479,7 +479,7 @@ def game():
     print(type(datetime.now()), type(lastplayed))
     print(datetime.now() - lastplayed)
 
-    if datetime.now() - lastplayed > timedelta(days=1):
+    if datetime.now() - lastplayed > timedelta(seconds=1):
         tries = 3
         with shelve.open('clawmachine.db') as clawmachinedb:
             clawmachinedb[str(userid)] = {'plays':0, 'lastplayed':datetime.now()}
