@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Grocery Store - Home{% endblock %}
+
+
+
+{% block content %}
+<div id="display">
+    <div id="productDescription">
+        <table id="descriptionTable">
+            <tr>
+                <td>Name</td>
+                <td>{{data[1]}}</td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>${{data[2]}}</td>
+            </tr>
+            <tr>
+                <td>Stock</td>
+                <td>{{data[5]}}</td>
+            </tr>
+        </table>
+    </div>
+    <div id="addToCart">
+        <a href="/addToCart?productId={{request.args.get('productId')}}">Add to Cart</a>
+    </div>
+</div>
+{% endblock %}

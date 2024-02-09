@@ -23,10 +23,6 @@ def allowed_file(filename):
 def home():
     return render_template('main.html')
 
-@app.route('/game')
-def game():
-    return render_template('index1.html')
-
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
@@ -128,68 +124,6 @@ def addtocart(item):
 #     return render_template('checkout.html', products=products)
 
 # Shelve file for data storage
-SHELVE_FILE = 'claw_machine_data.shelve'
-
-class ClawMachine:
-    def __init__(self):
-        self.last_play_key = 'last_play'
-        self.play_frequency = timedelta(hours=24)
-        self.max_daily_plays = 3  # Maximum allowed plays per day
-    
-    def can_play(self):
-        if self.last_play_key in session:
-            plays_today = session.get('plays_today', 0)
-            if plays_today >= self.max_daily_plays:
-                raise PermissionError('You have reached the maximum number of plays for today!')
-            
-            # Increment the plays_today counter
-            session['plays_today'] = plays_today + 1
-
-            if datetime.now() - session[self.last_play_key] < self.play_frequency:
-                raise PermissionError('You can only play once every 24 hours!')
-        else:
-            # First play of the day, reset the plays_today counter
-            session['plays_today'] = 1
-
-        return True
-
-    def play(self):
-        if self.can_play():
-            # Simulate the claw machine game
-            user_wins = random.choice([True, False])
-            
-            # Save the user's result to the database
-            user_data = shelve.open(SHELVE_FILE)
-            try:
-                if 'user_wins' not in user_data:
-                    user_data['user_wins'] = {}
-
-                play_number = session['plays_today']
-                user_data['user_wins'][f'Try {play_number}'] = 'Win' if user_wins else 'Lose'
-
-            finally:
-                user_data.close()
-
-            # Update the last play time
-            session[self.last_play_key] = datetime.now()
-            return user_wins
-
-@app.route('/play')
-def play_game():
-    claw_machine = ClawMachine()
-
-    try:
-        if claw_machine.play():
-            flash('Congratulations! You won a prize!', 'success')
-        else:
-            flash('Sorry, you didn\'t win this time. Try again tomorrow!', 'info')
-    except PermissionError as e:
-        flash(str(e), 'danger')
-
-    return redirect(url_for('index'))
-
-
-
 
 # @app.route('/checkout')
 # def check():
@@ -529,8 +463,41 @@ with shelve.open('parcels.db') as shelf:
     parcels = shelf.get('parcels', [])
     print(parcels)
 
-# @app.route('/clawmachine')
-# def claw_machine():
-#     return render_template('c')
+            
+@app.route('/game')
+def game():
+    userid = 1
+    plays = 0
+
+    with shelve.open('clawmachine.db') as clawmachinedb:
+        data = clawmachinedb.get(str(userid), {'plays':0,'lastplayed': datetime.now()})
+        plays = data['plays']
+        lastplayed = data['lastplayed']
+
+    tries = 3-plays
+    print(datetime.now(), lastplayed)
+    print(type(datetime.now()), type(lastplayed))
+    print(datetime.now() - lastplayed)
+
+    if datetime.now() - lastplayed > timedelta(days=1):
+        tries = 3
+        with shelve.open('clawmachine.db') as clawmachinedb:
+            clawmachinedb[str(userid)] = {'plays':0, 'lastplayed':datetime.now()}
+
+    return render_template('index1.html', tries=tries)
+
+@app.route('/play')
+def play_game():
+    userid = 1
+
+    with shelve.open('clawmachine.db') as clawmachinedb:
+        data = clawmachinedb.get(str(userid), {'plays':0,'lastplayed': datetime.now()})
+        plays = data['plays']
+        plays += 1
+        clawmachinedb[str(userid)] = {'plays':plays, 'lastplayed':datetime.now()}
+
+    return redirect(url_for('game'))
+       
+
 if __name__ == '__main__':
     app.run(debug=True)
