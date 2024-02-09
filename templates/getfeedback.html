@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Feedbacks</title>
+</head>
+<body>
+    <h2>View Feedbacks</h2>
+    {% if feedbacks %}
+        <ul>
+            {% for feedback in feedbacks %}
+                <li>
+                    <strong>Name:</strong> {{ feedback.name }}<br>
+                    <strong>Email:</strong> {{ feedback.email }}<br>
+                    <strong>Message:</strong> {{ feedback.message }}
+                </li>
+                <hr>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No feedbacks available.</p>
+    {% endif %}
+</body>
+</html>
