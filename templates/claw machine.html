@@ -23,7 +23,11 @@
         <p>Come try your luck and stand to win attractive prizes</p>
     </section>
 
-	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+	{% block navbar %}
+        {% include 'includes/navbar.html' %}
+    {% endblock %}
+
+	<!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
 		<div style="padding-left: 5%;">
 			<a href="#">
 				<img src="static/images/homelogo.png" style="width:70px;"
@@ -48,7 +52,7 @@
 				<img src="static/images/game.png" style="width:70px;" class="rounded-pill">
 			</a>
 		</div>
-	</nav>
+	</nav> -->
 	</head>
 	<body>
         
