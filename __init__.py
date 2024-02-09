@@ -23,10 +23,6 @@ def allowed_file(filename):
 def home():
     return render_template('main.html')
 
-@app.route('/game')
-def game():
-    return render_template('index1.html')
-
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
@@ -76,15 +72,26 @@ def shopping():
 def addtocart(item):
     userid = str(1)
 
-    with shelve.open('checkout.db', writeback=True) as db:
-        cart = db.get(userid, [])
+    with shelve.open('checkout.db', writeback=True) as db1:
+        with shelve.open('Seed.db', writeback=True) as db2:
+            cart = db1.get(userid, [])
+            seed = db2.get(userid, [])
 
-        print(request)
-        print(request.form)
-        amount = request.form["amount"]
+            print(request)
+            print(request.form)
+            amount = request.form.get("amount")
+            additional_value = request.form.get("seedplant")
 
-        cart.append({'id':item, 'amount': amount})
-        db[userid] = cart
+            if additional_value == "seed":
+                # Add to both databases
+                cart.append({'id': item, 'amount': amount})
+                seed.append({'id': item, 'amount': amount})
+            else:
+                # Add only to db2
+                cart.append({'id': item, 'amount': amount})
+
+            db1[userid] = cart
+            db2[userid] = seed
 
     return redirect('/cart')
 
@@ -117,68 +124,6 @@ def addtocart(item):
 #     return render_template('checkout.html', products=products)
 
 # Shelve file for data storage
-SHELVE_FILE = 'claw_machine_data.shelve'
-
-class ClawMachine:
-    def __init__(self):
-        self.last_play_key = 'last_play'
-        self.play_frequency = timedelta(hours=24)
-        self.max_daily_plays = 3  # Maximum allowed plays per day
-    
-    def can_play(self):
-        if self.last_play_key in session:
-            plays_today = session.get('plays_today', 0)
-            if plays_today >= self.max_daily_plays:
-                raise PermissionError('You have reached the maximum number of plays for today!')
-            
-            # Increment the plays_today counter
-            session['plays_today'] = plays_today + 1
-
-            if datetime.now() - session[self.last_play_key] < self.play_frequency:
-                raise PermissionError('You can only play once every 24 hours!')
-        else:
-            # First play of the day, reset the plays_today counter
-            session['plays_today'] = 1
-
-        return True
-
-    def play(self):
-        if self.can_play():
-            # Simulate the claw machine game
-            user_wins = random.choice([True, False])
-            
-            # Save the user's result to the database
-            user_data = shelve.open(SHELVE_FILE)
-            try:
-                if 'user_wins' not in user_data:
-                    user_data['user_wins'] = {}
-
-                play_number = session['plays_today']
-                user_data['user_wins'][f'Try {play_number}'] = 'Win' if user_wins else 'Lose'
-
-            finally:
-                user_data.close()
-
-            # Update the last play time
-            session[self.last_play_key] = datetime.now()
-            return user_wins
-
-@app.route('/play')
-def play_game():
-    claw_machine = ClawMachine()
-
-    try:
-        if claw_machine.play():
-            flash('Congratulations! You won a prize!', 'success')
-        else:
-            flash('Sorry, you didn\'t win this time. Try again tomorrow!', 'info')
-    except PermissionError as e:
-        flash(str(e), 'danger')
-
-    return redirect(url_for('index'))
-
-
-
 
 # @app.route('/checkout')
 # def check():
@@ -200,17 +145,7 @@ def checkout():
     userid = str(1)
     products = []
     cart = []
-    # with shelve.open('checkout.db') as db:
-    #     if userid in db:
-    #         cart = db[userid]
-    # with shelve.open('products.db') as db:
-    #     # with shelve.open('checkout.db') as db:
-    #         for item in cart:
-    #             product = db[int(item['id'])]
-    #             product['amount'] = item['amount']
-    #             total_price = int(item['amount']) * int(product['price'])
-    #             products.append(product)
-    #             products.append(total_price)
+
     with shelve.open('checkout.db') as db:
         if userid in db:
             cart = db[userid]
@@ -224,36 +159,53 @@ def checkout():
 
     if request.method == "POST" and form.validate():
         chckoutinfo_dict = {}
-        db = shelve.open('chckoutinfo.db', 'c')
+        seed = []
+        with shelve.open('chckoutinfo.db', writeback=True) as chckoutinfo_db:
+            try:
+                chckoutinfo_dict = db['Chckoutinfo']
+            except:
+                print('Error in retrieving Chckoutinfo from chckoutinfo.db')
 
-        try:
-            chckoutinfo_dict = db['Chckoutinfo']
-        except:
-            print('Error in retrieving Chckoutinfo from chckoutinfo.db')
-
-        now = datetime.now()
-        date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
-
-        chckoutinfo = checkoutinfo.CheckoutInfo(
-            name=form.name.data, 
-            address=form.address.data, 
-            card_number=form.card_number.data, 
-            exp_month=form.exp_month.data, 
-            exp_year=form.exp_year.data, 
-            cvv=form.cvv.data, 
-            date=date_time,
-            difference=0)
-        chckoutinfo_dict[chckoutinfo.get_info_id()] = chckoutinfo
-        db['Chckoutinfo'] = chckoutinfo_dict
     
+            with shelve.open('checkout.db') as checkout_db:
+                item_info = checkout_db.get("seedplant")
+                if item_info == "seed":
+                    seed.append(item_info)
+
+            now = datetime.now()
+            date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
+
+            chckoutinfo = checkoutinfo.CheckoutInfo(
+                name=form.name.data, 
+                address=form.address.data, 
+                card_number=form.card_number.data, 
+                exp_month=form.exp_month.data, 
+                exp_year=form.exp_year.data, 
+                cvv=form.cvv.data, 
+                date=date_time,
+                difference=0,
+                seed=seed)
+            
+            chckoutinfo_id = chckoutinfo.get_info_id()  # Get ID of the new checkout info
+        
+            # Check if the ID already exists, if so, update it instead of adding a new entry
+            if chckoutinfo_id in chckoutinfo_dict:
+                # Update the existing entry
+                chckoutinfo_dict[chckoutinfo_id].update(chckoutinfo.__dict__)
+            else:
+                # Add the new entry
+                chckoutinfo_dict[chckoutinfo_id] = chckoutinfo
+
+            chckoutinfo_db['Chckoutinfo'] = chckoutinfo_dict    
+
+        return redirect(url_for('checkout'))
         
         #Test codes
         # chckoutinfo_dict = db['Chckoutinfo']
         # chckoutinfo = chckoutinfo_dict[chckoutinfo.get_info_id()]
         # print(chckoutinfo.get_name(),"was stored in chckoutinfo.db successfully with info_id ==", chckoutinfo.get_info_id())
 
-        db.close()
-        return redirect(url_for('checkout'))
+        
     
     #     chckoutinfo_dict = {}
 #     db = shelve.open('chckoutinfo.db', 'r')
@@ -511,8 +463,41 @@ with shelve.open('parcels.db') as shelf:
     parcels = shelf.get('parcels', [])
     print(parcels)
 
-# @app.route('/clawmachine')
-# def claw_machine():
-#     return render_template('c')
+            
+@app.route('/game')
+def game():
+    userid = 1
+    plays = 0
+
+    with shelve.open('clawmachine.db') as clawmachinedb:
+        data = clawmachinedb.get(str(userid), {'plays':0,'lastplayed': datetime.now()})
+        plays = data['plays']
+        lastplayed = data['lastplayed']
+
+    tries = 3-plays
+    print(datetime.now(), lastplayed)
+    print(type(datetime.now()), type(lastplayed))
+    print(datetime.now() - lastplayed)
+
+    if datetime.now() - lastplayed > timedelta(days=1):
+        tries = 3
+        with shelve.open('clawmachine.db') as clawmachinedb:
+            clawmachinedb[str(userid)] = {'plays':0, 'lastplayed':datetime.now()}
+
+    return render_template('index1.html', tries=tries)
+
+@app.route('/play')
+def play_game():
+    userid = 1
+
+    with shelve.open('clawmachine.db') as clawmachinedb:
+        data = clawmachinedb.get(str(userid), {'plays':0,'lastplayed': datetime.now()})
+        plays = data['plays']
+        plays += 1
+        clawmachinedb[str(userid)] = {'plays':plays, 'lastplayed':datetime.now()}
+
+    return redirect(url_for('game'))
+       
+
 if __name__ == '__main__':
     app.run(debug=True)

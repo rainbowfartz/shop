@@ -33,18 +33,19 @@ nav a {
 section {
   width: 100%;
   text-align: center;
-  margin-bottom: 500px;
+  margin-top: 200px;
 }
 
 #main {
-  margin-top: 1000px;
-  margin-left: 1000px;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
   width:360px;
   height:460px;
 }
 #toys {
   position:absolute;
-  top:210px;
+  top:510px;
   left:102px;
   width:231px;
   height:121px;
@@ -62,7 +63,7 @@ section {
 }
 #moveContainer {
   position:absolute;
-  top:343px;
+  top:643px;
   left:102px;
   width:231px;
   height:36px;
@@ -83,7 +84,7 @@ section {
 }
 #claw {
   position:absolute;
-  top:65px;
+  top:365px;
   left:30px;
   width:60px;
   height:260px;
@@ -105,7 +106,7 @@ section {
 #clawBall {
   position:absolute;
   top:31px;
-  left:21px;
+  left:24px;
   width:6px;
   height:6px;
   border:6px solid #5b5b5b;
@@ -114,7 +115,7 @@ section {
 #leftClaw {
   position:absolute;
   top:36px;
-  left:3px;
+  left:8px;
   width:16px;
   height:25px;
   border-top:8px solid #5b5b5b;
@@ -125,7 +126,7 @@ section {
 #rightClaw {
   position:absolute;
   top:36px;
-  right:3px;
+  right:8px;
   width:16px;
   height:25px;
   border-top:8px solid #5b5b5b;
