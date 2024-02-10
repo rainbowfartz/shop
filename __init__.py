@@ -37,7 +37,7 @@ def home():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if current_user:
+    if current_user.is_authenticated:
         return redirect(url_for('shopping'))
     
     form = RegistrationForm(request.form)
@@ -53,7 +53,7 @@ def signup():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if current_user:
+    if current_user.is_authenticated:
         return redirect(url_for('shopping'))
     
     form = LoginForm(request.form)
