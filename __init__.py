@@ -118,7 +118,7 @@ def shopping():
 
 @app.route('/addtocart/<item>', methods=['POST'])
 def addtocart(item):
-    userid = str(1)
+    userid = current_user.id
 
     with shelve.open('checkout.db', writeback=True) as db1:
         with shelve.open('Seed.db', writeback=True) as db2:
@@ -190,7 +190,7 @@ def addtocart(item):
 
 @app.route('/cart', methods = ['GET', 'POST'])
 def checkout():
-    userid = str(1)
+    userid = current_user.id
     products = []
     cart = []
 
@@ -358,7 +358,7 @@ def delete_info(id):
 
 @app.route('/deleteCart/<int:id>', methods=['POST', 'GET'])
 def delete_cart(id):
-    userid = str(1)
+    userid = current_user.id
     with shelve.open('checkout.db', 'w') as db:
         cart = []
         if userid in db:
@@ -514,7 +514,7 @@ with shelve.open('parcels.db') as shelf:
             
 @app.route('/game')
 def game():
-    userid = 1
+    userid = current_user.id
     plays = 0
 
     with shelve.open('clawmachine.db') as clawmachinedb:
@@ -536,7 +536,7 @@ def game():
 
 @app.route('/play')
 def play_game():
-    userid = 1
+    userid = current_user.id
 
     with shelve.open('clawmachine.db') as clawmachinedb:
         data = clawmachinedb.get(str(userid), {'plays':0,'lastplayed': datetime.now()})
