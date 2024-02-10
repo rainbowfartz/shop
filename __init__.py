@@ -37,7 +37,7 @@ def home():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    if current_user:
+    if current_user.is_authenticated:
         return redirect(url_for('shopping'))
     
     form = RegistrationForm(request.form)
@@ -53,7 +53,7 @@ def signup():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
-    if current_user:
+    if current_user.is_authenticated:
         return redirect(url_for('shopping'))
     
     form = LoginForm(request.form)
@@ -514,7 +514,7 @@ with shelve.open('parcels.db') as shelf:
             
 @app.route('/game')
 def game():
-    userid = 1
+    userid = current_user.id
     plays = 0
 
     with shelve.open('clawmachine.db') as clawmachinedb:
@@ -536,7 +536,7 @@ def game():
 
 @app.route('/play')
 def play_game():
-    userid = 1
+    userid = current_user.id
 
     with shelve.open('clawmachine.db') as clawmachinedb:
         data = clawmachinedb.get(str(userid), {'plays':0,'lastplayed': datetime.now()})
