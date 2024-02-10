@@ -30,7 +30,7 @@ Sign up System
           <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
           <i class="fas fa-unlock-alt"></i>
-          <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required minlength="8">
+          <input type="password" name="confirm" id="confirm" placeholder="Confirm Password" required minlength="8">
           {% for error in form.confirm.errors %}
           <span style="color: red;">[{{ error }}]</span>
           {% endfor %}
@@ -40,7 +40,7 @@ Sign up System
           </div>                 
         </div>
         <div class="login-btn">
-          <button class="btn"> <a href="succes.html"> Submit</a></button>
+          <button class="btn"> <button type="submit"> Submit</a></button>
           <p class="signup">Already have an account ? <a href="#"><span>Log In</span> </a></p>
         </div>
       </div>
