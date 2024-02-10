@@ -11,6 +11,7 @@ import os
 from werkzeug.security import check_password_hash
 from flask_login import LoginManager, login_user, current_user
 from User import User
+from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
