@@ -1,4 +1,5 @@
 from flask import *
+from wtforms import StringField, SubmitField, TextAreaField
 from Forms import CreateCheckoutForm, LoginForm, RegistrationForm
 import shelve, checkoutinfo
 from datetime import datetime, timedelta
