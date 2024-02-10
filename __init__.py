@@ -4,12 +4,14 @@ import shelve, checkoutinfo
 from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
 from itertools import product
+from flask_wtf import FlaskForm
 import shelve
 import random
 import os
 from werkzeug.security import check_password_hash
 from flask_login import LoginManager, login_user, current_user
 from User import User
+from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
@@ -489,6 +491,56 @@ def display_input():
 with shelve.open('parcels.db') as shelf:
     parcels = shelf.get('parcels', [])
     print(parcels)
+
+
+    class FeedbackForm(FlaskForm):
+        name = StringField('Name')
+        email = StringField('Email')
+        message = TextAreaField('Message')
+        submit = SubmitField('Submit')
+
+
+def save_feedback_to_shelf(name, email, message):
+    with shelve.open('feedback_shelve.db') as shelf:
+        if 'feedbacks' not in shelf:
+            shelf['feedbacks'] = []
+
+        feedbacks = shelf['feedbacks']
+        feedbacks.append({'name': name, 'email': email, 'message': message})
+        shelf['feedbacks'] = feedbacks
+
+
+def get_all_feedbacks():
+    with shelve.open('feedback_shelve.db', writeback=True) as shelf:
+        return shelf.get('feedbacks', [])
+
+
+@app.route('/feedback', methods=['GET', 'POST'])
+def feedback_form():
+    form = FeedbackForm()
+
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        message = form.message.data
+
+        save_feedback_to_shelf(name, email, message)
+
+        return redirect(url_for('thank_you'))
+
+    return render_template('contactus.html', form=form)
+
+
+@app.route('/thank-you')
+def thank_you():
+    return "Thank you for your feedback!"
+
+
+@app.route('/view-feedbacks')
+def view_feedbacks():
+    feedbacks = get_all_feedbacks()
+    return render_template('getfeedback.html', feedbacks=feedbacks)
+
 
             
 @app.route('/game')
