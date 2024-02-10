@@ -1,5 +1,5 @@
 from flask import *
-from Forms import CreateCheckoutForm
+from Forms import CreateCheckoutForm, LoginForm, RegistrationForm
 import shelve, checkoutinfo
 from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
@@ -7,6 +7,7 @@ from itertools import product
 import shelve
 import random
 import os
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
@@ -22,6 +23,45 @@ def allowed_file(filename):
 @app.route('/')
 def home():
     return render_template('main.html')
+
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    form = RegistrationForm(request.form)
+    if request.method == 'POST' and form.validate():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        # save the user data to the database here
+        with shelve.open('users.db') as db:
+            # Store the user data in the database
+            user_data = {'email': email, 'password': password}
+            db[username] = user_data
+        # Store the username in the session
+        session['username'] = username
+        return render_template('login.html')
+    return render_template('signup.html', form=form)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+
+@app.route('/login', methods=['GET','POST'])
+def login2():
+    form = LoginForm(request.form)
+    if request.method == 'POST' and form.validate():
+        Email = form.Email.data
+        password = form.password.data
+
+        with shelve.open('users.db') as db:
+            user_data = db.get(Email)
+
+            if user_data is not None and check_password_hash(user_data['password'], password):
+                session['Email'] = Email
+                return render_template('main.html')
+            else:
+                return 'Invalid username or password', 401
+
+    return render_template('login.html', form=form)
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -498,6 +538,9 @@ def play_game():
 
     return redirect(url_for('game'))
        
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('error404page.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

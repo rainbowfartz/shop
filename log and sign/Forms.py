@@ -20,6 +20,6 @@ class RegistrationForm(Form):
     ])
     confirm = PasswordField('Repeat Password')
     
-    class LoginForm(Form):
-        username = StringField('Username', [validators.Length(min=4, max=25)])
+class LoginForm(Form):
+    Email = StringField('Email', [validators.Length(min=4, max=25)])
     password = PasswordField('Password', [validators.Length(min=6, max=80)])
