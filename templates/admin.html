@@ -32,22 +32,22 @@
 </style>
 
 <h1>Add Product</h1>
-<form autocomplete="off" method="POST" action="/admin" enctype="multipart/form-data">
+<form autocomplete="off" method="POST" action="/admin">
     <label for="name">Product Name:</label>
     <input autocomplete="false" type="text" name="name" required><br>
 
     <label for="price">Price:</label>
-    <input autocomplete="false" type="text" name="price" pattern="\d+|\d*\.\d{2}" required><br>
+    <input autocomplete="false" type="text" name="price" required><br>
 
     <label for="stock">Stock:</label>
-    <input autocomplete="false" type="text" name="stock" pattern="[1-9][0-9]*" required><br>
+    <input autocomplete="false" type="text" name="stock" required><br>
 
-    <label for="image">Image:</label>
-    <input autocomplete="false" type="file" name="image" required><br>
+    <label for="image">Image URL:</label>
+    <input autocomplete="false" type="text" name="image" required><br>
 
     <label for="seedplant">Seed or plant</label>
     <select id="seedplant" name="seedplant">
-        <option value="seed">Seed</option>
+        <option value=" ">Seed</option>
         <option value="plant">Plant</option>
     </select><br>
 
