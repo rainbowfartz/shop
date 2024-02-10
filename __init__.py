@@ -12,6 +12,7 @@ import os
 from werkzeug.security import check_password_hash
 from flask_login import LoginManager, login_user, current_user
 from User import User
+from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
@@ -120,28 +121,19 @@ def shopping():
 
 @app.route('/addtocart/<item>', methods=['POST'])
 def addtocart(item):
-    userid = current_user.id
+    userid = str(current_user.id)
 
-    with shelve.open('checkout.db', writeback=True) as db1:
-        with shelve.open('Seed.db', writeback=True) as db2:
-            cart = db1.get(userid, [])
-            seed = db2.get(userid, [])
+    with shelve.open('checkout.db', writeback=True) as db:
+        cart = db.get(userid, [])
 
-            print(request)
-            print(request.form)
-            amount = request.form.get("amount")
-            additional_value = request.form.get("seedplant")
+        amount = request.form.get("amount")
+        additional_value = request.form.get("seedplant")
 
-            if additional_value == "seed":
-                # Add to both databases
-                cart.append({'id': item, 'amount': amount})
-                seed.append({'id': item, 'amount': amount})
-            else:
-                # Add only to db2
-                cart.append({'id': item, 'amount': amount})
+        print(additional_value)
 
-            db1[userid] = cart
-            db2[userid] = seed
+        cart.append({'id': item, 'amount': amount, 'seedplant': additional_value})
+
+        db[userid] = cart
 
     return redirect('/cart')
 
@@ -192,13 +184,21 @@ def addtocart(item):
 
 @app.route('/cart', methods = ['GET', 'POST'])
 def checkout():
-    userid = current_user.id
+    userid = str(current_user.id)
     products = []
     cart = []
+    seeds = []
 
     with shelve.open('checkout.db') as db:
         if userid in db:
             cart = db[userid]
+            for item in cart:
+                print(item['seedplant'])
+                if item['seedplant'] == 'seed':
+                    seeds.append(item['id'])
+    
+    print(seeds)
+
     with shelve.open('products.db') as db:
         for item in cart:
             product = db[str(item['id'])]
@@ -208,19 +208,11 @@ def checkout():
     form = CreateCheckoutForm(request.form)
 
     if request.method == "POST" and form.validate():
-        chckoutinfo_dict = {}
-        seed = []
         with shelve.open('chckoutinfo.db', writeback=True) as chckoutinfo_db:
             try:
-                chckoutinfo_dict = db['Chckoutinfo']
+                chckoutinfo_dict = chckoutinfo_db.get('Chckoutinfo', {})
             except:
                 print('Error in retrieving Chckoutinfo from chckoutinfo.db')
-
-    
-            with shelve.open('checkout.db') as checkout_db:
-                item_info = checkout_db.get("seedplant")
-                if item_info == "seed":
-                    seed.append(item_info)
 
             now = datetime.now()
             date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
@@ -234,17 +226,15 @@ def checkout():
                 cvv=form.cvv.data, 
                 date=date_time,
                 difference=0,
-                seed=seed)
+                seed=seeds)
             
             chckoutinfo_id = chckoutinfo.get_info_id()  # Get ID of the new checkout info
         
-            # Check if the ID already exists, if so, update it instead of adding a new entry
-            if chckoutinfo_id in chckoutinfo_dict:
-                # Update the existing entry
-                chckoutinfo_dict[chckoutinfo_id].update(chckoutinfo.__dict__)
-            else:
-                # Add the new entry
-                chckoutinfo_dict[chckoutinfo_id] = chckoutinfo
+            chckoutinfo_dict[chckoutinfo_id] = chckoutinfo
+
+            print(chckoutinfo_dict)
+            for i in chckoutinfo_dict:
+                print(i)
 
             chckoutinfo_db['Chckoutinfo'] = chckoutinfo_dict    
 
@@ -255,17 +245,6 @@ def checkout():
         # chckoutinfo = chckoutinfo_dict[chckoutinfo.get_info_id()]
         # print(chckoutinfo.get_name(),"was stored in chckoutinfo.db successfully with info_id ==", chckoutinfo.get_info_id())
 
-        
-    
-    #     chckoutinfo_dict = {}
-#     db = shelve.open('chckoutinfo.db', 'r')
-#     chckoutinfo_dict = db['Chckoutinfo']
-#     db.close()
-
-#     chckoutinfo_list = []
-#     for key in chckoutinfo_dict:
-#         chckoutinfo = chckoutinfo_dict.get(key)
-#         chckoutinfo_list.append(chckoutinfo)
     return render_template('checkout.html', form=form, products=products)
 
 @app.route('/retrieveInfo')
@@ -280,6 +259,7 @@ def retrieve_Info():
         chckoutinfo = chckoutinfo_dict.get(key)
         chckoutinfo_list.append(chckoutinfo)
         print(chckoutinfo_list)
+
     pic_list = []
     for info in chckoutinfo_list:
 
@@ -360,7 +340,7 @@ def delete_info(id):
 
 @app.route('/deleteCart/<int:id>', methods=['POST', 'GET'])
 def delete_cart(id):
-    userid = current_user.id
+    userid = str(current_user.id)
     with shelve.open('checkout.db', 'w') as db:
         cart = []
         if userid in db:

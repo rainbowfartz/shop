@@ -185,6 +185,7 @@
                 <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
                     <label for="stock">Amount:</label>
                     <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
+                    <input type="hidden" name="seedplant" value="seed">
                     <input type="submit" value="Plant Me!" class="button-73"><br>
                     
                 </form>
