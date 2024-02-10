@@ -42,11 +42,11 @@
         }
 
         .content-box {
-            width: 650px;
-            height: 500px;
-            margin-top: 1000px;
-            margin-bottom:50px;
-            margin-left: 480px;
+            width:540px;
+            height: 400px;
+            margin-top: 900px;
+            margin-bottom:30px;
+            margin-left: 470px;
             margin-right: 400px;
             background-color: #ffffff;
             border-radius: 15px;
@@ -55,10 +55,17 @@
             text-align: center;
         }
         .formbox {
-            margin-left: 600px;
+            margin-left: 550px;
+            margin-top: 5px;
+            margin-bottom: 10px;
         }
         .info-box{
-            margin-right: 50px;
+            margin-top: 5px;
+            margin-bottom: 0px;
+            margin-left:650px;
+        }
+        #loading{
+            margin-left: 40px;
         }
     </style>
 
@@ -67,19 +74,19 @@
     <section>
         <div class="content-box">
             <a href="#">
-                <img src="{{ url_for('static', filename='images/Singapore.png')}}" style="width: 600px; margin-top: 30px;" id="map">
+                <img src="{{ url_for('static', filename='images/Singapore.png')}}" style="width: 500px; margin-top: 30px;" id="map">
             </a>
-            <h3 style="margin-top: 10px;">Map</h3>
+            <h4 style="margin-top: 10px;">Map</h4>
         </div>
 
     </section>
-
-    <section>
-        <div class="info-box" id="liveLocationInfo">
+<!-- 
+    <section> -->
+        <div class="info-box">
             <h5>Live Location Info</h5>
-            <p>Loading...</p>
+            <p id="loading">Loading...</p>
         </div>
-    </section>
+    <!-- </section> -->
 
     <div class="formbox">
         <form action="{{ url_for('display_input') }}" method="post">
