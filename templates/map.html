@@ -39,7 +39,7 @@
         lastUpdatedElement.textContent = formattedDate + ', ' + formattedTime;
     }
     </script>
-
+</head>
 <!-- <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
     <div style="padding-left: 5%;">
         <a href="#">
@@ -106,10 +106,10 @@
 
     .content-box {
         width: 650px;
-        height: 500px;
+        height: 420px;
         margin-top: 1050px;
         margin-bottom: 50px;
-        margin-left: 470px;
+        margin-left: 420px;
         background-color: #ffffff;
         border-radius: 15px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -120,22 +120,21 @@
     #display1 {
         margin-left: 635px;
         margin-bottom: 100px;
-
+        /* text-align: center; */
     }
 
-    #footer {
+    /* #footer {
         margin-left: 600px;
-        margin-top: 20px;
-    }
+    } */
     #lastUpdated{
         margin-top: 500px;
     }
     #parcel{
-        margin-left: 70px;
+        margin-left: 20px;
     }
 </style>
     <title>MAP</title>
-</head>
+
 <body>
     <section>
     <div class="content-box">
@@ -160,13 +159,14 @@
     </script>
     </section>
 <div id="display1">
-    <h1>Your Parcel Code</h1>
+    <h3>Your Parcel Code</h3>
     <p id="parcel">Entered Parcel Code: {{ parcel.code }}</p>
+    <p>Last updated: <span id="lastUpdated"></span></p>
 </div>
 
-<footer id="footer">
-    Last updated: <span id="lastUpdated"></span>
-</footer>
+
+    
+
 
 <script>
     window.onload = updateLastUpdated;

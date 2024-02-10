@@ -1,58 +1,56 @@
 <style>
-    .right li {
-        overflow: hidden;
-        background-color: black;
-    }
 
-    .right img {
-        transform: scale(1.20);
-        opacity: 1;
-        transition: opacity 0.4s, transform 0.4s;
-    }
-
-    .right img:hover {
-        transform: scale(1.03);
-        opacity: 0.7;
-    }
-    .right a:hover{
-        color:blue;
-    }
-    .right a{
-        padding: 10px;
-    }
-    nav{
+    nav {
         height: 100px;
+    }
+    a{
+        padding-left: 25px;
     }
 </style>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top" class="right">
-    <div style="padding-left: 5%;" class="right">
-        <a href="/">
-            <img src="static/images/homelogo.png" style="width:70px;" class="rounded-pill">
-        </a>
-        <a href="/">
-            <img src="static/images/profile.png" style="width:70px;" class="rounded-pill">
-        </a>
-        <a href="/shopping">
-            <img src="static/images/grocery.png" style="width:70px;" class="rounded-pill">
-        </a>
-        <a href="/cart">
-            <img src="static/images/cart.png" style="width:70px;" class="rounded-pill">
-        </a>
-        <a href="/form">
-            <img src="static/images/delivery.png" style="width:70px;" class="rounded-pill">
-        </a>
-        <a href="/game">
-            <img src="static/images/game.png" style="width:70px;" class="rounded-pill">
-        </a>
-        <a href="/retrieveInfo">
-            Retrieve Users
-        </a>
-        <a href="/admin">
-            admin
-        </a>
-        <a href="/index">
-            parcel list
-        </a>
-    </div>
+<nav>
+    <nav class="navbar navbar-expand-lg navbar-ddark bg-dark">
+        <a class="navbar-brand" href="/">Farmville</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/shopping">Shopping</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/form">Delivery</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/game">Game</a>
+                </li>
+                <li>
+                <a href="/retrieveInfo">
+                    Retrieve Users
+                </a>
+                </li>
+                <li>
+                <a href="/admin">
+                    admin
+                </a>
+                </li>
+                <li>
+                <a href="/index">
+                    parcel list
+                </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </nav>
