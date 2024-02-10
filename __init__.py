@@ -8,6 +8,8 @@ import shelve
 import random
 import os
 from werkzeug.security import check_password_hash
+from flask_login import LoginManager, login_user, current_user
+from User import User
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
@@ -15,6 +17,15 @@ app.secret_key = 'supersecretkey'  # Change this to a more secure key
 app.config['UPLOAD_FOLDER'] = 'static/upload'  
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'} 
 plant = {0:'static/images/sprout.png', 1:'static/images/sprout.png', 2:'static/images/sprout.png', 3:'static/images/seeding.png', 4:'static/images/seeding.png', 5:'static/images/seeding.png', 6:'static/images/vegetative.png', 7:'static/images/budding.png', 8:'static/images/budding.png', 10:'static/images/flowering.png', 11:'static/images/flowering.png', 12:'static/images/ripening.png', 13:'static/images/ripening.png'}
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(user_id):
+    with shelve.open('users.db') as db:
+        user = db[user_id]
+    return user
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -26,40 +37,37 @@ def home():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    if current_user:
+        return redirect(url_for('shopping'))
+    
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
         username = form.username.data
         email = form.email.data
         password = form.password.data
-        # save the user data to the database here
-        with shelve.open('users.db') as db:
-            # Store the user data in the database
-            user_data = {'email': email, 'password': password}
-            db[username] = user_data
-        # Store the username in the session
-        session['username'] = username
-        return render_template('login.html')
+        with shelve.open('users.db', writeback=True) as db:
+            user = User(username, email, password)
+            db[str(User.id)] = user
+        return redirect(url_for('login'))
     return render_template('signup.html', form=form)
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
 @app.route('/login', methods=['GET','POST'])
-def login2():
+def login():
+    if current_user:
+        return redirect(url_for('shopping'))
+    
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
-        Email = form.Email.data
+        email = form.email.data
         password = form.password.data
 
         with shelve.open('users.db') as db:
-            user_data = db.get(Email)
-
-            if user_data is not None and check_password_hash(user_data['password'], password):
-                session['Email'] = Email
-                return render_template('main.html')
-            else:
-                return 'Invalid username or password', 401
+            for id in db:
+                user = db[id]
+                
+                if user.email == email and user.password == password:
+                    login_user(user)
+                    return redirect(url_for('shopping'))
 
     return render_template('login.html', form=form)
 
