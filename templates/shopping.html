@@ -16,6 +16,7 @@
     .seed {
         display: flex;
         flex-wrap: wrap;
+        text-align: center;
     }
 
     .pics {
@@ -53,6 +54,7 @@
     .plant {
         display: flex;
         flex-wrap: wrap;
+        text-align: center;
     }
 
     .pic1 {
@@ -119,7 +121,6 @@
         -webkit-user-select: none;
         touch-action: manipulation;
         margin-top: 8px;
-        margin-left: 40px;
     }
 
     .button-73:hover {
@@ -134,8 +135,9 @@
 
     @media (min-width: 768px) {
         .button-73 {
-            font-size: 1.5rem;
+            font-size: 1rem;
             padding: .75rem 2rem;
+            width: 10rem;
         }
     }
 
@@ -144,7 +146,7 @@
         border: 0;
         background: rgba(0, 0, 0, 0);
         appearance: none;
-        width: 100%;
+        width: 50%;
         position: relative;
         border-radius: 3px;
         padding: 9px 12px;
@@ -154,6 +156,7 @@
         font-weight: 400;
         height: 40px;
         transition: all .2s ease;
+        margin-top: 8px;
     }
 
     input[type=text]:hover{
@@ -183,7 +186,6 @@
                     <label for="stock">Amount:</label>
                     <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
                     <input type="submit" value="Plant Me!" class="button-73"><br>
-                    <input type="submit" value="Add To Cart" class="button-73">
                     
                 </form>
             </li>
