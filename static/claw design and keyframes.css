@@ -31,9 +31,12 @@ nav a {
 .tries {
   width: 100%;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 800px;
+  padding-left: 80px;
   display: inline-block;
+  list-style: inside;
 }
+
 
 
 #main {
