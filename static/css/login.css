@@ -98,3 +98,6 @@ body {
 .user_login, .admin_login {
   width: 100%;
 }
+.btn.login_button a {
+  text-decoration: none;
+}
