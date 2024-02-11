@@ -1,6 +1,6 @@
 class CheckoutInfo:
     count_id = 0
-    def __init__(self, name, address, card_number, exp_month, exp_year, cvv, date):
+    def __init__(self, name, address, card_number, exp_month, exp_year, cvv, date, difference, seed):
         CheckoutInfo.count_id += 1
         self.__info_id = CheckoutInfo.count_id
         self.__name = name 
@@ -10,7 +10,11 @@ class CheckoutInfo:
         self.__exp_year = exp_year
         self.__cvv = cvv
         self.__date = date
-
+        self.__difference = 0
+        self.__seed= seed   
+    
+    def get_seed(self):
+        return self.__seed
     def get_info_id(self):
         return self.__info_id
     def get_name(self):
@@ -27,8 +31,9 @@ class CheckoutInfo:
         return self.__cvv
     def get_date(self):
         return self.__date
+    def get_difference(self):
+        return self.__difference
 
-    
     def set_info_id(self, info_id):
         self.__info_id = info_id
     def set_name(self, name):
@@ -45,3 +50,5 @@ class CheckoutInfo:
         self.__cvv = cvv
     def set_date(self, date):
         self.__date = date
+    def set_difference(self, difference):
+        self.__difference = difference

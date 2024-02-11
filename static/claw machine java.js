@@ -75,6 +75,10 @@ $(document).ready(function() {
                           }
                         });
                       },1500);
+                      
+                      console.log("WIN")
+                      alert("You have won a prize!")
+                      window.location.href = "/play"
                     }
                   });
                   setTimeout(function() {

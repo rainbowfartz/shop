@@ -1,53 +1,172 @@
 {% extends "base.html" %}
 {% block title %} Grocery Store - Shopping {% endblock %}
-{% block head %}
-    <link rel="stylesheet" href="/static/css/shopping.css">
-{% endblock %}
+
 {% block content %}
 <style>
+    h1 {
+        color: #646464;
+        text-align: center;
+    }
+
+    h3 {
+        color: #646464;
+        text-align: center;
+    }
+
     .seed {
         display: flex;
-        list-style: none;
-        
+        flex-wrap: wrap;
+        text-align: center;
     }
 
     .pics {
+        margin-top: 30px;
+    }
+
+    .pics li {
+        list-style: none;
+        border: solid 3px pink;
+        border-radius: 30px;
         padding: 10px 50px;
-        border: solid 1px rgb(36, 41, 43);
-        margin: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: rgb(251, 205, 222);
     }
 
-    .checkout {
-        padding-left: 50px;
-    }
-
-    .pn {
-        padding-left: 50px;
+    .pics li a {
+        background-color: rgb(230, 175, 206);
+        border-radius: 30px;
+        border-color: pink;
+        margin-top: 10px;
     }
 
     .pics img {
-        width: 200px;
-        height: 30vh;
+        width: 220px;
+        height: 200px;
+        border-radius: 30px;
+    }
+
+    .pics p {
+        font-weight: bold;
+        color: #646464;
     }
 
     .plant {
         display: flex;
-        list-style: none;
+        flex-wrap: wrap;
+        text-align: center;
     }
 
     .pic1 {
+        margin-top: 30px;
+    }
+
+    .pic1 li {
+        list-style: none;
+        border: solid 3px pink;
+        border-radius: 30px;
         padding: 10px 50px;
-        border: solid 1px rgb(40, 45, 47);
-        margin: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
+        background-color: rgb(251, 205, 222);
+    }
+
+    .pic1 li a {
+        background-color: rgb(230, 175, 206);
+        border-radius: 30px;
+        border-color: pink;
+        margin-top: 10px;
     }
 
     .pic1 img {
-        width: 200px;
-        height: 30vh;
+        width: 220px;
+        height: 200px;
+        border-radius: 30px;
     }
 
-    h1 {
-        color: rgb(128, 123, 123);
+    .pic1 p {
+        font-weight: bold;
+        color: #646464;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .button-73 {
+        appearance: none;
+        background-color: #FFFFFF;
+        border-radius: 40em;
+        border-style: none;
+        box-shadow: #ADCFFF 0 -12px 6px inset;
+        box-sizing: border-box;
+        color: #000000;
+        cursor: pointer;
+        display: inline-block;
+        font-family: -apple-system,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: -.24px;
+        margin: 0;
+        outline: none;
+        padding: 1rem 1.3rem;
+        quotes: auto;
+        text-align: center;
+        text-decoration: none;
+        transition: all .15s;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        margin-top: 8px;
+    }
+
+    .button-73:hover {
+        background-color: #f2bbdf;
+        box-shadow: #de96d0 0 -6px 8px inset;
+        transform: scale(1.125);
+    }
+
+    .button-73:active {
+        transform: scale(1.025);
+    }
+
+    @media (min-width: 768px) {
+        .button-73 {
+            font-size: 1rem;
+            padding: .75rem 2rem;
+            width: 10rem;
+        }
+    }
+
+    input[type=text] {
+        box-shadow: inset #abacaf 0 0 0 2px;
+        border: 0;
+        background: rgba(0, 0, 0, 0);
+        appearance: none;
+        width: 50%;
+        position: relative;
+        border-radius: 3px;
+        padding: 9px 12px;
+        line-height: 1.4;
+        color: rgb(0, 0, 0);
+        font-size: 16px;
+        font-weight: 400;
+        height: 40px;
+        transition: all .2s ease;
+        margin-top: 8px;
+    }
+
+    input[type=text]:hover{
+        box-shadow: 0 0 0 0 #fff inset, #d54cff 0 0 0 2px;
+    }
+
+    input[type=text]:focus {
+        background: #fff;
+        outline: 0;
+        box-shadow: 0 0 0 0 #fff inset, #d54cff 0 0 0 3px;
     }
 </style>
 <h1>Products</h1>
@@ -56,18 +175,22 @@
     <div class="seed">
         {% for id,product in products.items() %}
         {% if product['seedplant'] == 'seed' %}
-            <div class="pics">
-                <li>
-                    <h3>{{ product['name'] }}</h3>
-                    <p>Price: {{ product['price'] }}</p>
-                    <p>Stock: {{ product['stock'] }}</p>
-                    <p>Plant or Seed: {{ product['seedplant'] }}</p>
-                    <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="#" class="pn">Plant now</a><br>
-                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
+        <div class="pics">
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ url_for('static', filename='productimage' + '/' + id) }}" alt="{{ product['name'] }}" width="200"><br>
+                <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
+                    <label for="stock">Amount:</label>
+                    <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
+                    <input type="hidden" name="seedplant" value="seed">
+                    <input type="submit" value="Plant Me!" class="button-73"><br>
                     
-                </li>
-            </div>
+                </form>
+            </li>
+        </div>
         {% endif %}
         {% endfor %}
     </div>
@@ -76,21 +199,52 @@
 <ul>
     <h1>Plant</h1>
     <div class="plant">
-        
+
         {% for id,product in products.items() %}
         {% if product['seedplant'] == 'plant' %}
-            <div class="pic1">
-                <li>
-                    <h3>{{ product['name'] }}</h3>
-                    <p>Price: {{ product['price'] }}</p>
-                    <p>Stock: {{ product['stock'] }}</p>
-                    <p>Plant or Seed: {{ product['seedplant'] }}</p>
-                    <img src="{{ product['image'] }}" alt="{{ product['name'] }}" width="200"><br>
-                    <a href="{{ url_for('addtocart',item=id)}}" class="checkout">Checkout now</a>
-                </li>
-            </div>
+        <div class="pic1">
+            <li>
+                <h3>{{ product['name'] }}</h3>
+                <p>Price: {{ product['price'] }}</p>
+                <p>Stock: {{ product['stock'] }}</p>
+                <p>Plant or Seed: {{ product['seedplant'] }}</p>
+                <img src="{{ url_for('static', filename='productimage' + '/' + id) }}" alt="{{ product['name'] }}" width="200"><br>
+                <form autocomplete="off" action="{{ url_for('addtocart', item=id) }}" method="post">
+                    <label for="stock">Amount:</label>
+                    <input autocomplete="false" type="text" name="amount" pattern="[1-9][0-9]*" required><br>
+
+                    <input type="submit" value="Add To Cart" class="button-73">
+                </form>
+            </li>
+        </div>
         {% endif %}
         {% endfor %}
     </div>
 </ul>
 {% endblock %}
+
+
+
+
+box-shadow: inset #abacaf 0 0 0 2px;
+border: 0;
+background: rgba(0, 0, 0, 0);
+appearance: none;
+width: 100%;
+position: relative;
+border-radius: 3px;
+padding: 9px 12px;
+line-height: 1.4;
+color: rgb(0, 0, 0);
+font-size: 16px;
+font-weight: 400;
+height: 40px;
+transition: all .2s ease;
+:hover{
+    box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 2px;
+}
+:focus{
+    background: #fff;
+    outline: 0;
+    box-shadow: 0 0 0 0 #fff inset, #1de9b6 0 0 0 3px;
+}

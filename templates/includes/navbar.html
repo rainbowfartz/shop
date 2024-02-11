@@ -1,25 +1,37 @@
+<style>
+    nav a img {
+        -webkit-transform: scale(0.5);
+        transform: scale(1.0);
+        -webkit-transition: .3s ease-in-out;
+        transition: .3s ease-in-out;
+    }
+
+    nav a:hover img {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.8);
+    }
+
+
+</style>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
     <div style="padding-left: 5%;">
         <a href="/">
-            <img src="static/images/homelogo.png" style="width:70px;"
-                class="rounded-pill">
+            <img src="static/images/homelogo.png" style="width:70px;" class="rounded-pill">
         </a>
-        <a href="/">
-            <img src="static/images/profile.png" style="width:70px;"
-                class="rounded-pill">
+        <a href="/profile">
+            <img src="static/images/profile.png" style="width:70px;" class="rounded-pill" />
         </a>
         <a href="/shopping">
-            <img src="static/images/grocery.png" style="width:70px;"
-                class="rounded-pill">
+            <img src="static/images/grocery.png" style="width:70px;" class="rounded-pill">
         </a>
         <a href="/cart">
             <img src="static/images/cart.png" style="width:70px;" class="rounded-pill">
         </a>
-        <a href="/">
-            <img src="static/images/delivery.png" style="width:70px;"
-                class="rounded-pill">
+        <a href="/form">
+            <img src="static/images/delivery.png" style="width:70px;" class="rounded-pill">
         </a>
-        <a href="/">
+        <a href="/game">
             <img src="static/images/game.png" style="width:70px;" class="rounded-pill">
         </a>
         <a href="/retrieveInfo">
@@ -27,6 +39,9 @@
         </a>
         <a href="/admin">
             admin
+        </a>
+        <a href="/index">
+            parcel list
         </a>
     </div>
 </nav>
