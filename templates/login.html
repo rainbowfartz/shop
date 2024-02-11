@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-
+{% block navbar %}
+{% endblock %}
 {% block title %}
 Login System
 {% endblock %}
@@ -63,7 +64,7 @@ Login System
                 <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
               </div>
               <div class="login_button">
-                <button class="btn login_button">Login</button>
+                <button class="btn login_button"><a href="/admin" style="color:blue;">Login</a></button>
               </div>
             </div>
           </form>

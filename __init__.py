@@ -77,6 +77,10 @@ def login():
 
     return render_template('login.html', form=form)
 
+@app.route('/admin_login', methods=['POST'])
+def admin_login():
+    return redirect(url_for('admin'))
+
 @app.route('/logout')
 def logout():
     logout_user()
