@@ -114,3 +114,7 @@ a{
  label {
     margin-right: 300px;
  }
+
+ .signup a span {
+    color: black;
+}
