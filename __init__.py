@@ -74,6 +74,11 @@ def login():
 
     return render_template('login.html', form=form)
 
+@app.route('/profile')
+def profile():
+
+    return render_template('profile.html')
+
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
     if request.method == 'POST':
