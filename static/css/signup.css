@@ -8,9 +8,6 @@ body{
     background-size: cover;
     background-position-y: center;
     background-repeat: no-repeat;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
 }
 
 h1{
@@ -114,7 +111,3 @@ a{
  label {
     margin-right: 300px;
  }
-
- .signup a span {
-    color: black;
-}

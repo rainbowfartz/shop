@@ -1,9 +1,8 @@
+{% extends "base.html" %}
+{% block title %} Farmville -Claw machine {% endblock %}
 
+{% block content %}
 <head>
-    {% extends "base.html" %}
-    {% block title %} Farmville -Claw machine {% endblock %}
-
-    {% block content %}
     <link rel="stylesheet" type="text/css" href="/static/claw design and keyframes.css">
 		<meta name="description" content="Arcade Claw Machine">
 		<meta name="keywords" content="arcade claw machine">
@@ -29,19 +28,12 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 </style>
-<div class="parent">
-    <section class="tries">
+    <section>
         <h1>Welcome to the Claw Machine Game!</h1>
         <p>Come try your luck and stand to win attractive prizes</p>
         <p>You have {{tries}} tries remaining</p>
-        <h1>INSTRUCTIONS:</h1>
-        <ol>
-                <li><p>Slide the button to move the claw!</p></li>
-                <li><p>Press drop button to release the claw!</p></li>
-                <li><p>Claim prize won!!!</p></li>
-        </ol>
-    </section> 
-    
+    </section>
+
     <div id="main">
         <svg class="machine" width="360px" height="460px" version="1.1" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 3600000 4600000"
         style="position:absolute;top:300px;left:0;">
@@ -82,7 +74,7 @@
                     <div style="position:absolute;top:631px;left:35px;width:52px;height:12px;background-color:#565656;border-bottom:2px solid #898989;"></div>
                     <script src="/static/claw machine java.js"></script>
     </div>
-</div>
+         
     <script>
         const clawmachine = document.getElementById("main")
         const tries = {{tries}}
