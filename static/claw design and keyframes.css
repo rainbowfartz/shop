@@ -28,13 +28,13 @@ nav a {
 }
 
 
-
-
-section {
+.tries {
   width: 100%;
   text-align: center;
   margin-top: 200px;
+  display: inline-block;
 }
+
 
 #main {
   margin-top: 10%;
