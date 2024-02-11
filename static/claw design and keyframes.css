@@ -34,7 +34,7 @@ nav a {
   margin-top: 800px;
   padding-left: 80px;
   display: inline-block;
-  list-style: inside;
+  list-style: auto;
 }
 
 
