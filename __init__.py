@@ -10,12 +10,14 @@ import shelve
 import random
 import os
 from werkzeug.security import check_password_hash
-from flask_login import LoginManager, login_user, current_user
+from flask_login import LoginManager, login_user, current_user, logout_user
 from User import User
 from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 app.config['UPLOAD_FOLDER'] = 'static/upload'  
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'} 
@@ -73,6 +75,11 @@ def login():
                     return redirect(url_for('shopping'))
 
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
 
 @app.route('/profile')
 def profile():
