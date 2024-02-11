@@ -30,9 +30,9 @@ nav a {
 
 .tries {
   width: 100%;
-  text-align: center;
+  
   margin-top: 800px;
-  padding-left: 80px;
+  padding-left: 500px;
   display: inline-block;
   list-style: auto;
 }
