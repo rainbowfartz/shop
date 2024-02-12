@@ -7,7 +7,7 @@
 </head>
 <body>
     <h2>Feedback Form</h2>
-    <form method="post" action="/">
+    <form method="POST" action="{{ url_for('main') }}">
         {{ form.hidden_tag() }}
         <label for="name">Name:</label>
         {{ form.name() }}<br>

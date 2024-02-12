@@ -1,4 +1,5 @@
 from flask import *
+from flask import Flask, render_template, redirect, url_for
 from wtforms import StringField, SubmitField, TextAreaField
 from Forms import CreateCheckoutForm, LoginForm, RegistrationForm
 import shelve, checkoutinfo
@@ -552,15 +553,14 @@ with shelve.open('parcels.db') as shelf:
     print(parcels)
 
 
-    class FeedbackForm(FlaskForm):
-        name = StringField('Name')
-        email = StringField('Email')
-        message = TextAreaField('Message')
-        submit = SubmitField('Submit')
-
+class NewFeedbackForm(FlaskForm):
+    name = StringField('Name')
+    email = StringField('Email')
+    message = TextAreaField('Message')
+    submit = SubmitField('Submit')
 
 def save_feedback_to_shelf(name, email, message):
-    with shelve.open('feedback_shelve.db') as shelf:
+    with shelve.open("feedback_shelve_immediate_view.db", writeback=True) as shelf:
         if 'feedbacks' not in shelf:
             shelf['feedbacks'] = []
 
@@ -568,15 +568,13 @@ def save_feedback_to_shelf(name, email, message):
         feedbacks.append({'name': name, 'email': email, 'message': message})
         shelf['feedbacks'] = feedbacks
 
-
 def get_all_feedbacks():
-    with shelve.open('feedback_shelve.db', writeback=True) as shelf:
+    with shelve.open("feedback_shelve_immediate_view.db", writeback=True) as shelf:
         return shelf.get('feedbacks', [])
 
-
 @app.route('/feedback', methods=['GET', 'POST'])
-def feedback_form():
-    form = FeedbackForm()
+def main():
+    form = NewFeedbackForm()
 
     if form.validate_on_submit():
         name = form.name.data
@@ -584,22 +582,14 @@ def feedback_form():
         message = form.message.data
 
         save_feedback_to_shelf(name, email, message)
-
-        return redirect(url_for('thank_you'))
+        return redirect(url_for('view_feedbacks'))
 
     return render_template('contactus.html', form=form)
 
-
-@app.route('/thank-you')
-def thank_you():
-    return "Thank you for your feedback!"
-
-
-@app.route('/view-feedbacks')
+@app.route('/view-feedbacks', methods=['GET'])
 def view_feedbacks():
     feedbacks = get_all_feedbacks()
     return render_template('getfeedback.html', feedbacks=feedbacks)
-
 
             
 @app.route('/game')
