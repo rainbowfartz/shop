@@ -444,7 +444,7 @@ def update_info(id):
         db['Chckoutinfo'] = chckoutinfo_dict
         db.close()
 
-        return redirect(url_for('retrieve_Info'))
+        return redirect(url_for('admin_priv'))
     else:
         chckoutinfo_dict = {}
         db = shelve.open('chckoutinfo.db', 'r')
@@ -473,17 +473,7 @@ def delete_info(id):
     db['Chckoutinfo'] = chckoutinfo_dict
     db.close()
 
-    return redirect(url_for('retrieve_Info'))
-
-    userid = str(1)
-    products = []
-    cart = []
-    with shelve.open('checkout.db') as db:
-        if userid in db:
-            cart = db[userid]
-    with shelve.open('products.db') as db:
-        for item in cart:
-            products.append(db[item])
+    return redirect(url_for('admin_priv'))
 
 @app.route('/deleteCart/<int:id>', methods=['POST', 'GET'])
 def delete_cart(id):
@@ -593,7 +583,7 @@ def delete(code):
         parcels = shelf.get('parcels', [])
         shelf['parcels'] = [p for p in parcels if p.code != code]
 
-    return redirect(url_for('index'))
+    return redirect(url_for('admin_priv'))
 
 @app.route('/add', methods=['GET', 'POST'])
 def add():
