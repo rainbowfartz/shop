@@ -10,7 +10,7 @@ import shelve
 import random
 import os
 from werkzeug.security import check_password_hash
-from flask_login import LoginManager, login_user, current_user
+from flask_login import LoginManager, login_user, current_user, logout_user
 from User import User
 from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 
@@ -73,6 +73,11 @@ def login():
                     return redirect(url_for('shopping'))
 
     return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/profile')
 def profile():
