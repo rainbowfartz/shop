@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     
-    {%extends "base.html" %}
+{%extends "base.html" %}
 {% block title %}Grocery store - Feedback {% endblock %}
 
     
@@ -14,54 +14,73 @@
     <title>my headache</title>
     <style>
         body {
-                margin: 0;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                height: 100vh;
-                background-color:#ffffff;
-                overflow:hidden;
-             }
+            text-align: center;
+            /* margin-top: 100px; */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* height: 100vh; */
+            background-color:#ffffff;
+            overflow:hidden;
+        }
 
-             nav {
-                    width: 100%;
-                    height: 100px;
-                    background-color: #343a40;
-                    color: white;
-                    padding: 10px;
-                    box-sizing: border-box;
-                    display: flex;
-                    justify-content: center;
-                    margin-top: -1000px;
-                    margin-bottom: 500px; 
-                    }
+        .feedback {
+            margin-top: 100px;
+            margin: auto;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            display: grid;
+            align-self: center;
+            place-items: center;
+            min-height: 40vh;
+            justify-content: center;
+            border: 3px solid rgb(236, 194, 194);
+            border-radius: 30px;
+            background-color: rgb(236, 213, 232);
+            width: 80%;
+        }
 
-                    nav a {
-                    color: white;
-                    text-decoration: none;
-                    margin-right: 15px;
-                    }
+        /* nav {
+            width: 100%;
+            height: 100px;
+            background-color: #343a40;
+            color: white;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            margin-top: -1000px;
+            margin-bottom: 500px; 
+        }
 
-                    label {
-                        padding-bottom: 25px;
-                    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-right: 15px;
+        } */
+
+        label {
+            padding-bottom: 25px;
+        }
     </style>
 </head>
 <body>
-    <h2>Feedback Form</h2>
-    <form method="POST" action="{{ url_for('main') }}">
-        {{ form.hidden_tag() }}
-        <label for="name">Name:</label>
-        {{ form.name() }}<br>
+    <div class="feedback">
+        <h2>Feedback Form</h2>
+        <form method="POST" action="{{ url_for('main') }}">
+            {{ form.hidden_tag() }}
+            <label for="name">Name:</label>
+            {{ form.name() }}<br>
 
-        <label for="email">Email:</label>
-        {{ form.email() }}<br>
+            <label for="email">Email:</label>
+            {{ form.email() }}<br>
 
-        <label for="message">Message:</label>
-        {{ form.message() }}<br>
+            <label for="message">Message:</label>
+            {{ form.message() }}<br>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 {% endblock %}
 </html>
