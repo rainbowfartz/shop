@@ -9,8 +9,9 @@ from flask_wtf import FlaskForm
 import shelve
 import random
 import os
-from werkzeug.security import check_password_hash
-from flask_login import LoginManager, login_user, current_user, logout_user
+from flask_security import Security, UserMixin, RoleMixin, login_required
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import LoginManager, login_user, current_user, logout_user, logout_user, login_required
 from User import User
 from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 
@@ -18,6 +19,7 @@ app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager = LoginManager(app)
 
 
 app.config['UPLOAD_FOLDER'] = 'static/upload'  
