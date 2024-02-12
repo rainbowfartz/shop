@@ -1,8 +1,8 @@
+import shelve
+
 class CheckoutInfo:
-    count_id = 0
-    def __init__(self, name, address, card_number, exp_month, exp_year, cvv, date, difference, seed):
-        CheckoutInfo.count_id += 1
-        self.__info_id = CheckoutInfo.count_id
+    def __init__(self, id, name, address, card_number, exp_month, exp_year, cvv, date, difference, seed):
+        self.__info_id = id
         self.__name = name 
         self.__address= address
         self.__card_number = card_number
