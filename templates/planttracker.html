@@ -53,8 +53,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Product</th>
+                        <th>Product ID</th>
                         <th>date</th>
                         <th>duration</th>
                         <th></th>
@@ -65,10 +64,9 @@
                 <tbody>
                     {% for info in chckoutinfo_list %}
                     <tr>
-                        <td>{{ info.id }}</td>
-                        <td>{{ info.productname }}</td>
-                        <td>{{ info.date }}</td>
-                        <td>{{ info.difference }} weeks</td>
+                        <td>{{ info.get_info_id() }}</td>
+                        <td>{{ info.get_date() }}</td>
+                        <td>{{ info.get_difference() }} weeks</td>
                     </tr>
 
                     {% endfor %}
@@ -79,7 +77,7 @@
     </div>
     <div id="right">
         {% for info in chckoutinfo_list %}
-        <h1 style="text-align: left;">Plant {{ info.id }} is {{pic_list[loop.index0][1]}}</h1>
+        <h1 style="text-align: left;">Plant {{ info.get_info_id() }} is {{pic_list[loop.index0][1]}}</h1>
         <img src="{{pic_list[loop.index0][0]}}">
         <div id="rightstats">
             <img src="static/images/drop.png" width="50px">

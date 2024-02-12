@@ -121,9 +121,6 @@ $(document).ready(function() {
                   $(".toy").remove();
                   placeToy();
                 },300);
-
-                console.log("LOSE")
-                window.location.href = "/play"
               }
             });
           }
