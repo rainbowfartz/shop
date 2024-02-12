@@ -4,11 +4,120 @@
 Sign up System
 {% endblock %}
 
-    {% block head %}
-    <link rel="stylesheet" href="{{url_for('static', filename='css/signup.css')}}">
-    {% endblock %}
+  {% block head %}
+  <link rel="stylesheet" href="{{url_for('static', filename='css/signup.css')}}">
+  {% endblock %}
 
 {% block content %}
+<style>
+  body {
+    background-color: #FFC0CB;
+    background-size: cover;
+    background-position-y: center;
+    background-repeat: no-repeat;
+  }
+  
+  .container {
+    height: 46vh;
+    background: rgb(255, 192, 203);
+    background: linear-gradient(180deg, rgba(255, 192, 203, 1) 23%, rgba(255, 182, 193, 1) 81%, rgba(255, 105, 180, 1) 100%);
+    border-radius: 0 0 50px 0;
+    padding: 50px 50px;
+    box-shadow: 5px 5px 10px #4d4d4d30, -5px -5px 10px #45454530;
+    width: 50vh;
+    margin-top: 20px;
+  }
+  
+  .container h1 {
+    text-align: center;
+    background: url('https://img.freepik.com/free-photo/selective-focus-soft-foliage-with-summer-light-background_640221-128.jpg?w=900&t=st=1684250234~exp=1684250834~hmac=f00a33283ed462a20880d76aed1c9e87619c78e6e5a3e17ab410e62b096981f5');
+    background-size: 300%;
+    background-position: center;
+    background-repeat: no-repeat;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #FF69B4;
+    font-size: 40px;
+    letter-spacing: 3px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  
+  .container input[type="text"],
+  .container input[type="email"],
+  .container input[type="password"] {
+    background-color: #ffffff !important;
+    border: 2px solid #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 18px;
+  }
+  
+  .container .checkbox-container {
+    color: #000000;
+    font-size: 14px;
+  }
+  
+  .container .checkbox-container label {
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  .container .login-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 16px;
+  }
+  
+  .container .login-btn button {
+    width: 100%;
+    border-radius: 26px;
+    font-size: 18px;
+    padding: 6px 26px;
+    background-color: #FF69B4;
+    color: #ffffff;
+  }
+  
+  .container .login-btn button:hover {
+    background-color: #FF1493;
+    color: #ffffff;
+  }
+  
+  .container .signup {
+    margin-bottom: 40px !important;
+    border-bottom: 1px solid #FFC0CB;
+  }
+  
+  .container .signup a {
+    padding: 0 auto;
+    background-color: #ffffff;
+    color: #FF69B4;
+  }
+  
+  .container .signup a span {
+    display: none;
+  }
+  
+  .container .signup a.active {
+    display: block !important;
+  }
+  
+  .container .signup a.active_button {
+    border-bottom: 1px solid #FF69B48f !important;
+    border-radius: 0 !important;
+  }
+.container input[type="text"],
+.container input[type="email"],
+.container input[type="password"] {
+  background-color: #ffffff !important;
+  border: 2px solid #000000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  border-radius: 18px;
+  width: 100%; /* Add this line */
+}
+</style>
+
 <form id="loginForm" method="POST" action="/signup">
   <div class="container">
       <div class="box">
