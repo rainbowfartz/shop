@@ -52,6 +52,10 @@
     .two-col #col2 {
         float: right;
     }
+
+    a {
+        margin: 0px 7.7px ;
+    }
 </style>
 <h1 class="display-4" style="padding-left: 5%; font-weight: bolder; color: lightpink;">Shopping Cart</h1>
 <div class="container">
@@ -85,10 +89,10 @@
                     <td colspan="3" style="text-align: right;">Subtotal: ${{"%.2f"| format(ns.total)}}</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: right;">Shipping: $0.00</td>
+                    <td colspan="3" style="text-align: right;">Shipping: $3.00</td>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: right; font-size: large;">Total: $0.00</td>
+                    <td colspan="3" style="text-align: right; font-size: large;">Total: ${{"%.2f"| format(ns.total + 3.00)}}</td>
                 </tr>
             </table>
         </div>
