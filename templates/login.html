@@ -18,174 +18,108 @@ Login System
 
 {% block content %}
 <style>
-  body {
-    background-color: #FFC0CB;
-    background-size: cover;
-    background-position-y: center;
-    background-repeat: no-repeat;
-  }
-  
-  .login_form {
+body {
+  background-color: #FFC0CB;
+  background-size: cover;
+  background-position-y: center;
+  background-repeat: no-repeat;
+}
+
+.container.login_page {
     height: 46vh;
     background: rgb(255, 192, 203);
     background: linear-gradient(180deg, rgba(255, 192, 203, 1) 23%, rgba(255, 182, 193, 1) 81%, rgba(255, 105, 180, 1) 100%);
     border-radius: 0 0 50px 0;
     padding: 50px 50px;
     box-shadow: 5px 5px 10px #4d4d4d30, -5px -5px 10px #45454530;
-    width: 50vh;
+    width: 54vh;
     margin-top: 20px;
-  }
-  
-  .login_form h5 {
+}
+
+.container.login_page h5 {
     text-align: center;
-    background: url('https://img.freepik.com/free-photo/selective-focus-soft-foliage-with-summer-light-background_640221-128.jpg?w=900&t=st=1684250234~exp=1684250834~hmac=f00a33283ed462a20880d76aed1c9e87619c78e6e5a3e17ab410e62b096981f5');
-    background-size: 300%;
-    background-position: center;
-    background-repeat: no-repeat;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
     color: #FF69B4;
     font-size: 40px;
     letter-spacing: 3px;
     font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 10px;
-  }
-  
-  .login_form .form-control {
-    background-color: rgba(255, 192, 203, 0) !important;
-    border: 0.5px solid #FF69B46e;
-    border-radius: 0 0 12px 0;
-    border-top: none;
-    border-right: none;
-    border-left: none;
+}
+
+.container.login_page input[type="email"],
+.container.login_page input[type="password"] {
+    background-color: #ffffff !important;
+    border: 2px solid #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
     border-radius: 18px;
-  }
-  
-  .forget_password {
-    color: #FF69B4;
+    width: 300px;
+}
+
+.container.login_page .forget_password {
+    color: #000000;
     font-size: 14px;
-  }
-  
-  .forget_password a {
+}
+
+.container.login_page .forget_password label {
     text-decoration: none;
-    color: #FF69B4;
-  }
-  
-  .forget_password span {
-    float: right;
-  }
-  
-  .login_email_input label,
-  .login_password_input label {
-    color: #FF69B4;
-    font-weight: 600;
-  }
-  
-  .login_email_input,
-  .login_password_input {
-    margin-bottom: 12px;
-  }
-  
-  .login_button {
+    color: #000000;
+}
+
+.container.login_page .login_button {
     width: 100%;
     text-align: center;
     margin-top: 16px;
-  }
-  
-  .login_button .login_button {
+}
+
+.container.login_page .login_button button {
     width: 100%;
     border-radius: 26px;
     font-size: 18px;
     padding: 6px 26px;
     background-color: #FF69B4;
     color: #ffffff;
-  }
-  
-  .login_button .login_button:hover {
+}
+
+.container.login_page .login_button button:hover {
     background-color: #FF1493;
     color: #ffffff;
-  }
-  
-  .user_buttons {
-    margin-bottom: 40px !important;
-    border-bottom: 1px solid #FFC0CB;
-  }
-  
-  .user_buttons div .user_button {
-    padding: 0 auto;
-    background-color: #ffffff;
+}
+
+.container.login_page .forget_password a {
     color: #FF69B4;
-  }
-  
-  .user_login,
-  .admin_login {
+}
+
+.container.login_page .forget_password a span {
     display: none;
-  }
-  
-  .active {
+}
+
+.container.login_page .forget_password a.active {
     display: block !important;
-  }
-  
-  .active_button {
+}
+
+.container.login_page .forget_password a.active_button {
     border-bottom: 1px solid #FF69B48f !important;
     border-radius: 0 !important;
-  }
-  
-  .title {
-    text-align: right;
-    padding-top: 30px;
-    padding-right: 40px;
-  }
-  
-  .title h4 {
-    font-size: 60px;
-    opacity: 0.6;
-    color: #FFC0CB;
-  }
-  
-  .title h5 {
-    font-size: 20px;
-    opacity: 0.8;
-    color: #FFC0CB;
-  }
-  
-  .row_user_buttons {
-    display: inline-flex;
-    gap: 20px;
-    padding-bottom: 10px;
-  }
-  .login_form h5 {
-    color: #000000;
+}
+.password-toggle {
+  display: flex;
+  align-items: center;
+}
+.container.login_page .forget_password a {
+  color: #000000; /* Change this line */
 }
 
-.forget_password {
-    color: #000000;
+.container.login_page .forget_password a.active {
+  color: #000000; /* Add this line */
 }
-
-.forget_password a {
-    color: #000000;
-}
-
-.login_email_input label,
-.login_password_input label {
-    color: #000000;
-}
-
-.user_buttons div .user_button {
-    color: #000000;
-}
-
-.title h4,
-.title h5 {
-    color: #000000;
-}
-.login_form .form-control {
-  background-color: #ffffff !important; /* Change the background color to white */
-  border: 2px solid #000000; /* Add a 2px solid black border */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Add a box shadow */
-  border-radius: 18px;
+.container.login_page input[type="email"],
+.container.login_page input[type="password"],
+.container.login_page input[type="text"] {
+    background-color: #ffffff !important;
+    border: 2px solid #000000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    border-radius: 18px;
+    width: 300px;
 }
 </style>
 
@@ -197,12 +131,6 @@ Login System
             <h5>Login</h5>
             <div class="row_user_buttons">
               <div class="col-6">
-        
-                <button type="button" class="User_but" id="button1">User Login</button>
-              </div>
-              <div class="col-6">
-                <button type="button" class="admin_but" id="button2"><a href = "/adminlogin"></a>Admin Login</button>
-              </div>
             </div>
             <div class="user_login active" id="div1">
               <div class="login_email_input">
@@ -222,33 +150,7 @@ Login System
               <div class="login_button">
                 <button class="btn login_button">Login</button>
         </form>
-              </div>
-            </div>
-            <form id="adminlogin" method="POST" action="/adminlogin"></form>
-            <div class="admin_login" id="div2">
-              <div class="login_username_input">
-                <label for="username" class="form-label">Admin username</label>
-                <input type="text" class="form-control" name="username" id="username" placeholder="Enter your Username">
-              </div>
-              <div class="login_password_input">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="password" placeholder="Enter your password">
-              </div>
-              <div class="login_button">
-                <button class="btn login_button"><a href="/admin">Login</a></button>
-              </div>
-            </div>
-            </form>
-          </div>
-        </div> 
-        <div class="col-md-8">
-          <div class="title">
-            <h4></h4>
-            <h5></h5>
-          </div>
-        </div>
-      </div>
-    </div>
+
 </form>
 
 
