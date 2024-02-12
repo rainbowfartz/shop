@@ -96,6 +96,9 @@ def admin_login():
         else:
             flash('Invalid username or password.')
     return render_template('admin.html', form=form)
+@app.route('/resetpassword')
+def reset_request():
+    return render_template('resetpassword.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
