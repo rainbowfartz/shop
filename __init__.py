@@ -14,6 +14,7 @@ from werkzeug.security import check_password_hash
 from flask_login import LoginManager, login_user, current_user, logout_user
 from User import User
 from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
+from Forms import AdminLoginForm
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
@@ -84,6 +85,17 @@ def logout():
 def profile():
 
     return render_template('profile.html')
+
+@app.route('/adminlogin', methods=['GET', 'POST'])
+def admin_login():
+    form = AdminLoginForm()
+    if form.validate_on_submit():
+        if form.username.data == 'admin' and form.password.data == 'admin1234':
+            flash('Logged in successfully.')
+            return redirect(url_for('/admin'))
+        else:
+            flash('Invalid username or password.')
+    return render_template('admin.html', form=form)
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():

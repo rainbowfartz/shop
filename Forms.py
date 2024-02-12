@@ -2,7 +2,8 @@ from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, v
 from wtforms import *
 from wtforms.fields import EmailField, DateField
 from flask import *
-
+from wtforms.validators import DataRequired
+from flask_wtf import FlaskForm
 
 class CreateCheckoutForm(Form):
     name = StringField('Name', [validators.Length(min=1, max=150), validators.Regexp(regex="[a-zA-Z]", message='Please enter letters only.'),validators.DataRequired()], render_kw={"placeholder":"John Lee"})
@@ -33,3 +34,8 @@ class RegistrationForm(Form):
 class LoginForm(Form):
     email = StringField('Email', [validators.Length(min=4, max=25)])
     password = PasswordField('Password', [validators.Length(min=6, max=80)])
+
+class AdminLoginForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    submit = SubmitField('Login')
