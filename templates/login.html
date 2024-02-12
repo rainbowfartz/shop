@@ -1,5 +1,6 @@
 {% extends "base.html" %}
-
+{% block navbar %}
+{% endblock %}
 {% block title %}
 Login System
 {% endblock %}
@@ -35,42 +36,44 @@ Login System
             <div class="user_login active" id="div1">
               <div class="login_email_input">
                 <label for="email" class="form-label">User Email</label>
-                <input type="email" class="form-control" name="email" id="" placeholder="">
+                <input type="email" class="form-control" name="email" id="email" placeholder="thomas@gmail.com">
               </div>
               <div class="login_password_input">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="passwordInput" placeholder="">
+                <input type="password" class="form-control" name="password" id="passwordInput" placeholder="Enter Password">
               </div>
               <div class="forget_password">
                 <input type="checkbox" id="showPasswordCheckbox" onchange="togglePasswordVisibility()"> Show
                 Password
                 <span><a href="#">Forget Password</a></span>  
-                <p>New to Farmville? Sign up<a href="/signup"> here</a></p>
+                <p>New to Farmville? Sign up  <a href="/signup" style="color:rgb(245, 245, 250);">Here</a></p>
               </div>
               <div class="login_button">
                 <button class="btn login_button">Login</button>
         </form>
               </div>
             </div>
+            <form action="/admin_login" method="post"></form>
             <div class="admin_login" id="div2">
               <div class="login_email_input">
                 <label for="email" class="form-label">Admin Email</label>
-                <input type="email" class="form-control" name="email" id="" placeholder="">
+                <input type="email" class="form-control" name="email" id="email" placeholder="admin@gmail.com">
               </div>
               <div class="login_password_input">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password" id="" placeholder="">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
               </div>
               <div class="login_button">
-                <button class="btn login_button">Login</button>
+                <button class="btn login_button"><a href="/admin" style="color:blue;">Login</a></button>
               </div>
             </div>
+          </form>
           </div>
         </div> 
         <div class="col-md-8">
           <div class="title">
-            <h4>Welcome</h4>
-            <h5>This is our farm.</h5>
+            <h4></h4>
+            <h5></h5>
           </div>
         </div>
       </div>

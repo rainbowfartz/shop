@@ -3,11 +3,11 @@ body{
     padding:0;
     box-sizing:border-box;
     font-family: 'Montserrat', sans-serif;
-    color:#fff;
-    background-image: url("https://cdn.discordapp.com/attachments/948596391855394826/1108360422790271006/login_page_bg.jpg");
-    background-size: cover;
-    background-position-y: center;
-    background-repeat: no-repeat;
+    color:rgb(255, 255, 255);
+    background-color: lightpink; 
+    height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 h1{
@@ -111,3 +111,7 @@ a{
  label {
     margin-right: 300px;
  }
+
+ .signup a span {
+    color: black;
+}
