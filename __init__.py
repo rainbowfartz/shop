@@ -11,7 +11,7 @@ import shelve
 import random
 import os
 from werkzeug.security import check_password_hash
-from flask_login import LoginManager, login_user, current_user, logout_user
+from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 from User import User
 from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 from Forms import AdminLoginForm
@@ -39,6 +39,79 @@ def allowed_file(filename):
 @app.route('/')
 def home():
     return render_template('main.html')
+
+#Create admin page
+@app.route('/admin_priv')
+@login_required
+def admin_priv():
+    id = current_user.id
+    if id == 1:
+        chckoutinfo_dict = {}
+        db = shelve.open('chckoutinfo.db', 'r')
+        chckoutinfo_dict = db['Chckoutinfo']
+        db.close()
+
+        chckoutinfo_list = []
+        for key in chckoutinfo_dict:
+            chckoutinfo = chckoutinfo_dict.get(key)
+            chckoutinfo_list.append(chckoutinfo)
+            print(chckoutinfo_list)
+
+        pic_list = []
+        for info in chckoutinfo_list:
+
+            date_format = '%d/%m/%Y, %H:%M:%S'
+            date_obj = datetime.strptime(info.get_date(), date_format)
+            difference2 = datetime.now() - date_obj
+            weeks = difference2.days/7
+            info.set_difference(round(weeks))
+            print(chckoutinfo.get_difference())
+            pic_image = plant[round(weeks)]
+            parts = pic_image.split('/')
+            names = parts[2].split('.')
+            stage = names[0]
+            pic_list.append((pic_image, stage))
+            # print(chckoutinfo.get_date())
+
+            if request.method == 'POST':
+                name = request.form['name']
+                price = request.form['price']
+                stock = request.form['stock']
+                seedplant = request.form['seedplant']
+
+                image = request.files['image']
+
+                with shelve.open('products.db') as db:
+                    product_id = str(len(db))
+                    db[product_id] = {"id": int(product_id)+1, 'name': name, 'price': price, 'stock': stock, 'seedplant': seedplant}
+
+                    image.save(os.path.join('static/productimage', product_id))
+
+                return redirect('/shopping')  
+
+        if request.method == 'POST':
+            code = request.form['parcel_code']
+            currentparcel = None
+
+            with shelve.open('parcels.db') as shelf:
+                parcels = shelf.get('parcels', [])
+                
+                for parcel in parcels:
+                    if parcel.code == code:
+                        currentparcel = parcel
+
+            if currentparcel:
+                return render_template('map.html', parcel=currentparcel)
+            else:
+                return "Parcel not found", 404
+
+        with shelve.open('parcels.db') as shelf:
+            parcels = shelf.get('parcels', [])
+
+        return render_template("admin_priv.html", count=len(chckoutinfo_list), chckoutinfo_list=chckoutinfo_list, pic_list=pic_list, parcels=parcels, user_input_code=None)
+    else:
+        flash('Only admin can access this page.')
+        return redirect(url_for('shopping'))
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -96,6 +169,9 @@ def admin_login():
         else:
             flash('Invalid username or password.')
     return render_template('admin.html', form=form)
+@app.route('/resetpassword')
+def reset_request():
+    return render_template('resetpassword.html')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
