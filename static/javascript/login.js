@@ -20,15 +20,3 @@ function togglePasswordVisibility() {
   var showPasswordCheckbox = document.getElementById("showPasswordCheckbox");
   passwordInput.type = showPasswordCheckbox.checked ? "text" : "password";
 }
-document.getElementById("button2").addEventListener("click", function() {
-  document.querySelector(".admin_login").style.display = "block";
-});
-document.getElementById("button1").addEventListener("click", function() {
-  document.querySelector(".user_login").style.display = "block";
-  document.querySelector(".admin_login").style.display = "none";
-});
-
-document.getElementById("button2").addEventListener("click", function() {
-  document.querySelector(".admin_login").style.display = "block";
-  document.querySelector(".user_login").style.display = "none";
-});
