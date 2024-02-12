@@ -45,17 +45,23 @@
         <a href="/feedback">
             <img src="static/images/feedback icon.png" style="width:80px;" class="rounded-pill">
         </a>
-        <a href="/retrieveInfo">
-            Retrieve Users
-        </a>
-        <a href="/admin">
-            admin
-        </a>
-        <a href="/index">
-            parcel list
-        </a>
-        <a href="/logout">
-            logout
+        {% if current_user.is_authenticated %}
+        {% if current_user.id == 1 %}
+
+        <a href="{{ url_for('admin_priv')}}">Admin</a>
+
+        {% endif %}
+
+
+        <a  href="{{ url_for('logout')}}">Logout</a>
+
+        {% else %}
+
+        <a  href="{{ url_for('signup')}}">Register</a>
+
+        <a  href="{{ url_for('login')}}">Login</a>
+
+        {% endif %}
         </a>
     </div>
 </nav>

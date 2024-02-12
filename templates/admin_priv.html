@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+{% block title %} Farmville - Admin {% endblock %}
+
+{% block content %}
+<style>
+    .pgheader {
+        padding-left: 25px;
+    }
+
+    section {
+        padding: 25px 25px 25px 25px
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .add_product {
+        margin: auto;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        display: grid;
+        align-self: center;
+        place-items: center;
+        min-height: 70vh;
+        justify-content: center;
+        border: 3px solid rgb(236, 194, 194);
+        border-radius: 30px;
+        background-color: rgb(236, 213, 232);
+        width: 80%;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .parcel_list {
+        text-align: center;
+    }
+</style>
+
+<div class="pgheader">
+    <h1 class="display-4" style="padding-left: 5%; font-weight: bolder; color: palevioletred;">Welcome! Admin</h1>
+</div>
+<section>
+
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <img src="static/images/profile.png" alt="avatar" class="rounded-circle img-fluid"
+                        style="width: 150px;">
+                    <h5 class="my-3">{{ current_user.username }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Name</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ current_user.username }}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Email</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0">{{ current_user.email }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+<h1 class="display-4">Retrieve Information</h1>
+<div>
+    {% if count == 0 %}
+    <p>There are no information.</p>
+    {% elif count == 1 %}
+    <p>There is 1 user.</p>
+    {% else %}
+    <p>There are {{ count }} users.</p>
+    {% endif %}
+</div>
+<div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Info ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Card Number</th>
+                <th>Month</th>
+                <th>Year</th>
+                <th>CVV</th>
+                <th>Date</th>
+                <th>Difference</th>
+                <th>Seeds</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for info in chckoutinfo_list %}
+            <tr>
+                <td>{{ info.get_info_id() }}</td>
+                <td>{{ info.get_name() }}</td>
+                <td>{{ info.get_address() }}</td>
+                <td>{{ info.get_card_number() }}</td>
+                <td>{{ info.get_exp_month() }}</td>
+                <td>{{ info.get_exp_year() }}</td>
+                <td>{{ info.get_cvv() }}</td>
+                <td>{{ info.get_date() }}</td>
+                <td>{{ info.get_difference() }}</td>
+                <td>{{ info.get_seed() }}</td>
+                <td></td>
+                <td><a href="/updateInfo/{{info.get_info_id()}}" class="btn btn-warning">Update</a></td>
+                <td>
+                    <form action="{{url_for('delete_info', id=info.get_info_id())}}" method="POST">
+                        <!-- <input type="submit" value="Delete" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete {{info.get_name()}}?');"> -->
+                        <!-- Button to Open the Modal -->
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                            data-bs-target="#myModal_{{info.get_info_id()}}">
+                            Delete
+                        </button>
+
+                        <!-- The Modal -->
+                        <div class="modal" id="myModal_{{info.get_info_id()}}">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Delete Confirmation</h4>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+
+                                    <!-- Modal body -->
+                                    <div class="modal-body">
+                                        Are you sure you want to delete {{info.get_name()}}?
+                                    </div>
+
+                                    <!-- Modal footer -->
+                                    <div class="modal-footer">
+                                        <input type="submit" value="Delete" class="btn btn-danger">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<h1>Add Product</h1>
+<form class="add_product" autocomplete="off" method="POST" action="/admin">
+    <label for="name">Product Name:</label>
+    <input autocomplete="false" type="text" name="name" required><br>
+
+    <label for="price">Price:</label>
+    <input autocomplete="false" type="text" name="price" required><br>
+
+    <label for="stock">Stock:</label>
+    <input autocomplete="false" type="text" name="stock" required><br>
+
+    <label for="image">Image URL:</label>
+    <input autocomplete="false" type="text" name="image" required><br>
+
+    <label for="seedplant">Seed or plant</label>
+    <select id="seedplant" name="seedplant">
+        <option value=" ">Seed</option>
+        <option value="plant">Plant</option>
+    </select><br>
+
+    <input type="submit" value="Add Product">
+</form>
+
+<div class="parcel_list">
+
+    <body>
+        <br>
+        <h2>Parcel List</h2>
+        <div class="output">
+            <!-- Display user input code -->
+            {% if user_input_code %}
+            <p>User Input Code: {{ user_input_code }}</p>
+            {% endif %}
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Parcel Code</th>
+                        <th>Location</th>
+                        <th>Coordinates</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for parcel in parcels %}
+                    <tr>
+                        <td>{{ parcel.username }}</td>
+                        <td>{{ parcel.code }}</td>
+                        <td>{{ parcel.location }}</td>
+                        <td>
+                            Latitude: {{ parcel.latitude }}
+                            Longitude: {{ parcel.longitude }}
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" role="button"><a href="{{ url_for('delete', code=parcel.code) }}"
+                                    style="color: inherit; text-decoration: none;">Delete</a></button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</div>
+{% endblock %}
