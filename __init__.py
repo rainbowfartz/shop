@@ -10,15 +10,12 @@ import shelve
 import random
 import os
 from werkzeug.security import check_password_hash
-from flask_login import LoginManager, login_user, current_user, logout_user
+from flask_login import LoginManager, login_user, current_user
 from User import User
 from wtforms import Form, StringField, RadioField, SelectField, TextAreaField, validators, IntegerField, SubmitField
 
 app = Flask(__name__)
 app.secret_key = 'supersecretkey'  # Change this to a more secure key
-login_manager = LoginManager()
-login_manager.init_app(app)
-
 
 app.config['UPLOAD_FOLDER'] = 'static/upload'  
 app.config['ALLOWED_EXTENSIONS'] = {'png', 'jpg', 'jpeg', 'gif'} 
@@ -76,16 +73,6 @@ def login():
                     return redirect(url_for('shopping'))
 
     return render_template('login.html', form=form)
-
-@app.route('/admin_login', methods=['POST'])
-def admin_login():
-    return redirect(url_for('admin'))
-
-@app.route('/logout')
-def logout():
-    logout_user()
-    return redirect(url_for('login'))
-
 
 @app.route('/profile')
 def profile():
@@ -206,6 +193,7 @@ def checkout():
     products = []
     cart = []
     seeds = []
+    delivery = []
 
     with shelve.open('checkout.db') as db:
         if userid in db:
@@ -213,9 +201,13 @@ def checkout():
             for item in cart:
                 print(item['seedplant'])
                 if item['seedplant'] == 'seed':
-                    seeds.append(item['id'])
+                    for i in range(0,int(item['amount'])):
+                        seeds.append(item['id'])
+                else:
+                    delivery.append(item)
     
     print(seeds)
+    print(delivery)
 
     with shelve.open('products.db') as db:
         for item in cart:
@@ -236,6 +228,7 @@ def checkout():
             date_time = now.strftime("%d/%m/%Y, %H:%M:%S")
 
             chckoutinfo = checkoutinfo.CheckoutInfo(
+                id=len(chckoutinfo_dict)+1,
                 name=form.name.data, 
                 address=form.address.data, 
                 card_number=form.card_number.data, 
@@ -255,6 +248,48 @@ def checkout():
                 print(i)
 
             chckoutinfo_db['Chckoutinfo'] = chckoutinfo_dict    
+            
+            with shelve.open('seeds.db', writeback=True) as seeds_db:
+                try:
+                    seeds_dict = seeds_db.get(userid, [])
+                    
+                    seed_counter = len(seeds_dict)
+                    
+                    for seed in seeds:
+                        seed_counter += 1
+                        seedData = {
+                            "id": seed_counter,
+                            "productid": seed,
+                            "productname": product['name'],
+                            "date": date_time,
+                            "difference": 0,
+                        }
+                        
+                        print(seedData)
+                        seeds_dict.append(seedData)
+                        
+                    seeds_db[userid] = seeds_dict
+                except:
+                    print('Error in retrieving seeds from seeds.db')
+        
+        
+        # Parcels
+        for deliver in delivery:
+            print(deliver)
+            
+            parcelid = random.randint(111, 999)
+            location = "Ang Mo Kio Ave 5"
+            latitude = random.randint(127, 142)/100
+            longitude = random.randint(10370, 10390)/100
+            
+            parcel = Parcel(form.name.data, parcelid, location, latitude, longitude)
+
+            with shelve.open('parcels.db', writeback=True) as shelf:
+                parcels = shelf.get('parcels', [])
+
+                parcels.append(parcel)
+
+                shelf['parcels'] = parcels
 
         return redirect(url_for('checkout'))
         
@@ -372,34 +407,33 @@ def delete_cart(id):
 
 @app.route('/planttracker')
 def plant_tracker():
-    chckoutinfo_dict = {}
-    db = shelve.open('chckoutinfo.db', 'r')
-    chckoutinfo_dict = db['Chckoutinfo']
+    userid = str(current_user.id)
+    
+    seeds = []
+    db = shelve.open('seeds.db', 'r')
+    seeds = db[userid]
     db.close()
-
-    chckoutinfo_list = []
-    for key in chckoutinfo_dict:
-        chckoutinfo = chckoutinfo_dict.get(key)
-        chckoutinfo_list.append(chckoutinfo)
         
     pic_list = []
-    for info in chckoutinfo_list:
+    for info in seeds:
+        print(info)
 
         date_format = '%d/%m/%Y, %H:%M:%S'
-        date_obj = datetime.strptime(info.get_date(), date_format)
+        date_obj = datetime.strptime(info['date'], date_format)
         difference2 = datetime.now() - date_obj
         weeks = difference2.days/7
-        info.set_difference(round(weeks))
-        print(chckoutinfo.get_difference())
+        info['difference'] = round(weeks)
+        # print(chckoutinfo.get_difference())
         pic_image = plant[round(weeks)]
         parts = pic_image.split('/')
         names = parts[2].split('.')
         stage = names[0]
         pic_list.append((pic_image, stage))
 
+    print(seeds)
+    print(pic_list)
 
-
-    return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list, pic_list=pic_list)
+    return render_template('planttracker.html',count=len(seeds), chckoutinfo_list = seeds, pic_list=pic_list)
 
 # @app.route('/planttracker')
 # def plant_tracker():
@@ -418,7 +452,8 @@ def plant_tracker():
 #     return render_template('planttracker.html',count=len(chckoutinfo_list), chckoutinfo_list = chckoutinfo_list)
 
 class Parcel:
-    def __init__(self, code, location, latitude=None, longitude=None):
+    def __init__(self, username, code, location, latitude=None, longitude=None):
+        self.username = username
         self.code = code
         self.location = location
         self.latitude = latitude
@@ -427,9 +462,9 @@ class Parcel:
 with shelve.open('parcels.db', writeback=True) as shelf:
     if 'parcels' not in shelf:
         shelf['parcels'] = [
-            Parcel('123', 'Jurong Ave 6', 1.3561, 103.8010),
-            Parcel('456', 'Woodlands Dr 70', 1.3721, 103.8292),
-            Parcel('789', 'Ang Mo Kio Ave 80',  1.369115, 103.845436)
+            Parcel('Admin', '123', 'Jurong Ave 6', 1.3561, 103.8010),
+            Parcel('Admin', '456', 'Woodlands Dr 70', 1.3721, 103.8292),
+            Parcel('Admin', '789', 'Ang Mo Kio Ave 80',  1.369115, 103.845436)
         ]
 
 @app.route('/form')
