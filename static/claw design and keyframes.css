@@ -29,8 +29,8 @@ nav a {
 
 .tries {
   width: 100%;
-  
-  margin-top: 800px;
+  font-size: smaller;
+  margin-top: 600px;
   padding-left: 25px;
   display: inline-block;
   list-style: auto;
