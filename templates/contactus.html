@@ -2,8 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
+    {%extends "base.html" %}
+{% block title %}Grocery store - Feedback {% endblock %}
+
+    
+{% block content %}   
+    
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feedback Form with Shelve</title>
+    <title>my headache</title>
+    <style>
+        body {
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 100vh;
+                background-color:#ffffff;
+                overflow:hidden;
+             }
+
+             nav {
+                    width: 100%;
+                    height: 100px;
+                    background-color: #343a40;
+                    color: white;
+                    padding: 10px;
+                    box-sizing: border-box;
+                    display: flex;
+                    justify-content: center;
+                    margin-top: -1000px;
+                    margin-bottom: 500px; 
+                    }
+
+                    nav a {
+                    color: white;
+                    text-decoration: none;
+                    margin-right: 15px;
+                    }
+
+                    label {
+                        padding-bottom: 25px;
+                    }
+    </style>
 </head>
 <body>
     <h2>Feedback Form</h2>
@@ -21,4 +63,5 @@
         <button type="submit">Submit</button>
     </form>
 </body>
+{% endblock %}
 </html>
