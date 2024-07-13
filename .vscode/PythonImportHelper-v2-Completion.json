@@ -1,0 +1,436 @@
+[
+    {
+        "label": "User",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "User",
+        "description": "User",
+        "detail": "User",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "importPath": "User",
+        "description": "User",
+        "isExtraImport": true,
+        "detail": "User",
+        "documentation": {}
+    },
+    {
+        "label": "Form",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "StringField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "RadioField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "SelectField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "TextAreaField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "validators",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "IntegerField",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "wtforms",
+        "description": "wtforms",
+        "isExtraImport": true,
+        "detail": "wtforms",
+        "documentation": {}
+    },
+    {
+        "label": "EmailField",
+        "importPath": "wtforms.fields",
+        "description": "wtforms.fields",
+        "isExtraImport": true,
+        "detail": "wtforms.fields",
+        "documentation": {}
+    },
+    {
+        "label": "DateField",
+        "importPath": "wtforms.fields",
+        "description": "wtforms.fields",
+        "isExtraImport": true,
+        "detail": "wtforms.fields",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "session",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "flash",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "Flask",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "render_template",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "request",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "redirect",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "url_for",
+        "importPath": "flask",
+        "description": "flask",
+        "isExtraImport": true,
+        "detail": "flask",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "timedelta",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "random",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "random",
+        "description": "random",
+        "detail": "random",
+        "documentation": {}
+    },
+    {
+        "label": "shelve",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shelve",
+        "description": "shelve",
+        "detail": "shelve",
+        "documentation": {}
+    },
+    {
+        "label": "Customer",
+        "kind": 6,
+        "importPath": "log n sign.Customer",
+        "description": "log n sign.Customer",
+        "peekOfCode": "class Customer(User):\n    count_id = 0\n    def __init__(self, first_name, last_name, gender, membership, remarks, email, date_joined, address):\n        super().__init__(first_name, last_name, gender, membership, remarks)\n        Customer.count_id += 1\n        self.__customer_id = Customer.count_id\n        self.__email = email\n        self.__date_joined = date_joined\n        self.__address = address\n    # accessor methods",
+        "detail": "log n sign.Customer",
+        "documentation": {}
+    },
+    {
+        "label": "CreateCheckoutForm",
+        "kind": 6,
+        "importPath": "log n sign.Forms",
+        "description": "log n sign.Forms",
+        "peekOfCode": "class CreateCheckoutForm(Form):\n    name = StringField('Name', [validators.Length(min=1, max=150), validators.Regexp(regex=\"[a-zA-Z]\", message='Please enter letters only.'),validators.DataRequired()], render_kw={\"placeholder\":\"John Lee\"})\n    address = TextAreaField('Address', [validators.Length(min=1, max=150),validators.Regexp(regex=\"[0-9-a-zA-Z]\", message='Please enter address accordingly.'), validators.DataRequired()], render_kw={\"placeholder\":\"100A Neighbourhood 01-010 100100\"})\n    card_number = StringField('Card Number', [validators.Length(min=1, max=150),validators.Regexp(regex=\"^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$\", message='Please enter valid card number.'), validators.DataRequired()], render_kw={\"placeholder\":\"1234123412341234\"})\n    exp_month = StringField('Month', [validators.Length(min=1, max=12),validators.Regexp(regex=\"^(0?[1-9]|1[012])$\", message='Please enter valid month.'),validators.DataRequired()], render_kw={\"placeholder\":\"mm\"})\n    exp_year = StringField('Year', [validators.Regexp(regex=\"^(19|20)\\d{2}$\", message='Please enter valid year.'),validators.DataRequired()], render_kw={\"placeholder\":\"yyyy\"})\n    cvv = StringField('Cvv', [validators.Regexp(regex=\"^[0-9]{3,4}$\", message='Please enter valid cvv.'),validators.DataRequired()], render_kw={\"placeholder\":\"123\"})",
+        "detail": "log n sign.Forms",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "log n sign.User",
+        "description": "log n sign.User",
+        "peekOfCode": "class User:\n    count_id = 0\n    # initializer method\n    def __init__(self, first_name, last_name, gender, membership, remarks):\n        User.count_id += 1\n        self.__user_id = User.count_id\n        self.__first_name = first_name\n        self.__last_name = last_name\n        self.__gender = gender\n        self.__membership = membership",
+        "detail": "log n sign.User",
+        "documentation": {}
+    },
+    {
+        "label": "Customer",
+        "kind": 6,
+        "importPath": "shop-signin-and-login.Customer",
+        "description": "shop-signin-and-login.Customer",
+        "peekOfCode": "class Customer(User.User):\n    count_id = 0\n    def __init__(self, first_name, last_name, gender, membership, remarks, email, date_joined, address):\n        super().__init__(first_name, last_name, gender, membership, remarks)\n        Customer.count_id += 1\n        self.__customer_id = Customer.count_id\n        self.__email = email\n        self.__date_joined = date_joined\n        self.__address = address\n    # accessor methods",
+        "detail": "shop-signin-and-login.Customer",
+        "documentation": {}
+    },
+    {
+        "label": "CreateUserForm",
+        "kind": 6,
+        "importPath": "shop-signin-and-login.Forms",
+        "description": "shop-signin-and-login.Forms",
+        "peekOfCode": "class CreateUserForm(Form):\n    Full_name = StringField('Full_name', [validators.Length(min=1, max=150), validators.DataRequired()])\nclass CreateCustomerForm(Form):\n    Full_name = StringField('Full_name', [validators.Length(min=1, max=150), validators.DataRequired()])\n    email = EmailField('Email', [validators.Email(), validators.DataRequired()])\nclass RegistrationForm(Form):\n    username = StringField('Username', [validators.Length(min=4, max=25)])\n    email = StringField('Email Address', [validators.Length(min=6, max=35)])\n    password = PasswordField('New Password', [\n        validators.DataRequired(),",
+        "detail": "shop-signin-and-login.Forms",
+        "documentation": {}
+    },
+    {
+        "label": "CreateCustomerForm",
+        "kind": 6,
+        "importPath": "shop-signin-and-login.Forms",
+        "description": "shop-signin-and-login.Forms",
+        "peekOfCode": "class CreateCustomerForm(Form):\n    Full_name = StringField('Full_name', [validators.Length(min=1, max=150), validators.DataRequired()])\n    email = EmailField('Email', [validators.Email(), validators.DataRequired()])\nclass RegistrationForm(Form):\n    username = StringField('Username', [validators.Length(min=4, max=25)])\n    email = StringField('Email Address', [validators.Length(min=6, max=35)])\n    password = PasswordField('New Password', [\n        validators.DataRequired(),\n        validators.EqualTo('confirm', message='Passwords must match')\n    ])",
+        "detail": "shop-signin-and-login.Forms",
+        "documentation": {}
+    },
+    {
+        "label": "RegistrationForm",
+        "kind": 6,
+        "importPath": "shop-signin-and-login.Forms",
+        "description": "shop-signin-and-login.Forms",
+        "peekOfCode": "class RegistrationForm(Form):\n    username = StringField('Username', [validators.Length(min=4, max=25)])\n    email = StringField('Email Address', [validators.Length(min=6, max=35)])\n    password = PasswordField('New Password', [\n        validators.DataRequired(),\n        validators.EqualTo('confirm', message='Passwords must match')\n    ])\n    confirm = PasswordField('Repeat Password')\n    class LoginForm(Form):\n        username = StringField('Username', [validators.Length(min=4, max=25)])",
+        "detail": "shop-signin-and-login.Forms",
+        "documentation": {}
+    },
+    {
+        "label": "User",
+        "kind": 6,
+        "importPath": "shop-signin-and-login.User",
+        "description": "shop-signin-and-login.User",
+        "peekOfCode": "class User:\n    count_id = 0\n    # initializer method\n    def __init__(self, Fullname,Email,Password):\n        User.count_id += 1\n        self.__user_id = User.count_id\n        self.__Fullname = Fullname\n        self.__Email = Email\n        self.__Password = Password\n    # accessor methods",
+        "detail": "shop-signin-and-login.User",
+        "documentation": {}
+    },
+    {
+        "label": "ClawMachine",
+        "kind": 6,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "class ClawMachine:\n    def __init__(self):\n        self.last_play_key = 'last_play'\n        self.play_frequency = timedelta(hours=24)\n        self.max_daily_plays = 3  # Maximum allowed plays per day\n    def can_play(self):\n        if self.last_play_key in session:\n            plays_today = session.get('plays_today', 0)\n            if plays_today >= self.max_daily_plays:\n                raise PermissionError('You have reached the maximum number of plays for today!')",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def index():\n    return render_template('index.html')\n@app.route('/play')\ndef play_game():\n    claw_machine = ClawMachine()\n    try:\n        if claw_machine.play():\n            flash('Congratulations! You won a prize!', 'success')\n        else:\n            flash('Sorry, you didn\\'t win this time. Try again tomorrow!', 'info')",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "play_game",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def play_game():\n    claw_machine = ClawMachine()\n    try:\n        if claw_machine.play():\n            flash('Congratulations! You won a prize!', 'success')\n        else:\n            flash('Sorry, you didn\\'t win this time. Try again tomorrow!', 'info')\n    except PermissionError as e:\n        flash(str(e), 'danger')\n    return redirect(url_for('index'))",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app = Flask(__name__)\napp.secret_key = 'supersecretkey'  # Change this to a more secure key\n# Shelve file for data storage\nSHELVE_FILE = 'claw_machine_data.shelve'\nclass ClawMachine:\n    def __init__(self):\n        self.last_play_key = 'last_play'\n        self.play_frequency = timedelta(hours=24)\n        self.max_daily_plays = 3  # Maximum allowed plays per day\n    def can_play(self):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "app.secret_key",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "app.secret_key = 'supersecretkey'  # Change this to a more secure key\n# Shelve file for data storage\nSHELVE_FILE = 'claw_machine_data.shelve'\nclass ClawMachine:\n    def __init__(self):\n        self.last_play_key = 'last_play'\n        self.play_frequency = timedelta(hours=24)\n        self.max_daily_plays = 3  # Maximum allowed plays per day\n    def can_play(self):\n        if self.last_play_key in session:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "SHELVE_FILE",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "SHELVE_FILE = 'claw_machine_data.shelve'\nclass ClawMachine:\n    def __init__(self):\n        self.last_play_key = 'last_play'\n        self.play_frequency = timedelta(hours=24)\n        self.max_daily_plays = 3  # Maximum allowed plays per day\n    def can_play(self):\n        if self.last_play_key in session:\n            plays_today = session.get('plays_today', 0)\n            if plays_today >= self.max_daily_plays:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "CheckoutInfo",
+        "kind": 6,
+        "importPath": "checkoutinfo",
+        "description": "checkoutinfo",
+        "peekOfCode": "class CheckoutInfo:\n    count_id = 0\n    def __init__(self, name, address, card_number, exp_month, exp_year, cvv, date, difference):\n        CheckoutInfo.count_id += 1\n        self.__info_id = CheckoutInfo.count_id\n        self.__name = name \n        self.__address= address\n        self.__card_number = card_number\n        self.__exp_month = exp_month\n        self.__exp_year = exp_year",
+        "detail": "checkoutinfo",
+        "documentation": {}
+    },
+    {
+        "label": "Parcel",
+        "kind": 6,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "class Parcel:\n    def __init__(self, code, location, latitude=None, longitude=None):\n        self.code = code\n        self.location = location\n        self.latitude = latitude\n        self.longitude = longitude\napp = Flask(__name__)\nwith shelve.open('parcels.db', writeback=True) as shelf:\n    if 'parcels' not in shelf:\n        shelf['parcels'] = [",
+        "detail": "deliver",
+        "documentation": {}
+    },
+    {
+        "label": "home",
+        "kind": 2,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "def home():\n    return render_template('form.html')\n@app.route('/form')\ndef form():\n    return render_template('form.html')\n@app.route('/index', methods=['GET', 'POST'])\ndef index():\n    if request.method == 'POST':\n        code = request.form['parcel_code']\n        currentparcel = None",
+        "detail": "deliver",
+        "documentation": {}
+    },
+    {
+        "label": "form",
+        "kind": 2,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "def form():\n    return render_template('form.html')\n@app.route('/index', methods=['GET', 'POST'])\ndef index():\n    if request.method == 'POST':\n        code = request.form['parcel_code']\n        currentparcel = None\n        with shelve.open('parcels.db') as shelf:\n            parcels = shelf.get('parcels', [])\n            for parcel in parcels:",
+        "detail": "deliver",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "def index():\n    if request.method == 'POST':\n        code = request.form['parcel_code']\n        currentparcel = None\n        with shelve.open('parcels.db') as shelf:\n            parcels = shelf.get('parcels', [])\n            for parcel in parcels:\n                if parcel.code == code:\n                    currentparcel = parcel\n        if currentparcel:",
+        "detail": "deliver",
+        "documentation": {}
+    },
+    {
+        "label": "delete",
+        "kind": 2,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "def delete(code):\n    with shelve.open('parcels.db', writeback=True) as shelf:\n        parcels = shelf.get('parcels', [])\n        shelf['parcels'] = [p for p in parcels if p.code != code]\n    return redirect(url_for('index'))\n@app.route('/add', methods=['GET', 'POST'])\ndef add():\n    if request.method == 'POST':\n        parcel = Parcel(request.form.get('parcelid'), request.form.get('location'), request.form.get('latitude'), request.form.get('longitude'))\n        with shelve.open('parcels.db', writeback=True) as shelf:",
+        "detail": "deliver",
+        "documentation": {}
+    },
+    {
+        "label": "add",
+        "kind": 2,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "def add():\n    if request.method == 'POST':\n        parcel = Parcel(request.form.get('parcelid'), request.form.get('location'), request.form.get('latitude'), request.form.get('longitude'))\n        with shelve.open('parcels.db', writeback=True) as shelf:\n            parcels = shelf.get('parcels', [])\n            parcels.append(parcel)\n            shelf['parcels'] = parcels\n            redirect(url_for('index'))\n    return render_template('addparcel.html')\n@app.route('/map', methods=['POST'])",
+        "detail": "deliver",
+        "documentation": {}
+    },
+    {
+        "label": "display_input",
+        "kind": 2,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "def display_input():\n    code = request.form['parcel_code']\n    currentparcel = None\n    with shelve.open('parcels.db') as shelf:\n        parcels = shelf.get('parcels', [])\n        for parcel in parcels:\n            if parcel.code == code:\n                currentparcel = parcel\n    if currentparcel:\n        return render_template('map.html', parcel=currentparcel)",
+        "detail": "deliver",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "deliver",
+        "description": "deliver",
+        "peekOfCode": "app = Flask(__name__)\nwith shelve.open('parcels.db', writeback=True) as shelf:\n    if 'parcels' not in shelf:\n        shelf['parcels'] = [\n            Parcel('123', 'Jurong Ave 6', 1.3561, 103.8010),\n            Parcel('456', 'Woodlands Dr 70', 1.3721, 103.8292)\n        ]\n@app.route('/')\ndef home():\n    return render_template('form.html')",
+        "detail": "deliver",
+        "documentation": {}
+    }
+]
